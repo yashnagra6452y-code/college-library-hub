@@ -25,7 +25,7 @@ const io = new Server(server, {
     }
 });
 
-// ✅ RE-WRITTEN WITH BULLETPROOF FALLBACK VALUES TO PREVENT ENGINE CRASHES:
+// Fallback values to guarantee smooth performance across hosting nodes
 const JWT_SECRET = process.env.JWT_SECRET || 'SUPER_BEAST_MODE_SECRET_KEY_99X';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 
