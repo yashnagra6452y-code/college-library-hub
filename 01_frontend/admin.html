@@ -225,9 +225,24 @@
             }
         }
 
-        // Placeholder alert loop for Return actions (we will wire the endpoint next)
-        function returnBookRequest(id) {
-            alert("Return flow ready to hook next! Book ID captured: " + id);
+        // 6. Asynchronous live book check-in tracking call
+        async function returnBookRequest(book_id) {
+            if (!confirm("Are you sure you want to log a return check-in for this material?")) return;
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/books/return`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ book_id })
+                });
+
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || "Execution fault.");
+
+                loadAdminBooks(); // Instantly update data grids
+            } catch (error) {
+                alert("Transaction Return Halted: " + error.message);
+            }
         }
 
         // Real-Time Socket Streams
