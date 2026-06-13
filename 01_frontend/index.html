@@ -29,6 +29,36 @@
         </div>
     </nav>
 
+    <div class="max-w-7xl mx-auto px-6 pt-6">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Occupancy Density</p>
+                    <h3 id="stat-density" class="text-2xl font-black text-slate-800 mt-1">0%</h3>
+                </div>
+                <div class="bg-indigo-50 p-3 rounded-lg text-indigo-600"><i class="fa-solid fa-chart-pie text-xl"></i></div>
+            </div>
+
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Available Study Hubs</p>
+                    <h3 id="stat-seats" class="text-2xl font-black text-slate-800 mt-1">0 / 0</h3>
+                </div>
+                <div class="bg-emerald-50 p-3 rounded-lg text-emerald-600"><i class="fa-solid fa-chair text-xl"></i></div>
+            </div>
+
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Books On Shelves</p>
+                    <h3 id="stat-books" class="text-2xl font-black text-slate-800 mt-1">0 Available</h3>
+                </div>
+                <div class="bg-amber-50 p-3 rounded-lg text-amber-600"><i class="fa-solid fa-book text-xl"></i></div>
+            </div>
+
+        </div>
+    </div>
+
     <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         <div class="lg:col-span-1 space-y-6">
@@ -82,7 +112,7 @@
         const BACKEND_URL = 'https://college-library-hub.onrender.com/api';
         const socket = io('https://college-library-hub.onrender.com');
 
-        // 1. Fetch and show seats inside the new Map representation
+        // 1. Fetch and show seats inside the Map representation + calculate seat metrics
         async function loadSeats() {
             try {
                 const response = await fetch(`${BACKEND_URL}/seats`);
@@ -90,10 +120,14 @@
                 const container = document.getElementById('seats-container');
                 container.innerHTML = '';
 
+                let occupiedCount = 0;
+                const totalSeats = seats.length;
+
                 seats.forEach(seat => {
                     const isOccupied = seat.is_occupied;
+                    if (isOccupied) occupiedCount++;
+
                     const div = document.createElement('div');
-                    
                     div.className = `w-16 h-16 rounded-2xl flex flex-col items-center justify-center border transition-all duration-300 shadow-sm ${
                         isOccupied 
                         ? 'bg-rose-50 border-rose-200 text-rose-700 shadow-rose-50' 
@@ -106,12 +140,20 @@
                     `;
                     container.appendChild(div);
                 });
+
+                // Compute real-time analytics updates
+                const freeSeats = totalSeats - occupiedCount;
+                const densityPercentage = totalSeats > 0 ? Math.round((occupiedCount / totalSeats) * 100) : 0;
+
+                document.getElementById('stat-seats').innerText = `${freeSeats} / ${totalSeats}`;
+                document.getElementById('stat-density').innerText = `${densityPercentage}% Full`;
+
             } catch (error) {
                 console.error("Error fetching seats:", error);
             }
         }
 
-        // 2. Fetch and show books inside an advanced responsive card grid
+        // 2. Fetch and show books inside card grid + calculate inventory metrics
         async function searchBooks() {
             try {
                 const query = document.getElementById('search-input').value;
@@ -122,19 +164,14 @@
                 const container = document.getElementById('books-container');
                 container.innerHTML = '';
 
-                if (books.length === 0) {
-                    container.innerHTML = `
-                        <div class="col-span-full py-12 text-center border-2 border-dashed border-slate-100 rounded-xl">
-                            <i class="fa-solid fa-box-open text-slate-300 text-3xl mb-3"></i>
-                            <p class="text-slate-400 text-sm font-medium">No catalog listings found.</p>
-                        </div>`;
-                    return;
-                }
+                let availableBooksCount = 0;
 
                 books.forEach(book => {
+                    if (book.is_available) availableBooksCount++;
+                    
+                    // We only render items to the list grid layout matching query parameters
                     const isAvail = book.is_available;
                     const div = document.createElement('div');
-                    
                     div.className = "p-4 bg-slate-50 border border-slate-100 rounded-xl flex flex-col justify-between hover:border-indigo-200 hover:bg-white transition-all duration-200 group";
                     div.innerHTML = `
                         <div>
@@ -156,6 +193,19 @@
                     `;
                     container.appendChild(div);
                 });
+
+                // Only update global stock indicator metric if the search field is clear
+                if (!query) {
+                    document.getElementById('stat-books').innerText = `${availableBooksCount} Available`;
+                }
+
+                if (books.length === 0) {
+                    container.innerHTML = `
+                        <div class="col-span-full py-12 text-center border-2 border-dashed border-slate-100 rounded-xl">
+                            <i class="fa-solid fa-box-open text-slate-300 text-3xl mb-3"></i>
+                            <p class="text-slate-400 text-sm font-medium">No catalog listings found.</p>
+                        </div>`;
+                }
             } catch (error) {
                 console.error("Error fetching books:", error);
             }
@@ -164,6 +214,9 @@
         // Live Event Listeners via socket communication channels
         socket.on('seatUpdated', () => {
             loadSeats();
+        });
+        socket.on('bookUpdated', () => {
+            searchBooks();
         });
 
         // Initialize display executions
