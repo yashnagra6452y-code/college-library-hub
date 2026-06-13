@@ -3,44 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Library Hub</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Library Control Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Socket.io Client CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 </head>
-<body class="bg-gray-100 p-8">
-    <div class="max-w-4xl mx-auto">
-        <h1 class="text-3xl font-bold text-indigo-700 mb-8 text-center flex items-center justify-center gap-2">
-            📚 College Library Hub
-        </h1>
+<body class="bg-slate-50 font-sans min-h-screen text-slate-800">
 
-        <!-- Seat Availability Card -->
-        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">🪑 Live Seat Availability</h2>
-            <div id="seats-container" class="flex flex-wrap gap-4">
-                <!-- Seats will be loaded dynamically here -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 px-6 py-4 shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-indigo-600 p-2.5 rounded-xl text-white shadow-md shadow-indigo-200">
+                    <i class="fa-solid fa-layer-group text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">College Library Hub</h1>
+                    <p class="text-xs text-slate-400 font-medium tracking-wide uppercase">Student Live Dashboard</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <span id="connection-badge" class="bg-emerald-50 text-emerald-700 text-xs px-3 py-1.5 font-semibold rounded-full border border-emerald-200 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Systems Active
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-1 space-y-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-chair text-indigo-500"></i> Zone Map
+                        </h2>
+                        <p class="text-xs text-slate-400">Real-time occupancy matrix</p>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-50 border border-slate-100 p-6 rounded-xl">
+                    <div id="seats-container" class="grid grid-cols-3 gap-4 justify-items-center">
+                        </div>
+                </div>
+                
+                <div class="flex gap-4 mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500 justify-center">
+                    <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-500"></span> Available</span>
+                    <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-rose-500"></span> Occupied</span>
+                </div>
             </div>
         </div>
 
-        <!-- Book Search Card -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-xl font-semibold mb-4">🔍 Search Catalog</h2>
-            <div class="flex gap-2 mb-4">
-                <input id="search-input" type="text" placeholder="Type book title or author..." class="border p-2 rounded w-full focus:outline-indigo-500">
-                <button onclick="searchBooks()" class="bg-indigo-600 text-white px-6 py-2 rounded font-semibold hover:bg-indigo-700 transition">Search</button>
-            </div>
-            <div id="books-container" class="space-y-2">
-                <!-- Books will be loaded dynamically here -->
+        <div class="lg:col-span-2 space-y-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <div class="md:flex md:justify-between md:items-center gap-4 mb-6">
+                    <div class="mb-4 md:mb-0">
+                        <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-book-bookmark text-indigo-500"></i> Knowledge Catalog
+                        </h2>
+                        <p class="text-xs text-slate-400">Search and check item distribution tracks</p>
+                    </div>
+                    
+                    <div class="relative flex-1 max-w-md">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input id="search-input" type="text" oninput="searchBooks()" placeholder="Search titles, authors, rows..." 
+                               class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-500 focus:bg-white transition-all">
+                    </div>
+                </div>
+
+                <div id="books-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[550px] overflow-y-auto pr-1">
+                    </div>
             </div>
         </div>
-    </div>
+
+    </main>
 
     <script>
         const BACKEND_URL = 'https://college-library-hub.onrender.com/api';
         const socket = io('https://college-library-hub.onrender.com');
 
-        // 1. Fetch and show seats from database
+        // 1. Fetch and show seats inside the new Map representation
         async function loadSeats() {
             try {
                 const response = await fetch(`${BACKEND_URL}/seats`);
@@ -49,18 +91,28 @@
                 container.innerHTML = '';
 
                 seats.forEach(seat => {
+                    const isOccupied = seat.is_occupied;
                     const div = document.createElement('div');
-                    div.className = `p-4 rounded text-white font-bold w-24 text-center shadow-sm ${seat.is_occupied ? 'bg-red-600' : 'bg-green-600'}`;
-                    div.innerText = `Seat ${seat.seat_number}\n${seat.is_occupied ? 'Busy' : 'Free'}`;
+                    
+                    // Designing modern visual circular nodes instead of block boxes
+                    div.className = `w-16 h-16 rounded-2xl flex flex-col items-center justify-center border transition-all duration-300 shadow-sm ${
+                        isOccupied 
+                        ? 'bg-rose-50 border-rose-200 text-rose-700 shadow-rose-50' 
+                        : 'bg-emerald-50 border-emerald-200 text-emerald-700 shadow-emerald-50'
+                    }`;
+                    
+                    div.innerHTML = `
+                        <span class="text-xs font-black tracking-tighter">S-${seat.seat_number}</span>
+                        <i class="fa-solid ${isOccupied ? 'fa-user-lock text-rose-400' : 'fa-circle-check text-emerald-400'} text-xs mt-1"></i>
+                    `;
                     container.appendChild(div);
                 });
             } catch (error) {
-                alert("Mobile Seat Error: " + error.message);
                 console.error("Error fetching seats:", error);
             }
         }
 
-        // 2. Fetch and show books / search catalog
+        // 2. Fetch and show books inside an advanced responsive card grid
         async function searchBooks() {
             try {
                 const query = document.getElementById('search-input').value;
@@ -72,37 +124,50 @@
                 container.innerHTML = '';
 
                 if (books.length === 0) {
-                    container.innerHTML = '<p class="text-gray-500 italic">No books found matching that search.</p>';
+                    container.innerHTML = `
+                        <div class="col-span-full py-12 text-center border-2 border-dashed border-slate-100 rounded-xl">
+                            <i class="fa-solid fa-box-open text-slate-300 text-3xl mb-3"></i>
+                            <p class="text-slate-400 text-sm font-medium">No catalog listings found.</p>
+                        </div>`;
                     return;
                 }
 
                 books.forEach(book => {
+                    const isAvail = book.is_available;
                     const div = document.createElement('div');
-                    div.className = "p-4 border-b flex justify-between items-center hover:bg-gray-50 transition";
+                    
+                    // Card component structure with row/shelf chips
+                    div.className = "p-4 bg-slate-50 border border-slate-100 rounded-xl flex flex-col justify-between hover:border-indigo-200 hover:bg-white transition-all duration-200 group";
                     div.innerHTML = `
                         <div>
-                            <h3 class="font-bold text-gray-800">${book.title}</h3>
-                            <p class="text-sm text-gray-500">By ${book.author} | 📍 Row ${book.row_letter}, Shelf ${book.shelf_number}</p>
+                            <div class="flex justify-between items-start gap-2 mb-2">
+                                <h3 class="font-bold text-slate-800 text-sm leading-tight group-hover:text-indigo-600 transition-colors">${book.title}</h3>
+                                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md shadow-2xs ${
+                                    isAvail ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-rose-50 text-rose-700 border border-rose-200'
+                                }">
+                                    ${isAvail ? 'Available' : 'Issued'}
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-500 font-medium mb-3">By ${book.author}</p>
                         </div>
-                        <span class="px-3 py-1 rounded text-sm text-white font-semibold ${book.is_available ? 'bg-green-600' : 'bg-red-600'}">
-                            ${book.is_available ? 'Available' : 'Issued'}
-                        </span>
+                        <div class="flex gap-1.5 pt-2 border-t border-slate-200/60 text-[10px] font-bold text-slate-400">
+                            <span class="bg-white px-2 py-1 rounded border border-slate-200"><i class="fa-solid fa-route mr-1 text-slate-400"></i> ROW ${book.row_letter || 'N/A'}</span>
+                            <span class="bg-white px-2 py-1 rounded border border-slate-200"><i class="fa-solid fa-cubes mr-1 text-slate-400"></i> SHELF ${book.shelf_number || 'N/A'}</span>
+                        </div>
                     `;
                     container.appendChild(div);
                 });
             } catch (error) {
-                alert("Mobile Book Error: " + error.message);
                 console.error("Error fetching books:", error);
             }
         }
 
-        // 🚀 Listen for 'seatUpdated' live real-time broadcasts from Render server
-        socket.on('seatUpdated', (data) => {
-            console.log("Live real-time change received from server!", data);
+        // Live Event Listeners via socket communication channels
+        socket.on('seatUpdated', () => {
             loadSeats();
         });
 
-        // Run automatically when the webpage first opens to pull initial data
+        // Initialize display executions
         loadSeats();
         searchBooks();
     </script>
