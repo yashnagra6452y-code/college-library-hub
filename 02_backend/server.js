@@ -25,9 +25,8 @@ const io = new Server(server, {
     }
 });
 
-// A private cryptographic signature key for tokens (Defaults to a fallback if not configured in .env)
+// ✅ RE-WRITTEN WITH BULLETPROOF FALLBACK VALUES TO PREVENT ENGINE CRASHES:
 const JWT_SECRET = process.env.JWT_SECRET || 'SUPER_BEAST_MODE_SECRET_KEY_99X';
-// The master admin credential code processed securely on the cloud server side
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 
 // =========================================================================
@@ -46,7 +45,7 @@ function authenticateToken(req, res, next) {
             return res.status(403).json({ error: "Access Denied: Invalid or expired token session." });
         }
         req.user = user;
-        next(); // Authorization verified, proceed to operational business route
+        next();
     });
 }
 
@@ -73,7 +72,6 @@ app.post('/api/admin/login', (req, res) => {
 // 🗄️ CORE BUSINESS API ROUTES (PUBLIC CHANNELS)
 // =========================================================================
 
-// 1. Fetch all seats (Publicly visible on Student Dashboard)
 app.get('/api/seats', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM library_seats ORDER BY seat_number ASC');
@@ -84,7 +82,6 @@ app.get('/api/seats', async (req, res) => {
     }
 });
 
-// 2. Fetch books (Publicly visible on Student Dashboard)
 app.get('/api/books', async (req, res) => {
     const { search } = req.query;
     try {
@@ -110,7 +107,6 @@ app.get('/api/books', async (req, res) => {
 // 🔐 PROTECTED BUSINESS API ROUTES (REQUIRES SECURE VALID TOKEN SESSION)
 // =========================================================================
 
-// 3. Toggle seat status (Real-Time update - PROTECTED)
 app.post('/api/seats/toggle', authenticateToken, async (req, res) => {
     const { seat_number } = req.body;
     try {
@@ -122,7 +118,6 @@ app.post('/api/seats/toggle', authenticateToken, async (req, res) => {
         const newStatus = !currentSeat.rows[0].is_occupied;
         await pool.query('UPDATE library_seats SET is_occupied = $1 WHERE seat_number = $2', [newStatus, seat_number]);
 
-        // 📢 Broadcast change to all connected clients immediately
         io.emit('seatUpdated', { seat_number, is_occupied: newStatus });
         res.json({ message: `Seat ${seat_number} toggled successfully`, is_occupied: newStatus });
     } catch (error) {
@@ -131,7 +126,6 @@ app.post('/api/seats/toggle', authenticateToken, async (req, res) => {
     }
 });
 
-// 4. Issue a book to a specific student (PROTECTED)
 app.post('/api/books/issue', authenticateToken, async (req, res) => {
     const { book_id, student_id, student_name } = req.body;
 
@@ -172,7 +166,6 @@ app.post('/api/books/issue', authenticateToken, async (req, res) => {
     }
 });
 
-// 5. Log a returned book back into stock (PROTECTED)
 app.post('/api/books/return', authenticateToken, async (req, res) => {
     const { book_id } = req.body;
 
