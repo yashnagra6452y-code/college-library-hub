@@ -10,71 +10,88 @@
 </head>
 <body class="bg-slate-900 font-sans min-h-screen text-slate-100">
 
-    <nav class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 px-6 py-4 shadow-xl">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="bg-indigo-600 p-2.5 rounded-xl text-white shadow-lg shadow-indigo-500/30">
-                    <i class="fa-solid fa-terminal text-xl"></i>
-                </div>
+    <div id="login-overlay" class="fixed inset-0 bg-slate-950 z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-800 border border-slate-700 p-8 rounded-2xl w-full max-w-md shadow-2xl text-center">
+            <div class="inline-flex bg-indigo-600/10 p-4 rounded-full text-indigo-400 border border-indigo-500/20 mb-4">
+                <i class="fa-solid fa-shield-halved text-3xl"></i>
+            </div>
+            <h2 class="text-xl font-black text-white tracking-tight">System Access Restricted</h2>
+            <p class="text-xs text-slate-400 mt-1 mb-6">Enter administrative cryptographic authentication key</p>
+            
+            <div class="space-y-4 text-left">
                 <div>
-                    <h1 class="text-xl font-black tracking-tight bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Librarian Management Node</h1>
-                    <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">System Control Terminal</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <span class="bg-indigo-500/10 text-indigo-400 text-xs px-3 py-1.5 font-bold rounded-full border border-indigo-500/20 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-indigo-400 animate-ping"></span> Console Authorized
-                </span>
-            </div>
-        </div>
-    </nav>
-
-    <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        <div class="lg:col-span-1 space-y-6">
-            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
-                <div class="mb-4">
-                    <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
-                        <i class="fa-solid fa-toggle-on text-indigo-400"></i> Live Seat Controls
-                    </h2>
-                    <p class="text-xs text-slate-400">Tap nodes to instantly broadcast override toggles</p>
-                </div>
-                
-                <div id="seats-admin-container" class="grid grid-cols-2 gap-4 pt-2">
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Master Console Key</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-key absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                        <input id="admin-pass-input" type="password" placeholder="••••••••" class="w-full pl-9 pr-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500 transition-all">
                     </div>
+                </div>
+                <button onclick="executeAdminLogin()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-indigo-600/20 mt-2 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-unlock-keyhole"></i> Unlock Terminal Console
+                </button>
             </div>
         </div>
+    </div>
 
-        <div class="lg:col-span-2 space-y-6">
-            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
-                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+    <div id="main-terminal-content" class="hidden">
+        <nav class="bg-slate-800 border-b border-slate-700 sticky top-0 z-40 px-6 py-4 shadow-xl">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="bg-indigo-600 p-2.5 rounded-xl text-white shadow-lg shadow-indigo-500/30">
+                        <i class="fa-solid fa-terminal text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-black tracking-tight bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Librarian Management Node</h1>
+                        <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">System Control Terminal</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button onclick="terminateTerminalSession()" class="text-xs font-bold text-slate-400 bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-lg hover:bg-rose-950/40 hover:border-rose-500/40 hover:text-rose-400 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-power-off"></i> Lock Terminal
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
+                    <div class="mb-4">
+                        <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
+                            <i class="fa-solid fa-toggle-on text-indigo-400"></i> Live Seat Controls
+                        </h2>
+                        <p class="text-xs text-slate-400">Tap nodes to instantly broadcast override toggles</p>
+                    </div>
+                    <div id="seats-admin-container" class="grid grid-cols-2 gap-4 pt-2">
+                        </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 space-y-6">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
                     <div>
                         <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
                             <i class="fa-solid fa-sliders text-indigo-400"></i> Catalog Logistics Desk
                         </h2>
                         <p class="text-xs text-slate-400">Manage digital distribution tokens across the user cluster</p>
                     </div>
+                    <div id="books-admin-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                        </div>
                 </div>
-
-                <div id="books-admin-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
     <div id="issue-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center z-50 p-4">
-        <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl w-full max-w-md shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+        <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl w-full max-w-md shadow-2xl">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-lg font-bold text-white flex items-center gap-2">
                     <i class="fa-solid fa-passport text-indigo-400"></i> Initialize Book Issue
                 </h3>
                 <button onclick="closeIssueModal()" class="text-slate-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            
             <p id="modal-book-title" class="text-sm font-semibold text-indigo-300 bg-indigo-950/40 px-3 py-2 rounded-xl border border-indigo-500/20 mb-4"></p>
-            
             <input type="hidden" id="modal-book-id">
-            
             <div class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Student ID Token</label>
@@ -84,7 +101,7 @@
                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Full Student Legal Name</label>
                     <input id="student-name-input" type="text" placeholder="e.g., Yash Sharma" class="w-full px-3 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500 transition-all">
                 </div>
-                <button onclick="submitIssueRequest()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-indigo-600/20 mt-2 flex items-center justify-center gap-2">
+                <button onclick="submitIssueRequest()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition mt-2 flex items-center justify-center gap-2">
                     <i class="fa-solid fa-check-to-slot"></i> Authorize Distribution
                 </button>
             </div>
@@ -95,7 +112,56 @@
         const BACKEND_URL = 'https://college-library-hub.onrender.com/api';
         const socket = io('https://college-library-hub.onrender.com');
 
-        // 1. Fetch and render control cards for all seats
+        // Check if there is an active valid token session on boot execution
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = sessionStorage.getItem("admin_token");
+            if (token) {
+                initializeProtectedTerminal();
+            }
+        });
+
+        // 🔑 EXECUTE SERVER-SIDE SECURE VERIFICATION LOGIN
+        async function executeAdminLogin() {
+            const password = document.getElementById('admin-pass-input').value;
+            try {
+                const response = await fetch(`${BACKEND_URL}/admin/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || "Login Rejected.");
+
+                // Save secure token across session lifetime tracks
+                sessionStorage.setItem("admin_token", data.token);
+                initializeProtectedTerminal();
+            } catch (error) {
+                alert("Security Authorization Halted: " + error.message);
+            }
+        }
+
+        function initializeProtectedTerminal() {
+            document.getElementById('login-overlay').classList.add('hidden');
+            document.getElementById('main-terminal-content').classList.remove('hidden');
+            loadAdminSeats();
+            loadAdminBooks();
+        }
+
+        function terminateTerminalSession() {
+            sessionStorage.removeItem("admin_token");
+            window.location.reload();
+        }
+
+        // Helper function to dynamically append authorization tokens to headers
+        function getAuthHeaders() {
+            const token = sessionStorage.getItem("admin_token");
+            return {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            };
+        }
+
         async function loadAdminSeats() {
             try {
                 const response = await fetch(`${BACKEND_URL}/seats`);
@@ -107,10 +173,8 @@
                     const active = seat.is_occupied;
                     const button = document.createElement('button');
                     button.onclick = () => toggleSeatStatus(seat.seat_number);
-                    button.className = `p-4 rounded-xl border font-bold text-left transition-all duration-200 group flex flex-col justify-between h-24 ${
-                        active 
-                        ? 'bg-rose-950/30 border-rose-500/40 text-rose-400 shadow-md shadow-rose-950/20' 
-                        : 'bg-emerald-950/30 border-emerald-500/40 text-emerald-400 shadow-md shadow-emerald-950/20'
+                    button.className = `p-4 rounded-xl border font-bold text-left transition-all duration-200 flex flex-col justify-between h-24 ${
+                        active ? 'bg-rose-950/30 border-rose-500/40 text-rose-400' : 'bg-emerald-950/30 border-emerald-500/40 text-emerald-400'
                     }`;
 
                     button.innerHTML = `
@@ -118,19 +182,13 @@
                             <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">Node ${seat.seat_number}</span>
                             <span class="w-2 h-2 rounded-full ${active ? 'bg-rose-500 animate-pulse' : 'bg-emerald-500'}"></span>
                         </div>
-                        <div class="text-base font-black tracking-tight flex items-center gap-2 mt-2">
-                            <i class="fa-solid ${active ? 'fa-user-lock text-rose-500' : 'fa-door-open text-emerald-500'}"></i>
-                            ${active ? 'Force Occupied' : 'Force Free'}
-                        </div>
+                        <div class="text-base font-black tracking-tight flex items-center gap-2 mt-2"><i class="fa-solid ${active ? 'fa-user-lock text-rose-500' : 'fa-door-open text-emerald-500'}"></i>${active ? 'Force Occupied' : 'Force Free'}</div>
                     `;
                     container.appendChild(button);
                 });
-            } catch (error) {
-                console.error("Admin Seat Fetch Fatal Error:", error);
-            }
+            } catch (error) { console.error(error); }
         }
 
-        // 2. Fetch and render books catalog with live contextual actions
         async function loadAdminBooks() {
             try {
                 const response = await fetch(`${BACKEND_URL}/books`);
@@ -142,50 +200,35 @@
                     const avail = book.is_available;
                     const div = document.createElement('div');
                     div.className = "p-4 bg-slate-800/40 border border-slate-700/60 rounded-xl flex flex-col justify-between gap-4";
-                    
                     div.innerHTML = `
                         <div>
                             <div class="flex justify-between items-start gap-2 mb-1">
                                 <h3 class="font-bold text-slate-100 text-sm leading-snug">${book.title}</h3>
-                                <span class="text-[9px] uppercase font-bold tracking-widest px-2 py-0.5 rounded border ${
-                                    avail ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-rose-500/10 border-rose-500/20 text-rose-400'
-                                }">${avail ? 'Stock' : 'Out'}</span>
+                                <span class="text-[9px] uppercase font-bold tracking-widest px-2 py-0.5 rounded border ${avail ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-rose-500/10 border-rose-500/20 text-rose-400'}">${avail ? 'Stock' : 'Out'}</span>
                             </div>
                             <p class="text-xs text-slate-400 font-medium">By ${book.author}</p>
                             <span class="inline-block mt-2 text-[10px] bg-slate-900 border border-slate-700 font-bold rounded px-2 py-0.5 text-slate-400"><i class="fa-solid fa-map-pin mr-1 text-slate-500"></i> ${book.shelf_location}</span>
                         </div>
-                        
-                        <button onclick="${avail ? `openIssueModal(${book.id}, '${book.title.replace(/'/g, "\\'")}')` : `returnBookRequest(${book.id})`}" 
-                                class="w-full py-2 rounded-lg text-xs font-bold tracking-wide border transition-all duration-150 flex items-center justify-center gap-1.5 ${
-                                    avail 
-                                    ? 'bg-indigo-600 border-indigo-500 hover:bg-indigo-500 text-white' 
-                                    : 'bg-slate-700 border-slate-600 text-slate-300 hover:bg-rose-950/40 hover:border-rose-500/40 hover:text-rose-400'
-                                }">
-                            <i class="fa-solid ${avail ? 'fa-paper-plane' : 'fa-rotate-left'}"></i>
-                            ${avail ? 'Issue Material' : 'Log Return'}
+                        <button onclick="${avail ? `openIssueModal(${book.id}, '${book.title.replace(/'/g, "\\'")}')` : `returnBookRequest(${book.id})`}" class="w-full py-2 rounded-lg text-xs font-bold border transition-all duration-150 flex items-center justify-center gap-1.5 ${avail ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-slate-700 border-slate-600 text-slate-300'}">
+                            <i class="fa-solid ${avail ? 'fa-paper-plane' : 'fa-rotate-left'}"></i>${avail ? 'Issue Material' : 'Log Return'}
                         </button>
                     `;
                     container.appendChild(div);
                 });
-            } catch (error) {
-                console.error("Admin Catalog Retrieval Fail:", error);
-            }
+            } catch (error) { console.error(error); }
         }
 
-        // 3. Fire real-time websocket transmission signals for seat toggling
         async function toggleSeatStatus(seat_number) {
             try {
-                await fetch(`${BACKEND_URL}/seats/toggle`, {
+                const response = await fetch(`${BACKEND_URL}/seats/toggle`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: getAuthHeaders(), // Inject JWT security token key signature
                     body: JSON.stringify({ seat_number })
                 });
-            } catch (error) {
-                console.error("Transmission interruption:", error);
-            }
+                if (!response.ok) { const d = await response.json(); alert(d.error); }
+            } catch (error) { console.error(error); }
         }
 
-        // 4. Modal Display Logic
         function openIssueModal(id, title) {
             document.getElementById('modal-book-id').value = id;
             document.getElementById('modal-book-title').innerText = title;
@@ -193,69 +236,42 @@
         }
         function closeIssueModal() {
             document.getElementById('issue-modal').classList.add('hidden');
-            document.getElementById('student-id-input').value = '';
-            document.getElementById('student-name-input').value = '';
         }
 
-        // 5. Submit the transaction payload execution straight to Render server
         async function submitIssueRequest() {
             const book_id = document.getElementById('modal-book-id').value;
             const student_id = document.getElementById('student-id-input').value.trim();
             const student_name = document.getElementById('student-name-input').value.trim();
 
-            if (!student_id || !student_name) {
-                alert("Please authenticate all deployment fields completely.");
-                return;
-            }
-
             try {
                 const response = await fetch(`${BACKEND_URL}/books/issue`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: getAuthHeaders(), // Inject JWT security token key signature
                     body: JSON.stringify({ book_id, student_id, student_name })
                 });
-
                 const data = await response.json();
-                if (!response.ok) throw new Error(data.error || "Execution fault.");
-
+                if (!response.ok) throw new Error(data.error);
                 closeIssueModal();
-                loadAdminBooks(); // Instantly update view fields
-            } catch (error) {
-                alert("Transaction Execution Halted: " + error.message);
-            }
+                loadAdminBooks();
+            } catch (error) { alert(error.message); }
         }
 
-        // 6. Asynchronous live book check-in tracking call
         async function returnBookRequest(book_id) {
             if (!confirm("Are you sure you want to log a return check-in for this material?")) return;
-
             try {
                 const response = await fetch(`${BACKEND_URL}/books/return`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: getAuthHeaders(), // Inject JWT security token key signature
                     body: JSON.stringify({ book_id })
                 });
-
                 const data = await response.json();
-                if (!response.ok) throw new Error(data.error || "Execution fault.");
-
-                loadAdminBooks(); // Instantly update data grids
-            } catch (error) {
-                alert("Transaction Return Halted: " + error.message);
-            }
+                if (!response.ok) throw new Error(data.error);
+                loadAdminBooks();
+            } catch (error) { alert(error.message); }
         }
 
-        // Real-Time Socket Streams
-        socket.on('seatUpdated', () => {
-            loadAdminSeats();
-        });
-        socket.on('bookUpdated', () => {
-            loadAdminBooks();
-        });
-
-        // Initialize Display Matrix
-        loadAdminSeats();
-        loadAdminBooks();
+        socket.on('seatUpdated', () => { if(!document.getElementById('main-terminal-content').classList.contains('hidden')) loadAdminSeats(); });
+        socket.on('bookUpdated', () => { if(!document.getElementById('main-terminal-content').classList.contains('hidden')) loadAdminBooks(); });
     </script>
 </body>
 </html>
