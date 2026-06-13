@@ -109,8 +109,9 @@
     </div>
 
     <script>
-        const BACKEND_URL = 'https://college-library-hub.onrender.com/api';
-        const socket = io('https://college-library-hub.onrender.com');
+        // Separated paths explicitly so paths match correctly across cross-origin deployments
+        const BACKEND_URL = 'https://college-library-hub.onrender.com';
+        const socket = io(BACKEND_URL);
 
         // Check if there is an active valid token session on boot execution
         document.addEventListener("DOMContentLoaded", () => {
@@ -124,7 +125,7 @@
         async function executeAdminLogin() {
             const password = document.getElementById('admin-pass-input').value;
             try {
-                const response = await fetch(`${BACKEND_URL}/admin/login`, {
+                const response = await fetch(`${BACKEND_URL}/api/admin/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ password })
@@ -164,7 +165,7 @@
 
         async function loadAdminSeats() {
             try {
-                const response = await fetch(`${BACKEND_URL}/seats`);
+                const response = await fetch(`${BACKEND_URL}/api/seats`);
                 const seats = await response.json();
                 const container = document.getElementById('seats-admin-container');
                 container.innerHTML = '';
@@ -191,7 +192,7 @@
 
         async function loadAdminBooks() {
             try {
-                const response = await fetch(`${BACKEND_URL}/books`);
+                const response = await fetch(`${BACKEND_URL}/api/books`);
                 const books = await response.json();
                 const container = document.getElementById('books-admin-container');
                 container.innerHTML = '';
@@ -220,7 +221,7 @@
 
         async function toggleSeatStatus(seat_number) {
             try {
-                const response = await fetch(`${BACKEND_URL}/seats/toggle`, {
+                const response = await fetch(`${BACKEND_URL}/api/seats/toggle`, {
                     method: 'POST',
                     headers: getAuthHeaders(), // Inject JWT security token key signature
                     body: JSON.stringify({ seat_number })
@@ -244,7 +245,7 @@
             const student_name = document.getElementById('student-name-input').value.trim();
 
             try {
-                const response = await fetch(`${BACKEND_URL}/books/issue`, {
+                const response = await fetch(`${BACKEND_URL}/api/books/issue`, {
                     method: 'POST',
                     headers: getAuthHeaders(), // Inject JWT security token key signature
                     body: JSON.stringify({ book_id, student_id, student_name })
@@ -259,7 +260,7 @@
         async function returnBookRequest(book_id) {
             if (!confirm("Are you sure you want to log a return check-in for this material?")) return;
             try {
-                const response = await fetch(`${BACKEND_URL}/books/return`, {
+                const response = await fetch(`${BACKEND_URL}/api/books/return`, {
                     method: 'POST',
                     headers: getAuthHeaders(), // Inject JWT security token key signature
                     body: JSON.stringify({ book_id })
