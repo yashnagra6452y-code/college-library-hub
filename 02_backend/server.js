@@ -128,6 +128,46 @@ app.post('/api/books/issue', async (req, res) => {
     }
 });
 
+// 🚀 BEAST MODE FEATURE: Log a returned book back into stock
+app.post('/api/books/return', async (req, res) => {
+    const { book_id } = req.body;
+
+    if (!book_id) {
+        return res.status(400).json({ error: "Missing required book ID parameter." });
+    }
+
+    try {
+        // A. Verify if the book is actually marked as issued first
+        const bookCheck = await pool.query('SELECT is_available FROM library_books WHERE id = $1', [book_id]);
+        
+        if (bookCheck.rows.length === 0) {
+            return res.status(404).json({ error: "Book record not found." });
+        }
+        if (bookCheck.rows[0].is_available) {
+            return res.status(400).json({ error: "This item is already back in stock." });
+        }
+
+        // B. Put the book back in inventory (is_available = true)
+        await pool.query('UPDATE library_books SET is_available = TRUE WHERE id = $1', [book_id]);
+
+        // C. Close out the transaction log with a return timestamp
+        await pool.query(
+            `UPDATE library_transactions 
+             SET return_date = CURRENT_TIMESTAMP 
+             WHERE book_id = $1 AND return_date IS NULL`,
+            [book_id]
+        );
+
+        // 📢 Broadcast to both student and librarian screens that the inventory updated live
+        io.emit('bookUpdated');
+
+        res.status(200).json({ message: "Material checked in and ledger closed successfully." });
+    } catch (error) {
+        console.error("Critical return system failure:", error);
+        res.status(500).json({ error: "Internal tracking calculation error." });
+    }
+});
+
 // =========================================================================
 // 🌐 REAL-TIME SOCKET HUB ROUTER CONNECTION
 // =========================================================================
