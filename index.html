@@ -29,7 +29,7 @@
     </div>
 
     <script>
-        const BACKEND_URL = 'http://localhost:5000/api';
+        const BACKEND_URL = 'https://college-library-hub.onrender.com/api';
 
         // 1. Fetch and show seats from database
         async function loadSeats() {
@@ -84,7 +84,7 @@
         }
 
         // 🚀 NEW: Establish continuous WebSocket connection with backend server
-        const socket = io('http://localhost:5000');
+        const socket = io('https://college-library-hub.onrender.com');
 
         // 🚀 NEW: Listen for 'seatUpdated' broadcasts sent by the server
         socket.on('seatUpdated', (data) => {
