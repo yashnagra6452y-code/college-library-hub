@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Library Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="http://localhost:5000/socket.io/socket.io.js"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8 text-indigo-700">📚 College Library Hub</h1>
+
+        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h2 class="text-xl font-semibold mb-4">🪑 Live Seat Availability</h2>
+            <div id="seats-container" class="flex flex-wrap gap-4">
+                </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold mb-4">🔍 Search Catalog</h2>
+            <div class="flex gap-2 mb-4">
+                <input id="search-input" type="text" placeholder="Type book title or author..." class="border p-2 rounded w-full focus:outline-indigo-500">
+                <button onclick="searchBooks()" class="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700">Search</button>
+            </div>
+            <div id="books-container" class="space-y-2">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        const BACKEND_URL = 'http://localhost:5000/api';
+
+        // 1. Fetch and show seats from database
+        async function loadSeats() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/seats`);
+                const seats = await response.json();
+                const container = document.getElementById('seats-container');
+                container.innerHTML = ''; 
+
+                seats.forEach(seat => {
+                    const div = document.createElement('div');
+                    div.className = `p-4 rounded text-white font-bold w-24 text-center shadow-sm transition-all duration-300 ${seat.is_occupied ? 'bg-red-500 scale-95' : 'bg-green-500 scale-100'}`;
+                    div.innerText = `Seat ${seat.seat_number}\n${seat.is_occupied ? 'Busy' : 'Free'}`;
+                    container.appendChild(div);
+                });
+            } catch (error) {
+                console.error("Error fetching seats:", error);
+            }
+        }
+
+        // 2. Fetch and show books based on search input
+        async function searchBooks() {
+            try {
+                const query = document.getElementById('search-input').value;
+                const response = await fetch(`${BACKEND_URL}/books?search=${query}`);
+                const books = await response.json();
+                const container = document.getElementById('books-container');
+                container.innerHTML = '';
+
+                if (books.length === 0) {
+                    container.innerHTML = '<p class="text-gray-500 p-2">No books found matching that search.</p>';
+                    return;
+                }
+
+                books.forEach(book => {
+                    const div = document.createElement('div');
+                    div.className = "border p-4 rounded flex justify-between items-center bg-gray-50 shadow-sm";
+                    div.innerHTML = `
+                        <div>
+                            <p class="font-bold text-lg text-gray-800">${book.title}</p>
+                            <p class="text-sm text-gray-600">By ${book.author} | 📍 <span class="font-semibold text-indigo-600">${book.shelf_location}</span></p>
+                        </div>
+                        <span class="px-3 py-1 rounded text-sm text-white font-semibold ${book.is_available ? 'bg-green-600' : 'bg-red-600'}">
+                            ${book.is_available ? 'Available' : 'Issued'}
+                        </span>
+                    `;
+                    container.appendChild(div);
+                });
+            } catch (error) {
+                console.error("Error fetching books:", error);
+            }
+        }
+
+        // 🚀 NEW: Establish continuous WebSocket connection with backend server
+        const socket = io('http://localhost:5000');
+
+        // 🚀 NEW: Listen for 'seatUpdated' broadcasts sent by the server
+        socket.on('seatUpdated', (data) => {
+            console.log("Live real-time change received from server!", data);
+            // Refresh just the seats instantly on the student screen without a page reload!
+            loadSeats();
+        });
+
+        // Run automatically when the webpage first opens
+        loadSeats();
+        searchBooks();
+    </script>
+</body>
+</html>
