@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Matrix Hub | Immersive Student Gateway</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Socket.io Client -->
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <!-- GSAP Premium Animation Engine Core -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Lottie Player Industry Animation Driver Module -->
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2 family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -112,12 +117,15 @@
 </head>
 <body class="min-h-screen text-slate-700 antialiased selection:bg-sky-100 selection:text-sky-900 opacity-0" id="master-body-viewport">
 
+    <!-- 🌌 SYSTEM BACKGROUND GENERATOR OVERLAY -->
     <div class="aurora-bg-mesh"></div>
 
+    <!-- BACKGROUND VECTOR DECORATIONS -->
     <div class="hidden lg:block absolute top-[14%] left-[3%] text-sky-300/40 text-6xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-graduation-cap"></i></div>
     <div class="hidden lg:block absolute top-[58%] left-[43%] text-pink-300/35 text-7xl pointer-events-none select-none drift-node-x z-0"><i class="fa-solid fa-book-bookmark"></i></div>
     <div class="hidden lg:block absolute top-[25%] right-[3%] text-purple-300/40 text-5xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
 
+    <!-- TOP NAVIGATION BAR -->
     <nav class="bg-[#FAF8F5]/75 backdrop-blur-xl border-b border-[#E6DFD3] sticky top-0 z-50 px-6 sm:px-8 py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex justify-between items-center relative z-10">
             <div class="flex items-center gap-3.5 group cursor-pointer">
@@ -137,12 +145,14 @@
         </div>
     </nav>
 
+    <!-- 🌟 HIGH-ENGAGEMENT COZY SUMMARY HUD WITH CORRECTED LOTTIE LINK -->
     <header id="gsap-hero-panel" class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10">
         <div class="premium-glass-shell rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row justify-between items-center gap-8 relative overflow-hidden border border-white/70">
             
             <div class="flex flex-col sm:flex-row items-center gap-6 w-full md:w-auto text-center sm:text-left relative z-10">
-                <div class="w-24 h-24 sm:w-28 sm:h-24 bg-white/40 rounded-2xl flex items-center justify-center border border-white shrink-0 shadow-sm overflow-hidden">
-                    <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_dmw3g0ep.json" background="transparent" speed="1" style="width: 110px; height: 110px;" loop autoplay></lottie-player>
+                <!-- Stable Verified Cloud Delivery Endpoint -->
+                <div class="w-24 h-24 sm:w-28 sm:h-24 bg-white/50 rounded-2xl flex items-center justify-center border border-white shrink-0 shadow-sm overflow-hidden">
+                    <lottie-player src="https://assets2.lottiefiles.com/dotlotties/dlf10_wq9r0mby.json" background="transparent" speed="0.85" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
                 </div>
                 <div>
                     <h2 class="text-xl sm:text-2xl font-800 text-slate-900 display-font tracking-tight leading-tight">Welcome to Sanctuary Desk</h2>
@@ -155,6 +165,7 @@
                 </div>
             </div>
             
+            <!-- THE MAGNETIC GSAP ACTION BUTTON CONTROLLER -->
             <div class="w-full md:w-auto shrink-0 flex justify-center items-center relative z-10" id="magnetic-button-container">
                 <button id="magic-allocate-btn" onclick="executeMagicSeatMatch()" class="w-full md:w-auto bg-gradient-to-r from-[#3A78C4] to-[#4A90E2] text-white font-800 text-xs tracking-wider uppercase px-6 py-4 rounded-xl shadow-md shadow-sky-200/40 transition-shadow duration-300 flex items-center justify-center gap-2.5 font-mono relative">
                     <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i> Find Me an Open Seat Now
@@ -163,6 +174,7 @@
         </div>
     </header>
 
+    <!-- MOBILE TABS -->
     <div class="flex justify-center p-4 lg:hidden sticky top-[77px] z-40 backdrop-blur-md transition-all duration-300">
         <div class="bg-[#F7F4EF]/90 border border-[#E6DFD3] p-1 rounded-2xl flex gap-1 shadow-md">
             <button id="toggle-seats-btn" onclick="switchMobileTab('seats')" class="px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4] shadow-sm">
@@ -174,8 +186,10 @@
         </div>
     </div>
 
+    <!-- MAIN GRID CONTAINER -->
     <main class="max-w-7xl mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
         
+        <!-- LEFT PANEL: RADAR WORKSPACE MATRIX MAP -->
         <div id="seats-panel" class="lg:col-span-5 space-y-6 block transition-all duration-500 gsap-panel-left">
             <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl relative overflow-hidden">
                 <div class="mb-5">
@@ -185,18 +199,21 @@
                     <p class="text-xs text-slate-400 mt-0.5 font-medium">Isolate study desks seamlessly by building layers</p>
                 </div>
 
+                <!-- ZONE CHANNELS FILTERS -->
                 <div class="bg-white/80 border border-[#E6DFD3] p-1 rounded-xl flex gap-1 mb-6 overflow-x-auto no-scrollbar shadow-inner">
                     <button id="zone-btn-all" onclick="filterRadarZone('all')" class="px-4 py-2 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap bg-slate-900 text-white shadow-sm">All Registers</button>
                     <button id="zone-btn-main" onclick="filterRadarZone('main')" class="px-4 py-2 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap text-slate-500 hover:text-slate-800 hover:bg-white/60">🌳 Oak Center</button>
                     <button id="zone-btn-quiet" onclick="filterRadarZone('quiet')" class="px-4 py-2 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap text-slate-500 hover:text-slate-800 hover:bg-white/60">🤫 Silent Pods</button>
                 </div>
 
+                <!-- BLUEPRINT INTERACTIVE SCROLLER -->
                 <div class="border border-[#E6DFD3] rounded-2xl p-6 bg-[#FAF8F5]/20 relative max-h-[500px] overflow-y-auto space-y-12 flex flex-col items-center shadow-inner">
                     <div id="library-bays-container" class="w-full space-y-16 py-4 flex flex-col items-center transition-all duration-500"></div>
                 </div>
             </div>
         </div>
 
+        <!-- RIGHT PANEL: DISCOVER ACCESS DISK SYSTEM -->
         <div id="books-panel" class="lg:col-span-7 space-y-6 hidden lg:block transition-all duration-500 gsap-panel-right">
             <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -207,6 +224,7 @@
                         <p class="text-xs text-slate-400 mt-0.5 font-medium">Fluid system search — instant availability tracking</p>
                     </div>
 
+                    <!-- SEARCH BAR TERMINAL INPUT -->
                     <div class="relative w-full sm:w-64 rounded-xl shadow-sm transition-all duration-300 focus-within:shadow-md">
                         <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                         <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Type title, author, row tag..." class="w-full pl-10 pr-4 py-3 bg-white/90 border border-[#E6DFD3] rounded-xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#4A90E2] focus:ring-4 focus:ring-sky-100 transition-all font-medium">
@@ -214,7 +232,8 @@
                 </div>
 
                 <div id="student-books-container" class="grid grid-cols-1 md:grid-cols-2 gap-5 transition-all duration-500">
-                    </div>
+                    <!-- Cards loop dynamically here -->
+                </div>
             </div>
         </div>
     </main>
@@ -274,7 +293,7 @@
         }
 
         // =========================================================================
-        // 🪑 STABILIZED SCANDI WOOD WORKBENCH LOOPS (WITH RELATIVE DURATION)
+        // 🪑 STABILIZED SCANDI WOOD WORKBENCH LOOPS
         // =========================================================================
         function formatRelativeSessionTime(timestampString) {
             if (!timestampString) return "Available";
@@ -352,7 +371,6 @@
                 mainContainer.appendChild(tableWrapper);
             }
             
-            // GSAP fluid staggered element entry
             gsap.from("#library-bays-container > div", { opacity: 0, y: 15, duration: 0.4, ease: "power2.out", stagger: 0.05 });
         }
 
@@ -426,7 +444,6 @@
                     container.appendChild(card);
                 });
 
-                // GSAP premium container upward slide entry sequencing
                 gsap.from("#student-books-container > div", { opacity: 0, y: 20, duration: 0.5, stagger: 0.06 });
             } catch (error) { console.error(error); }
         }
@@ -469,12 +486,10 @@
             }, 250);
         }
 
-        // High performance debounce filter configuration to optimize database transactions
         let searchTimeout;
         function executeLiveSearch() {
             clearTimeout(searchTimeout);
             const query = document.getElementById('catalog-search').value.trim();
-            // Deliberate 250ms latency hold to prevent network spamming loops
             searchTimeout = setTimeout(() => { fetchLiveBooksCatalog(query); }, 250);
         }
 
