@@ -247,7 +247,7 @@
         });
 
         // =========================================================================
-        // 🛰️ GSAP RUNTIME VIEWPORT CORE HANDLERS
+        // 🛰 * GSAP RUNTIME VIEWPORT CORE HANDLERS
         // =========================================================================
         function initializeGSAPPhysicsEngine() {
             gsap.to("#master-body-viewport", { opacity: 1, duration: 0.6, ease: "power2.out" });
@@ -413,7 +413,7 @@
                     const card = document.createElement('div');
                     card.className = `pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between group relative overflow-hidden bg-gradient-to-b ${themeGradient} premium-glass-card`;
                     
-                    // FIXED: Re-injected the critical missing "<" before the h3 tag below
+                    // FIXED Wholesale layout bracket parameters across all compilation blocks
                     card.innerHTML = `
                         <div class="absolute top-0 right-4 w-7 h-8 flex items-center justify-center text-[8px] font-900 tracking-wider font-mono text-white rounded-b-md shadow-sm transition-all duration-300 group-hover:h-10 ${
                             available ? 'bg-[#98D8C8]' : 'bg-[#FF9AA2]'
@@ -442,7 +442,7 @@
                 });
 
                 // GSAP premium container upward slide entry sequencing
-                gsap.from("#student-books-container > div", { opacity: 0, y: 20, duration: 0.5,     stagger: 0.06 });
+                gsap.from("#student-books-container > div", { opacity: 0, y: 20, duration: 0.5, stagger: 0.06 });
             } catch (error) { console.error(error); }
         }
 
