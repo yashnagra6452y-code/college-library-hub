@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
         
@@ -177,6 +178,21 @@
         </div>
     </header>
 
+    <section class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10 gsap-hero-panel">
+        <div class="premium-glass-shell rounded-3xl p-5 sm:p-6 border border-white/70">
+            <div class="mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-chart-pie text-[#3A78C4] text-sm animate-pulse"></i>
+                <div>
+                    <h3 class="text-sm font-800 text-slate-900 display-font tracking-tight">Live Environmental Load Ratios</h3>
+                    <p class="text-[10px] text-slate-400 font-medium">Real-time room occupancy analysis by building sectors</p>
+                </div>
+            </div>
+            <div class="w-full h-24 sm:h-28 relative flex items-center justify-center">
+                <canvas id="live-occupancy-chart-canvas"></canvas>
+            </div>
+        </div>
+    </section>
+
     <div class="flex justify-center p-4 lg:hidden sticky top-[77px] z-40 backdrop-blur-md transition-all duration-300">
         <div class="bg-[#F7F4EF]/90 border border-[#E6DFD3] p-1 rounded-2xl flex gap-1 shadow-md">
             <button id="toggle-seats-btn" onclick="switchMobileTab('seats')" class="px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4] shadow-sm">
@@ -239,6 +255,7 @@
 
         let systemSeatsArray = [];
         let globalCurrentZoneFilter = 'all';
+        let liveChartJSInstance = null; // Storing chart layer explicitly
 
         document.addEventListener("DOMContentLoaded", () => {
             fetchSystemRadarData();
@@ -247,7 +264,7 @@
         });
 
         // =========================================================================
-        // 🛰 * GSAP RUNTIME VIEWPORT CORE HANDLERS
+        // 🛰️ GSAP RUNTIME VIEWPORT CORE HANDLERS
         // =========================================================================
         function initializeGSAPPhysicsEngine() {
             gsap.to("#master-body-viewport", { opacity: 1, duration: 0.6, ease: "power2.out" });
@@ -271,12 +288,71 @@
             }
         }
 
+        // =========================================================================
+        // 📊 NEW: LIVE CHART ANIMATION COMPILER FUNCTION
+        // =========================================================================
+        function triggerLiveMetricsRecompilation(seats) {
+            // Split up seats by zones based on seat indexing variables
+            const mainCenterSeats = seats.slice(0, 30);
+            const silentPodsSeats = seats.slice(30);
+
+            const mainCenterOccupied = mainCenterSeats.filter(s => s.is_occupied).length;
+            const silentPodsOccupied = silentPodsSeats.filter(s => s.is_occupied).length;
+
+            const chartDataValues = [mainCenterOccupied, silentPodsOccupied];
+
+            if (liveChartJSInstance) {
+                // Smoothly slide lines without flashing component arrays
+                liveChartJSInstance.data.datasets[0].data = chartDataValues;
+                liveChartJSInstance.update('none'); // Animate smoothly without jumping layout bounds
+                return;
+            }
+
+            const ctx = document.getElementById('live-occupancy-chart-canvas').getContext('2d');
+            liveChartJSInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['🌳 Oak Center (Seats 1-30)', '🤫 Silent Pods (Seats 31+)'],
+                    datasets: [{
+                        label: 'Active System Nodes',
+                        data: chartDataValues,
+                        backgroundColor: ['rgba(58, 120, 196, 0.75)', 'rgba(216, 74, 117, 0.75)'],
+                        borderColor: ['#3A78C4', '#D84A75'],
+                        borderWidth: 1.5,
+                        borderRadius: 8,
+                        barThickness: 24
+                    }]
+                },
+                options: {
+                    indexAxis: 'y', // Premium side-gliding horizontal chart look
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: 'Plus Jakarta Sans', size: 10, weight: 'bold' } },
+                            min: 0,
+                            max: 30
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: { font: { family: 'Plus Jakarta Sans', size: 10, weight: 'bold' }, color: '#334155' }
+                        }
+                    }
+                }
+            });
+        }
+
         async function fetchSystemRadarData() {
             try {
                 const response = await fetch(`${BACKEND_URL}/api/seats`);
                 systemSeatsArray = await response.json();
                 calculateHUDAnalytics(systemSeatsArray);
                 renderModularZoneGrid(systemSeatsArray);
+                triggerLiveMetricsRecompilation(systemSeatsArray); // Compile data arrays live
             } catch(e) { console.error(e); }
         }
 
@@ -413,7 +489,6 @@
                     const card = document.createElement('div');
                     card.className = `pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between group relative overflow-hidden bg-gradient-to-b ${themeGradient} premium-glass-card`;
                     
-                    // FIXED Wholesale layout bracket parameters across all compilation blocks
                     card.innerHTML = `
                         <div class="absolute top-0 right-4 w-7 h-8 flex items-center justify-center text-[8px] font-900 tracking-wider font-mono text-white rounded-b-md shadow-sm transition-all duration-300 group-hover:h-10 ${
                             available ? 'bg-[#98D8C8]' : 'bg-[#FF9AA2]'
@@ -516,6 +591,7 @@
                 systemSeatsArray[seatIndex] = updatedSeat;
                 calculateHUDAnalytics(systemSeatsArray);
                 renderModularZoneGrid(systemSeatsArray);
+                triggerLiveMetricsRecompilation(systemSeatsArray); // Recalculate bars on change packets
             }
         });
         
