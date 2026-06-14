@@ -3,225 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Control Hub</title>
+    <title>College Library Hub | Student Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <style>
+        /* Premium custom scrollbar to match our dark theme aesthetics */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4f46e5; }
+    </style>
 </head>
-<body class="bg-slate-50 font-sans min-h-screen text-slate-800">
+<body class="bg-slate-950 font-sans min-h-screen text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200">
 
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 px-6 py-4 shadow-sm">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-10 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <nav class="bg-slate-900/60 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-50 px-6 py-4 shadow-xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-indigo-600 p-2.5 rounded-xl text-white shadow-md shadow-indigo-200">
-                    <i class="fa-solid fa-layer-group text-xl"></i>
+                <div class="bg-gradient-to-tr from-indigo-600 to-cyan-500 p-2.5 rounded-xl text-white shadow-lg shadow-indigo-500/20">
+                    <i class="fa-solid fa-graduation-cap text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">College Library Hub</h1>
-                    <p class="text-xs text-slate-400 font-medium tracking-wide uppercase">Student Live Dashboard</p>
+                    <h1 class="text-xl font-black tracking-tight bg-gradient-to-r from-indigo-400 via-indigo-200 to-cyan-400 bg-clip-text text-transparent">College Library Hub</h1>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Digital Student Gateway</p>
                 </div>
             </div>
-            <div class="flex items-center gap-4">
-                <span id="connection-badge" class="bg-emerald-50 text-emerald-700 text-xs px-3 py-1.5 font-semibold rounded-full border border-emerald-200 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Systems Active
-                </span>
+            <div class="flex items-center gap-2 bg-slate-950/60 border border-slate-800 px-3 py-1.5 rounded-xl">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-semibold text-slate-300 tracking-wide uppercase text-[10px]">Live Sync Node</span>
             </div>
         </div>
     </nav>
 
-    <div class="max-w-7xl mx-auto px-6 pt-6">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            
-            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
-                <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Occupancy Density</p>
-                    <h3 id="stat-density" class="text-2xl font-black text-slate-800 mt-1">0%</h3>
-                </div>
-                <div class="bg-indigo-50 p-3 rounded-lg text-indigo-600"><i class="fa-solid fa-chart-pie text-xl"></i></div>
-            </div>
-
-            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
-                <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Available Study Hubs</p>
-                    <h3 id="stat-seats" class="text-2xl font-black text-slate-800 mt-1">0 / 0</h3>
-                </div>
-                <div class="bg-emerald-50 p-3 rounded-lg text-emerald-600"><i class="fa-solid fa-chair text-xl"></i></div>
-            </div>
-
-            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
-                <div>
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Books On Shelves</p>
-                    <h3 id="stat-books" class="text-2xl font-black text-slate-800 mt-1">0 Available</h3>
-                </div>
-                <div class="bg-amber-50 p-3 rounded-lg text-amber-600"><i class="fa-solid fa-book text-xl"></i></div>
-            </div>
-
-        </div>
-    </div>
-
-    <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
         
         <div class="lg:col-span-1 space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                <div class="flex justify-between items-center mb-6">
+            <div class="bg-slate-900/40 border border-slate-800/60 backdrop-blur-md p-6 rounded-2xl shadow-xl">
+                <div class="mb-5 flex justify-between items-start">
                     <div>
-                        <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-chair text-indigo-500"></i> Zone Map
+                        <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
+                            <i class="fa-solid fa-couch text-indigo-400"></i> Reading Bay Status
                         </h2>
-                        <p class="text-xs text-slate-400">Real-time occupancy matrix</p>
+                        <p class="text-xs text-slate-400 mt-0.5">Find an open hub slot in real-time before walking in</p>
                     </div>
                 </div>
-                
-                <div class="bg-slate-50 border border-slate-100 p-6 rounded-xl">
-                    <div id="seats-container" class="grid grid-cols-3 gap-4 justify-items-center">
-                        </div>
-                </div>
-                
-                <div class="flex gap-4 mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-500 justify-center">
-                    <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-500"></span> Available</span>
-                    <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-rose-500"></span> Occupied</span>
-                </div>
+
+                <div id="student-seats-container" class="grid grid-cols-2 gap-4">
+                    </div>
             </div>
         </div>
 
         <div class="lg:col-span-2 space-y-6">
-            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-                <div class="md:flex md:justify-between md:items-center gap-4 mb-6">
-                    <div class="mb-4 md:mb-0">
-                        <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-book-bookmark text-indigo-500"></i> Knowledge Catalog
+            <div class="bg-slate-900/40 border border-slate-800/60 backdrop-blur-md p-6 rounded-2xl shadow-xl">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
+                            <i class="fa-solid fa-book-bookmark text-indigo-400"></i> Knowledge Catalog Discovery
                         </h2>
-                        <p class="text-xs text-slate-400">Search and check item distribution tracks</p>
+                        <p class="text-xs text-slate-400 mt-0.5">Search and check real-time availability of global library stocks</p>
                     </div>
-                    
-                    <div class="relative flex-1 max-w-md">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input id="search-input" type="text" oninput="searchBooks()" placeholder="Search titles, authors, locations..." 
-                               class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-500 focus:bg-white transition-all">
+
+                    <div class="relative w-full md:w-72">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Search title, author, shelf..." class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-indigo-500/80 focus:ring-1 focus:ring-indigo-500/30 transition-all">
                     </div>
                 </div>
 
-                <div id="books-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[550px] overflow-y-auto pr-1">
+                <div id="student-books-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     </div>
             </div>
         </div>
-
     </main>
 
     <script>
-        const BACKEND_URL = 'https://college-library-hub.onrender.com/api';
-        const socket = io('https://college-library-hub.onrender.com');
+        // Standardized absolute path definitions to prevent multi-domain routing snags
+        const BACKEND_URL = 'https://college-library-hub.onrender.com';
+        const socket = io(BACKEND_URL);
 
-        // 1. Fetch and show seats inside the Map representation + calculate seat metrics
-        async function loadSeats() {
+        // Core boot sequences running right on page load initialize
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchLiveSeats();
+            fetchLiveBooks();
+        });
+
+        // =========================================================================
+        // 🛰️ LIVE SEAT SYNC NETWORKING SECTION
+        // =========================================================================
+        async function fetchLiveSeats() {
             try {
-                const response = await fetch(`${BACKEND_URL}/seats`);
+                const response = await fetch(`${BACKEND_URL}/api/seats`);
                 const seats = await response.json();
-                const container = document.getElementById('seats-container');
+                const container = document.getElementById('student-seats-container');
                 container.innerHTML = '';
-
-                let occupiedCount = 0;
-                const totalSeats = seats.length;
 
                 seats.forEach(seat => {
-                    const isOccupied = seat.is_occupied;
-                    if (isOccupied) occupiedCount++;
-
-                    const div = document.createElement('div');
-                    div.className = `w-16 h-16 rounded-2xl flex flex-col items-center justify-center border transition-all duration-300 shadow-sm ${
-                        isOccupied 
-                        ? 'bg-rose-50 border-rose-200 text-rose-700 shadow-rose-50' 
-                        : 'bg-emerald-50 border-emerald-200 text-emerald-700 shadow-emerald-50'
-                    }`;
+                    const occupied = seat.is_occupied;
+                    const card = document.createElement('div');
                     
-                    div.innerHTML = `
-                        <span class="text-xs font-black tracking-tighter">S-${seat.seat_number}</span>
-                        <i class="fa-solid ${isOccupied ? 'fa-user-lock text-rose-400' : 'fa-circle-check text-emerald-400'} text-xs mt-1"></i>
+                    // High-Tier Glassmorphism design states based on active database flag
+                    card.className = `p-4 rounded-xl border transition-all duration-300 flex flex-col justify-between h-24 relative overflow-hidden ${
+                        occupied 
+                        ? 'bg-rose-950/10 border-rose-500/20 text-rose-400 shadow-[0_0_20px_rgba(244,63,94,0.02)]' 
+                        : 'bg-emerald-950/10 border-emerald-500/20 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.02)]'
+                    }`;
+
+                    card.innerHTML = `
+                        <div class="absolute -right-4 -bottom-4 w-12 h-12 rounded-full blur-xl opacity-20 ${occupied ? 'bg-rose-500' : 'bg-emerald-500'}"></div>
+                        
+                        <div class="flex justify-between items-center w-full z-10">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Seat Node ${seat.seat_number}</span>
+                            <span class="w-1.5 h-1.5 rounded-full ${occupied ? 'bg-rose-500 animate-pulse' : 'bg-emerald-500'}"></span>
+                        </div>
+                        <div class="text-sm font-black tracking-tight flex items-center gap-2 mt-2 z-10">
+                            <i class="fa-solid ${occupied ? 'fa-user-slash text-rose-500/70' : 'fa-circle-check text-emerald-500/70'}"></i>
+                            ${occupied ? 'Occupied / Busy' : 'Available Now'}
+                        </div>
                     `;
-                    container.appendChild(div);
+                    container.appendChild(card);
                 });
-
-                // Compute real-time analytics updates
-                const freeSeats = totalSeats - occupiedCount;
-                const densityPercentage = totalSeats > 0 ? Math.round((occupiedCount / totalSeats) * 100) : 0;
-
-                document.getElementById('stat-seats').innerText = `${freeSeats} / ${totalSeats}`;
-                document.getElementById('stat-density').innerText = `${densityPercentage}% Full`;
-
-            } catch (error) {
-                console.error("Error fetching seats:", error);
-            }
+            } catch (error) { console.error("Seat fetch failure:", error); }
         }
 
-        // 2. Fetch and show books inside card grid + calculate inventory metrics
-        async function searchBooks() {
+        // =========================================================================
+        // 📚 LIVE CATALOG MANAGEMENT NETWORK SECTION
+        // =========================================================================
+        async function fetchLiveBooks(searchQuery = '') {
             try {
-                const query = document.getElementById('search-input').value;
-                const url = query ? `${BACKEND_URL}/books?search=${encodeURIComponent(query)}` : `${BACKEND_URL}/books`;
-                
+                const url = searchQuery 
+                    ? `${BACKEND_URL}/api/books?search=${encodeURIComponent(searchQuery)}`
+                    : `${BACKEND_URL}/api/books`;
+
                 const response = await fetch(url);
                 const books = await response.json();
-                const container = document.getElementById('books-container');
+                const container = document.getElementById('student-books-container');
                 container.innerHTML = '';
 
-                let availableBooksCount = 0;
+                // Handle clear, clean custom layout if search query yields zero matches
+                if (books.length === 0) {
+                    container.className = "flex flex-col items-center justify-center py-12 col-span-full text-center border border-dashed border-slate-800 rounded-2xl";
+                    container.innerHTML = `
+                        <div class="text-slate-600 mb-3"><i class="fa-solid fa-book-open text-4xl"></i></div>
+                        <p class="text-sm font-bold text-slate-400">No Matching Materials Found</p>
+                        <p class="text-xs text-slate-500 mt-1">Refine your search tokens and parameters and try again</p>
+                    `;
+                    return;
+                }
+
+                // Reset layout structure grid class strings if items populate accurately
+                container.className = "grid grid-cols-1 md:grid-cols-2 gap-4";
 
                 books.forEach(book => {
-                    if (book.is_available) availableBooksCount++;
+                    const available = book.is_available;
+                    const card = document.createElement('div');
+                    card.className = "p-5 bg-slate-900/30 border border-slate-800/80 rounded-xl flex flex-col justify-between hover:border-slate-700/80 hover:-translate-y-0.5 transition-all duration-300 group";
                     
-                    // We only render items to the list grid layout matching query parameters
-                    const isAvail = book.is_available;
-                    const div = document.createElement('div');
-                    div.className = "p-4 bg-slate-50 border border-slate-100 rounded-xl flex flex-col justify-between hover:border-indigo-200 hover:bg-white transition-all duration-200 group";
-                    div.innerHTML = `
+                    card.innerHTML = `
                         <div>
-                            <div class="flex justify-between items-start gap-2 mb-2">
-                                <h3 class="font-bold text-slate-800 text-sm leading-tight group-hover:text-indigo-600 transition-colors">${book.title}</h3>
-                                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md shadow-2xs ${
-                                    isAvail ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-rose-50 text-rose-700 border border-rose-200'
-                                }">
-                                    ${isAvail ? 'Available' : 'Issued'}
-                                </span>
+                            <div class="flex justify-between items-start gap-3 mb-1.5">
+                                <h3 class="font-bold text-slate-200 text-sm leading-snug group-hover:text-indigo-400 transition-colors">${book.title}</h3>
+                                <span class="text-[8px] uppercase font-black tracking-widest px-2 py-0.5 rounded-md border shrink-0 ${
+                                    available 
+                                    ? 'bg-emerald-500/5 border-emerald-500/20 text-emerald-400' 
+                                    : 'bg-rose-500/5 border-rose-500/20 text-rose-400'
+                                }">${available ? 'STOCK' : 'OUT'}</span>
                             </div>
-                            <p class="text-xs text-slate-500 font-medium mb-3">By ${book.author}</p>
+                            <p class="text-xs text-slate-400 font-medium mb-4">By ${book.author}</p>
                         </div>
-                        <div class="flex gap-1.5 pt-2 border-t border-slate-200/60 text-[10px] font-bold text-slate-400">
-                            <span class="bg-white px-2.5 py-1 rounded border border-slate-200 flex items-center gap-1">
-                                <i class="fa-solid fa-location-dot text-indigo-500"></i> ${book.shelf_location || 'Not Assigned'}
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-800/60 mt-auto">
+                            <span class="text-[9px] bg-slate-950/80 border border-slate-800 font-bold rounded-lg px-2.5 py-1 text-slate-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-map-pin text-indigo-500/80"></i> ${book.shelf_location}
+                            </span>
+                            <span class="text-[10px] font-semibold ${available ? 'text-emerald-500/80' : 'text-slate-500'}">
+                                ${available ? 'Ready for Checkout' : 'Expected Back Soon'}
                             </span>
                         </div>
                     `;
-                    container.appendChild(div);
+                    container.appendChild(card);
                 });
-
-                // Only update global stock indicator metric if the search field is clear
-                if (!query) {
-                    document.getElementById('stat-books').innerText = `${availableBooksCount} Available`;
-                }
-
-                if (books.length === 0) {
-                    container.innerHTML = `
-                        <div class="col-span-full py-12 text-center border-2 border-dashed border-slate-100 rounded-xl">
-                            <i class="fa-solid fa-box-open text-slate-300 text-3xl mb-3"></i>
-                            <p class="text-slate-400 text-sm font-medium">No catalog listings found.</p>
-                        </div>`;
-                }
-            } catch (error) {
-                console.error("Error fetching books:", error);
-            }
+            } catch (error) { console.error("Catalog fetch failure:", error); }
         }
 
-        // Live Event Listeners via socket communication channels
+        // Real-time live execution trigger logic for inputs keyboard listener
+        let searchTimeout;
+        function executeLiveSearch() {
+            clearTimeout(searchTimeout);
+            const query = document.getElementById('catalog-search').value.trim();
+            // Debounce function to protect backend engine from processing overloading queries
+            searchTimeout = setTimeout(() => {
+                fetchLiveBooks(query);
+            }, 250);
+        }
+
+        // =========================================================================
+        // 🔌 REAL-TIME WEBSOCKET EMIT LISTENERS INFRASTRUCTURE
+        // =========================================================================
         socket.on('seatUpdated', () => {
-            loadSeats();
-        });
-        socket.on('bookUpdated', () => {
-            searchBooks();
+            console.log('⚡ Real-Time Network Hub Event: Seat Vector Sync Triggered');
+            fetchLiveSeats();
         });
 
-        // Initialize display executions
-        loadSeats();
-        searchBooks();
+        socket.on('bookUpdated', () => {
+            console.log('⚡ Real-Time Network Hub Event: Catalog Map Sync Triggered');
+            const currentQuery = document.getElementById('catalog-search').value.trim();
+            fetchLiveBooks(currentQuery);
+        });
     </script>
 </body>
 </html>
