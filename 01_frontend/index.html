@@ -17,9 +17,10 @@
             background-size: 24px 24px;
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #F7F4EF; }
-        ::-webkit-scrollbar-thumb { background: #E6DFD3; border-radius: 20px; }
+        /* Premium scrollbars for scrolling through high capacity layouts */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #F7F4EF; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #E6DFD3; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #CBD5E1; }
 
         .aesthetic-shadow {
@@ -28,7 +29,7 @@
         .wood-grain {
             background: #EEDCC5;
             border: 3px solid #DDBB97;
-            box-shadow: inset 0 4px 12px rgba(255,255,255,0.5), 0 12px 24px -6px rgba(221,187,151,0.3);
+            box-shadow: inset 0 4px 12px rgba(255,255,255,0.5), 0 8px 16px -4px rgba(221,187,151,0.2);
         }
     </style>
 </head>
@@ -56,33 +57,21 @@
         
         <div class="lg:col-span-5 space-y-6">
             <div class="bg-[#F7F4EF] border border-[#E6DFD3] p-6 rounded-3xl aesthetic-shadow relative overflow-hidden">
-                <div class="mb-6 flex items-start gap-3">
-                    <div class="mt-1 text-pink-400"><i class="fa-solid fa-compass text-xl"></i></div>
+                <div class="mb-4 flex justify-between items-center">
                     <div>
-                        <h2 class="text-lg font-800 text-slate-900">Reading Room Blueprint</h2>
-                        <p class="text-xs text-slate-500 mt-0.5">Real-time room architecture—pick an open spot</p>
+                        <h2 class="text-lg font-800 text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-compass text-pink-400"></i> Reading Room Map
+                        </h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Real-time modular floorplan — 70 seat configuration matrix</p>
                     </div>
                 </div>
 
-                <div class="border-2 border-dashed border-[#E6DFD3] rounded-2xl p-4 bg-[#FDFBF7]/60 flex items-center justify-center relative min-h-[400px] w-full select-none">
-                    <div class="absolute top-0 left-1/4 right-1/4 h-2 bg-[#ECEFF1] rounded-b-md flex items-center justify-center">
-                        <span class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Main Glass Arches</span>
-                    </div>
+                <div class="border-2 border-dashed border-[#E6DFD3] rounded-2xl p-6 bg-[#FDFBF7]/60 relative max-h-[520px] overflow-y-auto select-none space-y-12 flex flex-col items-center">
                     
-                    <div id="library-table" class="wood-grain w-48 h-72 rounded-3xl relative transition-all duration-500 ease-out flex items-center justify-center">
-                        
-                        <div class="absolute inset-y-0 w-[2px] bg-[#DDBB97]/50 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                        <div class="absolute inset-x-0 h-[2px] bg-[#DDBB97]/50 top-1/2 -translate-y-1/2 pointer-events-none"></div>
-                        
-                        <div class="text-[9px] font-800 text-[#8B6B4F] uppercase tracking-widest bg-[#FDFBF7]/95 px-3 py-1.5 rounded-full border border-[#DDBB97]/40 z-10 shadow-sm font-mono">
-                            Oak Wood Bay
-                        </div>
-                        
-                        <div id="visual-chairs-mesh" class="absolute inset-0 w-full h-full pointer-events-none"></div>
-                    </div>
+                    <div id="library-bays-container" class="w-full space-y-16 py-4 flex flex-col items-center"></div>
 
-                    <div class="absolute bottom-4 right-4 flex items-center gap-1 text-slate-400 font-mono text-[9px]">
-                        <i class="fa-solid fa-seedling text-emerald-400 text-sm animate-bounce"></i> Cozy Corner
+                    <div class="w-full text-center text-slate-300 font-mono text-[9px] pt-4 border-t border-[#F5F1E9]">
+                        <i class="fa-solid fa-seedling text-emerald-400 text-sm animate-bounce mr-1"></i> Multi-Bay Hub Operational
                     </div>
                 </div>
             </div>
@@ -116,58 +105,85 @@
         const socket = io(BACKEND_URL);
 
         document.addEventListener("DOMContentLoaded", () => {
-            fetchLiveSeatsMesh();
+            fetchLiveHighCapacitySeats();
             fetchLiveBooksCatalog();
         });
 
         // =========================================================================
-        // 🪑 STABILIZED AESTHETIC VISUAL SEAT MAP MESH
+        // 🪑 PROGRAMMATIC MULTI-BAY CLUSTER MATRIX GENERATOR
         // =========================================================================
-        async function fetchLiveSeatsMesh() {
+        async function fetchLiveHighCapacitySeats() {
             try {
                 const response = await fetch(`${BACKEND_URL}/api/seats`);
                 const seats = await response.json();
-                const container = document.getElementById('visual-chairs-mesh');
-                container.innerHTML = '';
+                const mainContainer = document.getElementById('library-bays-container');
+                mainContainer.innerHTML = '';
 
-                // Map absolute spatial spacing offsets to sit precisely on the stabilized table boundaries
-                const layoutCoordinates = [
-                    { top: '12%', left: '-34px' },   // Node 1 (Left Side Top)
-                    { top: '42%', left: '-34px' },   // Node 2 (Left Side Mid)
-                    { top: '72%', left: '-34px' },   // Node 3 (Left Side Bottom)
-                    { top: '25%', right: '-34px' },  // Node 4 (Right Side Top)
-                    { top: '55%', right: '-34px' }   // Node 5 (Right Side Bottom)
+                // Group seats programmatically into clusters of 10 seats per desk workbench
+                const seatsPerTable = 10;
+                const totalTables = Math.ceil(seats.length / seatsPerTable);
+
+                // Spatial coordinates relative to a single table box for a balanced layout profile
+                const relativeChairCoordinates = [
+                    { top: '8%',  left: '-40px' },   // Chair 1 (Left row)
+                    { top: '26%', left: '-40px' },   // Chair 2
+                    { top: '44%', left: '-40px' },   // Chair 3
+                    { top: '62%', left: '-40px' },   // Chair 4
+                    { top: '80%', left: '-40px' },   // Chair 5
+                    { top: '8%',  right: '-40px' },  // Chair 6 (Right row)
+                    { top: '26%', right: '-40px' },  // Chair 7
+                    { top: '44%', right: '-40px' },  // Chair 8
+                    { top: '62%', right: '-40px' },  // Chair 9
+                    { top: '80%', right: '-40px' }   // Chair 10
                 ];
 
-                seats.forEach((seat, idx) => {
-                    const occupied = seat.is_occupied;
-                    const position = layoutCoordinates[idx] || { top: '0px', left: '0px' };
+                for (let t = 0; t < totalTables; t++) {
+                    const tableWrapper = document.createElement('div');
+                    tableWrapper.className = "wood-grain w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4 animate-fade-in";
                     
-                    const chairWrapper = document.createElement('div');
-                    chairWrapper.className = "absolute w-12 h-12 flex items-center justify-center transition-all duration-500 ease-out z-20 pointer-events-auto";
-                    
-                    if (position.left) chairWrapper.style.left = position.left;
-                    if (position.right) chairWrapper.style.right = position.right;
-                    chairWrapper.style.top = position.top;
-
-                    // Creative Layout state: Occupied shifts out slightly and turns pink, open pulls neat and sky-blue
-                    chairWrapper.innerHTML = `
-                        <div class="w-10 h-10 rounded-xl border-2 flex flex-col items-center justify-center transition-all duration-500 shadow-md ${
-                            occupied 
-                            ? 'bg-[#FFD2E2] border-[#FFAEC9] text-[#D84A75] translate-x-[-2px] scale-105 shadow-pink-100' 
-                            : 'bg-[#CDEEFF] border-[#B3E0FF] text-[#3A78C4] hover:bg-[#B3E0FF] shadow-sky-50'
-                        }">
-                            <i class="fa-solid ${occupied ? 'fa-user-tag' : 'fa-chair'} text-sm"></i>
-                            <span class="text-[7px] font-black uppercase font-mono mt-0.5">${seat.seat_number}</span>
+                    tableWrapper.innerHTML = `
+                        <div class="absolute inset-y-0 w-[2px] bg-[#DDBB97]/50 left-1/2 -translate-x-1/2 pointer-events-none"></div>
+                        <div class="absolute inset-x-0 h-[2px] bg-[#DDBB97]/50 top-1/2 -translate-y-1/2 pointer-events-none"></div>
+                        
+                        <div class="text-[8px] font-900 text-[#8B6B4F] uppercase tracking-widest bg-[#FDFBF7]/95 px-3 py-1.5 rounded-full border border-[#DDBB97]/40 z-10 shadow-sm font-mono select-none">
+                            Study Section ${String.fromCharCode(65 + t)}
                         </div>
                     `;
-                    container.appendChild(chairWrapper);
-                });
-            } catch (error) { console.error("Visual seat map rendering break:", error); }
+
+                    // Slice the database response array into segments matching this workspace table index scope
+                    const tableSeatsSlice = seats.slice(t * seatsPerTable, (t + 1) * seatsPerTable);
+
+                    tableSeatsSlice.forEach((seat, idx) => {
+                        const occupied = seat.is_occupied;
+                        const position = relativeChairCoordinates[idx] || { top: '0px', left: '0px' };
+
+                        const chairDiv = document.createElement('div');
+                        chairDiv.className = "absolute w-10 h-10 flex items-center justify-center transition-all duration-500 ease-out z-20 pointer-events-auto";
+                        
+                        if (position.left) chairDiv.style.left = position.left;
+                        if (position.right) chairDiv.style.right = position.right;
+                        chairDiv.style.top = position.top;
+
+                        chairDiv.innerHTML = `
+                            <div class="w-9 h-9 rounded-xl border-2 flex flex-col items-center justify-center transition-all duration-500 shadow-md ${
+                                occupied 
+                                ? 'bg-[#FFD2E2] border-[#FFAEC9] text-[#D84A75] scale-105 shadow-pink-100' 
+                                : 'bg-[#CDEEFF] border-[#B3E0FF] text-[#3A78C4] hover:bg-[#B3E0FF] shadow-sky-50'
+                            }">
+                                <i class="fa-solid ${occupied ? 'fa-user-tag text-[10px]' : 'fa-chair text-xs'}"></i>
+                                <span class="text-[6px] font-black uppercase font-mono mt-0.5">${seat.seat_number}</span>
+                            </div>
+                        `;
+                        tableWrapper.appendChild(chairDiv);
+                    });
+
+                    mainContainer.appendChild(tableWrapper);
+                }
+            } catch (error) { console.error("High Capacity matrix pull loop block split fault:", error); }
         }
 
         // =========================================================================
-        // 📚 INTERACTIVE BOOK DECK Discovery Hub
+        // 📚 INTUITIVE DISCOVERY CATALOG ENGINE
         // =========================================================================
         async function fetchLiveBooksCatalog(searchQuery = '') {
             try {
@@ -196,7 +212,6 @@
                     const available = book.is_available;
                     const card = document.createElement('div');
                     
-                    // Premium bookstore card style structure featuring hover lifts and subtle gradients
                     card.className = "bg-[#FDFBF7] border border-[#E6DFD3] pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between hover:border-[#CBD5E1] hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 group relative overflow-hidden bg-gradient-to-b from-[#FDFBF7] to-[#F7F4EF]/30 aesthetic-shadow";
                     
                     card.innerHTML = `
@@ -223,7 +238,7 @@
                     `;
                     container.appendChild(card);
                 });
-            } catch (error) { console.error("Catalog loop execution failure:", error); }
+            } catch (error) { console.error("Catalog execution query fault loop:", error); }
         }
 
         let searchTimeout;
@@ -236,9 +251,9 @@
         }
 
         // =========================================================================
-        // 🔌 BROADCAST EVENT MATRIX SOCKET CHANNELS
+        // 🔌 REACTION EVENT BROADCAST CHANNELS SOCKET MAPS
         // =========================================================================
-        socket.on('seatUpdated', () => { fetchLiveSeatsMesh(); });
+        socket.on('seatUpdated', () => { fetchLiveHighCapacitySeats(); });
         socket.on('bookUpdated', () => {
             const currentQuery = document.getElementById('catalog-search').value.trim();
             fetchLiveBooksCatalog(currentQuery);
