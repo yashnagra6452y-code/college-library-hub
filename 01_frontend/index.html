@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Library Hub | Premium Student Sanctuary</title>
-    <!-- Tailwind CSS CDN -->
+    <title>College Library Hub | Immersive Student Gateway</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Socket.io Client -->
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #FAF8F5;
-            /* Layered ambient lighting mesh to completely eliminate empty white space dead zones */
+            /* Multi-node ambient glow layers completely eliminating dead white space */
             background-image: 
-                radial-gradient(at 0% 0%, rgba(205, 238, 255, 0.4) 0, transparent 40%), 
-                radial-gradient(at 100% 0%, rgba(255, 210, 226, 0.35) 0, transparent 40%),
+                radial-gradient(at 0% 0%, rgba(205, 238, 255, 0.45) 0, transparent 45%), 
+                radial-gradient(at 100% 0%, rgba(255, 210, 226, 0.4) 0, transparent 45%),
                 radial-gradient(at 50% 50%, rgba(247, 244, 239, 0.6) 0, transparent 60%),
                 linear-gradient(rgba(230, 223, 211, 0.25) 1px, transparent 1px), 
                 linear-gradient(90deg, rgba(230, 223, 211, 0.25) 1px, transparent 1px);
@@ -56,7 +53,7 @@
                 0 12px 28px -8px rgba(190, 178, 160, 0.45);
         }
 
-        /* Ambient Floating Vector Illustrations CSS */
+        /* Ambient Floating Vector Illustrations */
         .floating-accent-1 { animation: float-slow-y 8s infinite ease-in-out; }
         .floating-accent-2 { animation: float-slow-x 9s infinite ease-in-out; }
 
@@ -84,7 +81,6 @@
 </head>
 <body class="min-h-screen text-slate-700 antialiased selection:bg-sky-100 selection:text-sky-800 overflow-x-hidden">
 
-    <!-- TOP NAVIGATION BAR -->
     <nav class="bg-[#FAF8F5]/80 backdrop-blur-xl border-b border-[#E6DFD3] sticky top-0 z-50 px-6 sm:px-8 py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3.5">
@@ -104,10 +100,8 @@
         </div>
     </nav>
 
-    <!-- 🌟 PREMIUM HERO ILLUSTRATION & HUB SUMMARY -->
     <header class="max-w-7xl mx-auto p-4 sm:p-6 pb-0">
         <div class="glass-canvas rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row justify-between items-center gap-8 relative overflow-hidden">
-            <!-- Subtle study themed design backdrops -->
             <div class="absolute left-6 text-slate-200/20 text-9xl pointer-events-none select-none floating-accent-1"><i class="fa-solid fa-book-open"></i></div>
             <div class="absolute right-12 text-slate-200/15 text-8xl pointer-events-none select-none floating-accent-2"><i class="fa-solid fa-icons"></i></div>
 
@@ -116,7 +110,7 @@
                     <i class="fa-solid fa-chart-line text-xl text-[#3A78C4]"></i>
                 </div>
                 <div>
-                    <h2 class="text-xl sm:text-2xl font-800 text-slate-900 display-font tracking-tight">Welcome back to Sanctuary Desk</h2>
+                    <h2 class="text-xl sm:text-2xl font-800 text-slate-900 display-font tracking-tight">Welcome to Sanctuary Desk</h2>
                     <p class="text-xs text-slate-500 mt-1 font-medium">Real-time environmental synchronization index for student workstations.</p>
                     
                     <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 mt-4 text-[11px] font-mono font-bold">
@@ -126,16 +120,14 @@
                 </div>
             </div>
             
-            <!-- THE ZERO-EFFORT AUTO ALLOCATION ACTION ROW -->
             <div class="w-full lg:w-auto relative z-10 shrink-0">
                 <button onclick="executeMagicSeatMatch()" class="w-full lg:w-auto bg-gradient-to-r from-[#3A78C4] to-[#4A90E2] hover:from-[#4A90E2] hover:to-[#3A78C4] text-white font-700 text-xs tracking-wider uppercase px-6 py-4 rounded-xl shadow-lg shadow-sky-200/60 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 active:scale-98 flex items-center justify-center gap-2.5 font-mono">
-                    <i class="fa-solid fa-wand-magic-sparkles text-[10px] animate-pulse"></i> Auto-Allocate Best Seat
+                    <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i> Find Me an Open Seat Now
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- MOBILE NAVIGATION DOCK TOGGLES -->
     <div class="flex justify-center p-4 lg:hidden sticky top-[77px] z-40 bg-[#FAF8F5]/40 backdrop-blur-md transition-all duration-300">
         <div class="bg-[#F7F4EF]/90 border border-[#E6DFD3] p-1 rounded-2xl flex gap-1 shadow-md">
             <button id="toggle-seats-btn" onclick="switchMobileTab('seats')" class="px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4] shadow-sm">
@@ -147,36 +139,29 @@
         </div>
     </div>
 
-    <!-- MAIN GRID CANVAS WRAPPER -->
     <main class="max-w-7xl mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
         
-        <!-- LEFT WORKSPACE COLUMN PANEL: SPACE LAYOUT MODULE -->
         <div id="seats-panel" class="lg:col-span-5 space-y-6 block transition-all duration-300">
             <div class="glass-canvas p-5 sm:p-6 rounded-3xl relative overflow-hidden">
-                <div class="mb-5 flex items-start justify-between gap-2">
-                    <div>
-                        <h2 class="text-base font-800 text-slate-900 display-font flex items-center gap-2">
-                            <i class="fa-solid fa-compass text-pink-400 text-sm"></i> Space Architecture Matrix
-                        </h2>
-                        <p class="text-xs text-slate-400 mt-0.5 font-medium">Isolate study desks seamlessly by building layers</p>
-                    </div>
+                <div class="mb-5">
+                    <h2 class="text-base font-800 text-slate-900 display-font flex items-center gap-2">
+                        <i class="fa-solid fa-compass text-pink-400 text-sm"></i> Space Architecture Matrix
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-0.5 font-medium">Isolate study desks seamlessly by building layers</p>
                 </div>
 
-                <!-- SECTOR CLUSTER NAV TABS -->
                 <div class="bg-[#FAF8F5]/90 border border-[#E6DFD3] p-1 rounded-xl flex gap-1 mb-6 overflow-x-auto no-scrollbar shadow-inner">
                     <button id="zone-btn-all" onclick="filterRadarZone('all')" class="px-4 py-2 rounded-lg text-xs font-800 transition-all duration-200 whitespace-nowrap bg-slate-900 text-white shadow-sm">All Registers</button>
                     <button id="zone-btn-main" onclick="filterRadarZone('main')" class="px-4 py-2 rounded-lg text-xs font-800 transition-all duration-200 whitespace-nowrap text-slate-500 hover:text-slate-800">🌳 Oak Center</button>
                     <button id="zone-btn-quiet" onclick="filterRadarZone('quiet')" class="px-4 py-2 rounded-lg text-xs font-800 transition-all duration-200 whitespace-nowrap text-slate-500 hover:text-slate-800">🤫 Silent Pods</button>
                 </div>
 
-                <!-- REAL-TIME INTERACTIVE VIEWPORT SCROLLER -->
-                <div class="border border-[#E6DFD3] rounded-2xl p-6 bg-[#FAF8F5]/30 relative max-h-[490px] overflow-y-auto space-y-12 flex flex-col items-center">
-                    <div id="library-bays-container" class="w-full space-y-14 py-4 flex flex-col items-center transition-all duration-300"></div>
+                <div class="border border-[#E6DFD3] rounded-2xl p-6 bg-[#FAF8F5]/30 relative max-h-[500px] overflow-y-auto space-y-12 flex flex-col items-center">
+                    <div id="library-bays-container" class="w-full space-y-16 py-4 flex flex-col items-center transition-all duration-300"></div>
                 </div>
             </div>
         </div>
 
-        <!-- RIGHT WORKSPACE COLUMN PANEL: BOOK Discovery MODULE -->
         <div id="books-panel" class="lg:col-span-7 space-y-6 hidden lg:block transition-all duration-300">
             <div class="glass-canvas p-5 sm:p-6 rounded-3xl">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -187,17 +172,14 @@
                         <p class="text-xs text-slate-400 mt-0.5 font-medium">Fluid system search — instant availability tracking</p>
                     </div>
 
-                    <!-- SEARCH BAR GLYPH ACCENT -->
                     <div class="relative w-full sm:w-64 shadow-sm rounded-xl">
                         <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Type title, author, row tag..." class="w-full pl-10 pr-4 py-3 bg-white/90 border border-[#E6DFD3] rounded-xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#4A90E2] focus:ring-4 focus:ring-sky-100 transition-all font-medium">
+                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Type title, author, shelf row..." class="w-full pl-10 pr-4 py-3 bg-white/90 border border-[#E6DFD3] rounded-xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#4A90E2] focus:ring-4 focus:ring-sky-100 transition-all font-medium">
                     </div>
                 </div>
 
-                <!-- MATERIAL CONTAINER BLOCK -->
                 <div id="student-books-container" class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <!-- Cards load dynamically here -->
-                </div>
+                    </div>
             </div>
         </div>
     </main>
@@ -231,7 +213,7 @@
         }
 
         // =========================================================================
-        // 🪑 SCANDI HIGH-POLISH WORKBENCH MATRIX ENGINE
+        // 🪑 STABILIZED SCANDI OAK MULTI-TABLE RADAR BLUEPRINT LOOPS
         // =========================================================================
         function renderModularZoneGrid(seats) {
             const mainContainer = document.getElementById('library-bays-container');
@@ -240,10 +222,18 @@
             const seatsPerTable = 10;
             const totalTables = Math.ceil(seats.length / seatsPerTable);
 
-            // Fine geometric math padding alignments offsets
+            // Rock-solid absolute coordinate mappings ensuring no layout compression crashes
             const relativeChairCoordinates = [
-                { top: '6%',  left: '-34px' }, { top: '25%', left: '-34px' }, { top: '44%', left: '-34px' }, { top: '63%', left: '-34px' }, { top: '82%', left: '-34px' },
-                { top: '6%',  right: '-34px' }, { top: '25%', right: '-34px' }, { top: '44%', right: '-34px' }, { top: '63%', right: '-34px' }, { top: '82%', right: '-34px' }
+                { top: '8%',  left: '-40px' },   // Chair 1 (Left row)
+                { top: '26%', left: '-40px' },   // Chair 2
+                { top: '44%', left: '-40px' },   // Chair 3
+                { top: '62%', left: '-40px' },   // Chair 4
+                { top: '80%', left: '-40px' },   // Chair 5
+                { top: '8%',  right: '-40px' },  // Chair 6 (Right row)
+                { top: '26%', right: '-40px' },  // Chair 7
+                { top: '44%', right: '-40px' },  // Chair 8
+                { top: '62%', right: '-40px' },  // Chair 9
+                { top: '80%', right: '-40px' }   // Chair 10
             ];
 
             for (let t = 0; t < totalTables; t++) {
@@ -253,10 +243,10 @@
                 if (globalCurrentZoneFilter !== 'all' && globalCurrentZoneFilter !== tableZone) continue;
 
                 const tableWrapper = document.createElement('div');
-                tableWrapper.className = "scandi-oak-bench w-44 h-76 rounded-2xl relative flex items-center justify-center shrink-0 mb-4 transition-all duration-300 transform hover:scale-[1.01]";
+                // Firmly locking down spatial coordinates at w-52 and h-80
+                tableWrapper.className = "scandi-oak-bench w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4 transition-all duration-300 transform hover:scale-[1.01]";
                 
                 tableWrapper.innerHTML = `
-                    <!-- Blueprint cross guidelines elements -->
                     <div class="absolute inset-y-0 w-[1px] bg-[#DBCEB4]/40 left-1/2 -translate-x-1/2 pointer-events-none"></div>
                     <div class="absolute inset-x-0 h-[1px] bg-[#DBCEB4]/40 top-1/2 -translate-y-1/2 pointer-events-none"></div>
                     
@@ -273,16 +263,15 @@
                     const position = relativeChairCoordinates[idx];
 
                     const chairDiv = document.createElement('div');
-                    chairDiv.className = "absolute w-9 h-9 flex items-center justify-center transition-all duration-300 z-20";
+                    chairDiv.className = "absolute w-10 h-10 flex items-center justify-center transition-all duration-300 z-20";
                     chairDiv.id = `chair-node-anchor-${seat.seat_number}`;
                     
                     if (position.left) chairDiv.style.left = position.left;
                     if (position.right) chairDiv.style.right = position.right;
                     chairDiv.style.top = position.top;
 
-                    // Luxury bright pastel node cards logic
                     chairDiv.innerHTML = `
-                        <div class="w-8 h-8 rounded-lg border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm ${
+                        <div class="w-9 h-9 rounded-xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm ${
                             occupied 
                             ? 'bg-[#FFD2E2] border-[#FFAEC9] text-[#D84A75] scale-105 shadow-pink-100/60' 
                             : 'bg-[#CDEEFF] border-[#B3E0FF] text-[#3A78C4] hover:bg-[#B3E0FF] hover:scale-105 shadow-sky-50'
@@ -298,7 +287,7 @@
         }
 
         // =========================================================================
-        // 📚 AUTO-TINT PASTEL MATERIAL CARD CATALOG ENGINE
+        // 📚 AUTO-TINT PASTEL THEMED BOOK CARDS GENERATION DESK
         // =========================================================================
         async function fetchLiveBooksCatalog(searchQuery = '') {
             try {
@@ -326,7 +315,6 @@
                     const available = book.is_available;
                     const titleLower = book.title.toLowerCase();
                     
-                    // Adaptive visual thematic styling based on text properties tokens
                     let themeGradient = "from-white to-[#FAF8F5]";
                     let tagDesignBadge = "bg-[#ECEFF1] border border-slate-200 text-slate-600";
                     
@@ -342,7 +330,6 @@
                     card.className = `bg-white border border-[#E6DFD3] pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between hover:border-slate-300 hover:-translate-y-0.5 hover:shadow-xl transition-all duration-300 group relative overflow-hidden bg-gradient-to-b ${themeGradient} glass-card-inner`;
                     
                     card.innerHTML = `
-                        <!-- Absolute right top custom stock overlay badge -->
                         <div class="absolute top-0 right-4 w-7 h-8 flex items-center justify-center text-[8px] font-900 tracking-wider font-mono text-white rounded-b-md shadow-sm transition-all duration-300 group-hover:h-9 ${
                             available ? 'bg-[#98D8C8]' : 'bg-[#FF9AA2]'
                         }">
@@ -353,8 +340,8 @@
                             <span class="text-[8px] uppercase tracking-widest font-900 px-2 py-0.5 rounded border font-mono ${tagDesignBadge}">
                                 ${titleLower.includes('physics') || titleLower.includes('algorithm') ? 'Boutique Collection' : 'Standard Catalog'}
                             </span>
-                            <h3 class="font-800 text-slate-900 text-xs mt-3 mb-1 group-hover:text-[#4A90E2] transition-colors duration-200 display-font leading-snug pr-5">${book.title}</h3>
-                            <p class="text-[11px] text-slate-400 font-medium">By ${book.author}</p>
+                            <h3 class="font-800 text-slate-900 text-xs mt-3 mb-1 group-hover:text-[#4A90E2] transition-colors duration-200 display-font leading-snug pr-5 tracking-tight">${book.title}</h3>
+                            <p class="text-xs text-slate-400 font-medium">By ${book.author}</p>
                         </div>
                         
                         <div class="flex items-center justify-between pt-3 border-t border-[#FAF8F5] mt-5">
@@ -372,7 +359,7 @@
         }
 
         // =========================================================================
-        // 🧪 SYSTEM EVENT FILTER MATRIX ROUTINES
+        // ⚡ MATRIX INTERACTION AND NAVIGATION CONTROLLER ROUTINES
         // =========================================================================
         function filterRadarZone(zone) {
             globalCurrentZoneFilter = zone;
@@ -435,9 +422,6 @@
             }
         }
 
-        // =========================================================================
-        // 🔌 SOCKET REAL-TIME LISTENER INTERFACES
-        // =========================================================================
         socket.on('seatUpdated', () => { fetchSystemRadarData(); });
         socket.on('bookUpdated', () => {
             const currentQuery = document.getElementById('catalog-search').value.trim();
