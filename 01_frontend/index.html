@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Matrix Hub | Immersive Student Gateway</title>
+    <title>ASBASJS Memorial College | Library Matrix Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
@@ -136,16 +136,18 @@
             <div class="flex items-center gap-3.5 group cursor-pointer">
                 <div class="bg-gradient-to-tr from-[#CDEEFF] to-[#B3E0FF] w-11 h-11 rounded-2xl flex items-center justify-center text-[#3A78C4] border border-[#B3E0FF]/60 shadow-sm relative overflow-hidden">
                     <div class="absolute inset-0 bg-white/30 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
-                    <i class="fa-solid fa-bookmark text-base relative z-10 transition-transform duration-300 group-hover:scale-110"></i>
+                    <i class="fa-solid fa-landmark text-base relative z-10 transition-transform duration-300 group-hover:scale-110"></i>
                 </div>
                 <div>
-                    <h1 class="text-base sm:text-lg font-800 tracking-tight text-slate-900 display-font leading-tight transition-colors duration-300 group-hover:text-[#3A78C4]">Library Matrix Hub</h1>
-                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Automated Architecture Stream</p>
+                    <h1 class="text-xs sm:text-sm font-800 tracking-tight text-slate-900 display-font leading-tight transition-colors duration-300 group-hover:text-[#3A78C4]">
+                        ASBASJS Memorial College, Bela
+                    </h1>
+                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Physical Science & Computer Department</p>
                 </div>
             </div>
             <div class="bg-white/80 border border-[#E6DFD3] px-3.5 py-1.5 rounded-xl flex items-center gap-2.5 shadow-sm hover:border-slate-300 transition-all duration-300">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] animate-pulse"></span>
-                <span class="text-[9px] font-800 text-slate-500 uppercase tracking-widest font-mono">Live Matrix Sync</span>
+                <span class="text-[9px] font-800 text-slate-500 uppercase tracking-widest font-mono">Live Sync Engine</span>
             </div>
         </div>
     </nav>
@@ -161,7 +163,7 @@
                 </div>
                 <div>
                     <h2 class="text-xl sm:text-2xl font-800 text-slate-900 display-font tracking-tight leading-tight">Welcome to Sanctuary Desk</h2>
-                    <p class="text-xs text-slate-500 mt-1.5 font-medium">Real-time environmental synchronization index for student workstations.</p>
+                    <p class="text-xs text-slate-500 mt-1.5 font-medium">Real-time environmental sync portal for college libraries and smart student spaces.</p>
                     
                     <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 mt-4 text-[11px] font-mono font-bold">
                         <span id="hud-total-busy" class="bg-[#FFD2E2] border border-[#FFAEC9] text-[#D84A75] px-3 py-1 rounded-xl shadow-sm flex items-center gap-1.5 transition-transform duration-300 hover:scale-105">0 Busy Units</span>
@@ -249,13 +251,17 @@
         </div>
     </main>
 
+    <footer class="max-w-7xl mx-auto p-6 text-center text-[10px] font-mono font-bold text-slate-400 tracking-wider relative z-10 border-t border-[#E6DFD3]/40 mt-12">
+        SYSTEM DESIGNED & DEVELOPED BY <span class="text-slate-600">YASHPNEET SINGH</span> | B.SC COMPUTER SCIENCE
+    </footer>
+
     <script>
         const BACKEND_URL = 'https://college-library-hub.onrender.com';
         const socket = io(BACKEND_URL);
 
         let systemSeatsArray = [];
         let globalCurrentZoneFilter = 'all';
-        let liveChartJSInstance = null; // Storing chart layer explicitly
+        let liveChartJSInstance = null;
 
         document.addEventListener("DOMContentLoaded", () => {
             fetchSystemRadarData();
@@ -289,10 +295,9 @@
         }
 
         // =========================================================================
-        // 📊 NEW: LIVE CHART ANIMATION COMPILER FUNCTION
+        // 📊 LIVE CHART ANIMATION COMPILER FUNCTION
         // =========================================================================
         function triggerLiveMetricsRecompilation(seats) {
-            // Split up seats by zones based on seat indexing variables
             const mainCenterSeats = seats.slice(0, 30);
             const silentPodsSeats = seats.slice(30);
 
@@ -302,9 +307,8 @@
             const chartDataValues = [mainCenterOccupied, silentPodsOccupied];
 
             if (liveChartJSInstance) {
-                // Smoothly slide lines without flashing component arrays
                 liveChartJSInstance.data.datasets[0].data = chartDataValues;
-                liveChartJSInstance.update('none'); // Animate smoothly without jumping layout bounds
+                liveChartJSInstance.update('none');
                 return;
             }
 
@@ -324,7 +328,7 @@
                     }]
                 },
                 options: {
-                    indexAxis: 'y', // Premium side-gliding horizontal chart look
+                    indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
@@ -352,7 +356,7 @@
                 systemSeatsArray = await response.json();
                 calculateHUDAnalytics(systemSeatsArray);
                 renderModularZoneGrid(systemSeatsArray);
-                triggerLiveMetricsRecompilation(systemSeatsArray); // Compile data arrays live
+                triggerLiveMetricsRecompilation(systemSeatsArray);
             } catch(e) { console.error(e); }
         }
 
@@ -442,7 +446,6 @@
                 mainContainer.appendChild(tableWrapper);
             }
             
-            // GSAP fluid staggered element entry
             gsap.from("#library-bays-container > div", { opacity: 0, y: 15, duration: 0.4, ease: "power2.out", stagger: 0.05 });
         }
 
@@ -516,7 +519,6 @@
                     container.appendChild(card);
                 });
 
-                // GSAP premium container upward slide entry sequencing
                 gsap.from("#student-books-container > div", { opacity: 0, y: 20, duration: 0.5, stagger: 0.06 });
             } catch (error) { console.error(error); }
         }
@@ -591,7 +593,7 @@
                 systemSeatsArray[seatIndex] = updatedSeat;
                 calculateHUDAnalytics(systemSeatsArray);
                 renderModularZoneGrid(systemSeatsArray);
-                triggerLiveMetricsRecompilation(systemSeatsArray); // Recalculate bars on change packets
+                triggerLiveMetricsRecompilation(systemSeatsArray);
             }
         });
         
