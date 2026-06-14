@@ -14,80 +14,83 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #FAF8F5;
             overflow-x: hidden;
+            position: relative;
         }
 
         .display-font {
             font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* 🌌 LAYERED AMBIENT BACKGROUND GRID */
-        .ambient-glow-layer {
+        /* 🌌 KINETIC AURORA RADIAL MESH BACKGROUND */
+        .aurora-bg-mesh {
             position: fixed;
             inset: 0;
             z-index: 1;
             pointer-events: none;
             background-image: 
-                radial-gradient(at 10% 15%, rgba(205, 238, 255, 0.6) 0, transparent 45%), 
-                radial-gradient(at 95% 10%, rgba(255, 210, 226, 0.5) 0, transparent 45%),
-                radial-gradient(at 50% 85%, rgba(240, 225, 255, 0.4) 0, transparent 50%),
-                linear-gradient(rgba(230, 223, 211, 0.3) 1px, transparent 1px), 
-                linear-gradient(90deg, rgba(230, 223, 211, 0.3) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 100% 100%, 28px 28px, 28px 28px;
+                radial-gradient(at 15% 20%, rgba(205, 238, 255, 0.65) 0, transparent 45%), 
+                radial-gradient(at 90% 15%, rgba(255, 210, 226, 0.55) 0, transparent 45%),
+                radial-gradient(at 50% 80%, rgba(243, 228, 255, 0.45) 0, transparent 50%),
+                linear-gradient(rgba(230, 223, 211, 0.35) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(230, 223, 211, 0.35) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px, 24px 24px;
         }
 
-        /* 🧊 HIGH-FIDELITY GLASS SURFACE */
-        .glass-canvas {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+        /* 🧊 HIGH-CONTRAST GLASSMORPHIC CONTAINER LAYERS */
+        .premium-glass-shell {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px) saturate(120%);
+            -webkit-backdrop-filter: blur(24px) saturate(120%);
+            border: 1px solid rgba(255, 255, 255, 0.7);
             box-shadow: 
                 0px 30px 60px -15px rgba(200, 185, 165, 0.25),
-                0px 1px 3px rgba(0, 0, 0, 0.01);
+                0px 1px 4px rgba(0, 0, 0, 0.01);
         }
 
-        /* 🗂️ TACTILE HOVER CARDS */
-        .glass-card-inner {
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid rgba(235, 228, 215, 0.7);
-            box-shadow: 0 10px 24px -6px rgba(225, 215, 195, 0.2);
+        /* 🗂️ TACTILE 3D HOVER INTERACTION CARDS */
+        .premium-glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 12px 28px -8px rgba(220, 210, 190, 0.2);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .glass-card-inner:hover {
-            transform: translateY(-6px);
-            border-color: rgba(74, 144, 226, 0.4);
-            box-shadow: 0 20px 32px -8px rgba(180, 195, 215, 0.5);
-            background: rgba(255, 255, 255, 0.95);
+        .premium-glass-card:hover {
+            transform: translateY(-8px) scale(1.015);
+            background: rgba(255, 255, 255, 0.96);
+            border-color: rgba(58, 120, 196, 0.4);
+            box-shadow: 0 28px 40px -10px rgba(175, 190, 215, 0.5);
         }
 
-        /* 🌳 SCANDINAVIAN OAK WORKBENCH */
+        /* 🌳 SCANDI MINIMALIST OAK WORKBENCHES */
         .scandi-oak-bench {
             background: linear-gradient(135deg, #F8EFE2 0%, #EFE1CD 100%);
             border: 2px solid #DAD0BE;
             box-shadow: 
                 inset 0 2px 4px rgba(255, 255, 255, 0.7),
                 0 16px 36px -10px rgba(185, 170, 150, 0.35);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .scandi-oak-bench:hover {
-            transform: scale(1.02);
-            box-shadow: 0 24px 48px -12px rgba(165, 150, 130, 0.5);
+            transform: scale(1.03);
+            box-shadow: 0 24px 48px -12px rgba(165, 150, 130, 0.45);
         }
 
-        /* 🧚‍♀️ CONTINUOUS AMBIENT FLUID MOTIONS */
-        .float-node-y { animation: floatDriftY 8s infinite ease-in-out; }
-        .float-node-x { animation: floatDriftX 10s infinite ease-in-out; }
+        /* 🧚‍♀️ AMBIENT FLOATING MECHANICAL MOTIONS */
+        .drift-node-y { animation: floatY 7s infinite ease-in-out; }
+        .drift-node-x { animation: floatX 9s infinite ease-in-out; }
 
-        @keyframes floatDriftY {
+        @keyframes floatY {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(3deg); }
+            50% { transform: translateY(-14px) rotate(4deg); }
         }
-        @keyframes floatDriftX {
+        @keyframes floatX {
             0%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
-            50% { transform: translateX(10px) translateY(-6px) rotate(-2deg); }
+            50% { transform: translateX(12px) translateY(-8px) rotate(-3deg); }
         }
 
-        /* ⚡ LIVE RADAR DETECTION GLOW RING */
+        /* ⚡ LIVE BROADCAST DETECTOR GLOW RING */
         .radar-pulse-active {
             animation: radarGlowRing 2.5s infinite ease-in-out;
         }
@@ -102,11 +105,11 @@
 </head>
 <body class="min-h-screen text-slate-700 antialiased selection:bg-sky-100 selection:text-sky-900">
 
-    <div class="ambient-glow-layer"></div>
+    <div class="aurora-bg-mesh"></div>
 
-    <div class="hidden lg:block absolute top-[15%] left-[2%] text-sky-300/35 text-6xl pointer-events-none select-none float-node-y z-0"><i class="fa-solid fa-graduation-cap"></i></div>
-    <div class="hidden lg:block absolute top-[58%] left-[43%] text-pink-300/30 text-7xl pointer-events-none select-none float-node-x z-0"><i class="fa-solid fa-book-bookmark"></i></div>
-    <div class="hidden lg:block absolute top-[28%] right-[3%] text-purple-300/35 text-5xl pointer-events-none select-none float-node-y z-0"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+    <div class="hidden lg:block absolute top-[14%] left-[3%] text-sky-300/35 text-6xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-graduation-cap"></i></div>
+    <div class="hidden lg:block absolute top-[58%] left-[43%] text-pink-300/30 text-7xl pointer-events-none select-none drift-node-x z-0"><i class="fa-solid fa-book-bookmark"></i></div>
+    <div class="hidden lg:block absolute top-[25%] right-[3%] text-purple-300/35 text-5xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
 
     <nav class="bg-[#FAF8F5]/75 backdrop-blur-xl border-b border-[#E6DFD3] sticky top-0 z-50 px-6 sm:px-8 py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex justify-between items-center relative z-10">
@@ -128,7 +131,7 @@
     </nav>
 
     <header class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10">
-        <div class="glass-canvas rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row justify-between items-center gap-8 relative overflow-hidden border border-white/70">
+        <div class="premium-glass-shell rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row justify-between items-center gap-8 relative overflow-hidden border border-white/70">
             <div class="absolute -right-16 -top-16 w-44 h-44 bg-gradient-to-br from-pink-200/15 to-purple-200/10 rounded-full blur-3xl pointer-events-none select-none"></div>
             
             <div class="flex flex-col sm:flex-row items-center gap-6 w-full lg:w-auto text-center sm:text-left">
@@ -136,8 +139,8 @@
                     <i class="fa-solid fa-chart-line text-xl text-[#3A78C4]"></i>
                 </div>
                 <div>
-                    <h2 class="text-xl sm:text-2xl font-800 text-slate-900 display-font tracking-tight">Welcome to Sanctuary Desk</h2>
-                    <p class="text-xs text-slate-500 mt-1 font-medium">Real-time environmental synchronization index for student workstations.</p>
+                    <h2 class="text-xl sm:text-2xl font-800 text-slate-900 display-font tracking-tight leading-tight">Welcome to Sanctuary Desk</h2>
+                    <p class="text-xs text-slate-500 mt-1.5 font-medium">Real-time environmental synchronization index for student workstations.</p>
                     
                     <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 mt-4 text-[11px] font-mono font-bold">
                         <span id="hud-total-busy" class="bg-[#FFD2E2] border border-[#FFAEC9] text-[#D84A75] px-3 py-1 rounded-xl shadow-sm flex items-center gap-1.5 transition-transform duration-300 hover:scale-105">0 Busy Units</span>
@@ -168,7 +171,7 @@
     <main class="max-w-7xl mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
         
         <div id="seats-panel" class="lg:col-span-5 space-y-6 block transition-all duration-500">
-            <div class="glass-canvas p-5 sm:p-6 rounded-3xl relative overflow-hidden">
+            <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl relative overflow-hidden">
                 <div class="mb-5">
                     <h2 class="text-base font-800 text-slate-900 display-font flex items-center gap-2">
                         <i class="fa-solid fa-compass text-pink-400 text-sm"></i> Space Architecture Matrix
@@ -189,7 +192,7 @@
         </div>
 
         <div id="books-panel" class="lg:col-span-7 space-y-6 hidden lg:block transition-all duration-500">
-            <div class="glass-canvas p-5 sm:p-6 rounded-3xl">
+            <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                     <div>
                         <h2 class="text-base font-800 text-slate-900 display-font flex items-center gap-2">
@@ -239,7 +242,7 @@
         }
 
         // =========================================================================
-        // 🪑 STABILIZED WORKBENCH MATRIX LOOPS
+        // 🪑 STABILIZED SCANDI OAK BLUEPRINT BUILD ENGINE
         // =========================================================================
         function renderModularZoneGrid(seats) {
             const mainContainer = document.getElementById('library-bays-container');
@@ -260,7 +263,7 @@
                 if (globalCurrentZoneFilter !== 'all' && globalCurrentZoneFilter !== tableZone) continue;
 
                 const tableWrapper = document.createElement('div');
-                tableWrapper.className = "scandi-oak-bench w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4 transform ease-out";
+                tableWrapper.className = "scandi-oak-bench w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4";
                 
                 tableWrapper.innerHTML = `
                     <div class="absolute inset-y-0 w-[1px] bg-[#DBCEB4]/50 left-1/2 -translate-x-1/2 pointer-events-none"></div>
@@ -303,7 +306,7 @@
         }
 
         // =========================================================================
-        // 📚 HOVER ELEVATION BOOK CARDS CATALOG
+        // 📚 AUTOMATED ADAPTIVE PASTEL Discovery CATALOG SYSTEM
         // =========================================================================
         async function fetchLiveBooksCatalog(searchQuery = '') {
             try {
@@ -343,10 +346,11 @@
                     }
 
                     const card = document.createElement('div');
-                    card.className = `bg-white border border-[#E6DFD3] pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between group relative overflow-hidden bg-gradient-to-b ${themeGradient} glass-card-inner`;
+                    // Embedded with premium tactile class: .premium-glass-card 
+                    card.className = `pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between group relative overflow-hidden bg-gradient-to-b ${themeGradient} premium-glass-card`;
                     
                     card.innerHTML = `
-                        <div class="absolute top-0 right-4 w-7 h-8 flex items-center justify-center text-[8px] font-900 tracking-wider font-mono text-white rounded-b-md shadow-sm transition-all duration-300 group-hover:h-9 ${
+                        <div class="absolute top-0 right-4 w-7 h-8 flex items-center justify-center text-[8px] font-900 tracking-wider font-mono text-white rounded-b-md shadow-sm transition-all duration-300 group-hover:h-10 ${
                             available ? 'bg-[#98D8C8]' : 'bg-[#FF9AA2]'
                         }">
                             <span>${available ? 'IN' : 'OUT'}</span>
@@ -356,7 +360,7 @@
                             <span class="text-[8px] uppercase tracking-widest font-900 px-2 py-0.5 rounded border font-mono ${tagDesignBadge}">
                                 ${titleLower.includes('physics') || titleLower.includes('algorithm') ? 'Boutique Collection' : 'Standard Catalog'}
                             </span>
-                            <h3 class="font-800 text-slate-900 text-xs mt-3 mb-1 group-hover:text-[#4A90E2] transition-colors duration-200 display-font leading-snug pr-5 tracking-tight">${book.title}</h3>
+                            <h3 class="font-800 text-slate-900 text-xs mt-3 mb-1 group-hover:text-[#4A90E2] transition-colors duration-300 display-font leading-snug pr-5 tracking-tight">${book.title}</h3>
                             <p class="text-xs text-slate-400 font-medium">By ${book.author}</p>
                         </div>
                         
@@ -375,7 +379,7 @@
         }
 
         // =========================================================================
-        // ⚡ ACTIVE FILTER RESPONSES
+        // ⚡ ACTIVE NAVIGATION MATRIX ACTIONS CONTROL CHANNELS
         // =========================================================================
         function filterRadarZone(zone) {
             globalCurrentZoneFilter = zone;
