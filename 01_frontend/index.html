@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASBASJS Memorial College | Library Matrix Portal</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Socket.io Client -->
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-    <!-- GSAP Premium Animation Engine Core -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <!-- Industry Standard ChartJS Core Module Engine -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
@@ -130,15 +125,12 @@
 </head>
 <body class="min-h-screen text-slate-700 antialiased selection:bg-sky-100 selection:text-sky-900 opacity-0" id="master-body-viewport">
 
-    <!-- 🌌 SYSTEM BACKGROUND GENERATOR OVERLAY -->
     <div class="aurora-bg-mesh"></div>
 
-    <!-- BACKGROUND VECTOR DECORATIONS -->
     <div class="hidden lg:block absolute top-[14%] left-[3%] text-sky-300/40 text-6xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-graduation-cap"></i></div>
     <div class="hidden lg:block absolute top-[58%] left-[43%] text-pink-300/35 text-7xl pointer-events-none select-none drift-node-x z-0"><i class="fa-solid fa-book-bookmark"></i></div>
     <div class="hidden lg:block absolute top-[25%] right-[3%] text-purple-300/40 text-5xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
 
-    <!-- TOP NAVIGATION BAR -->
     <nav class="bg-[#FAF8F5]/75 backdrop-blur-xl border-b border-[#E6DFD3] sticky top-0 z-50 px-6 sm:px-8 py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex justify-between items-center relative z-10">
             <div class="flex items-center gap-3.5 group cursor-pointer">
@@ -160,7 +152,6 @@
         </div>
     </nav>
 
-    <!-- 🌟 HIGH-ENGAGEMENT COZY SUMMARY HUD -->
     <header id="gsap-hero-panel" class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10">
         <div class="premium-glass-shell rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row justify-between items-center gap-8 relative overflow-hidden border border-white/70">
             
@@ -189,10 +180,7 @@
         </div>
     </header>
 
-    <!-- 📊 LIVE METRICS DISK PANEL & FORMAL COLLEGE INFO SHEET -->
     <section class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10 gsap-hero-panel grid grid-cols-1 md:grid-cols-12 gap-6">
-        
-        <!-- Graph Canvas (8 Columns) -->
         <div class="premium-glass-shell rounded-3xl p-5 md:col-span-8 border border-white/70">
             <div class="mb-3 flex items-center gap-2">
                 <i class="fa-solid fa-chart-pie text-[#3A78C4] text-xs animate-pulse"></i>
@@ -203,7 +191,6 @@
             </div>
         </div>
 
-        <!-- Corrected Profile and Valid Link Panel (4 Columns) -->
         <div class="premium-glass-shell rounded-3xl p-5 md:col-span-4 border border-white/70 flex flex-col justify-between">
             <div>
                 <div class="flex items-center justify-between border-b border-[#E6DFD3]/60 pb-2 mb-2">
@@ -214,16 +201,14 @@
                     This automated allocation terminal acts as a pilot framework supporting the evolution of a smart campus architecture at Bela.
                 </p>
             </div>
-            <!-- FIXED: Exact verified college URL mapped cleanly -->
             <div class="mt-4">
                 <a href="https://belacollege.org/" target="_blank" class="w-full bg-white hover:bg-slate-50 border border-[#E6DFD3] text-center text-[10px] font-mono font-bold py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 text-slate-600">
-                    <i class="fa-solid fa-graduation-cap text-slate-400 text-[9px]"></i> Visit Official College Website
+                    <i class="fa-solid fa-graduation-cap text-slate-400 text-[10px]"></i> Visit Official College Website
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- MOBILE TABS -->
     <div class="flex justify-center p-4 lg:hidden sticky top-[77px] z-40 backdrop-blur-md transition-all duration-300">
         <div class="bg-[#F7F4EF]/90 border border-[#E6DFD3] p-1 rounded-2xl flex gap-1 shadow-md">
             <button id="toggle-seats-btn" onclick="switchMobileTab('seats')" class="px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4] shadow-sm">
@@ -235,10 +220,8 @@
         </div>
     </div>
 
-    <!-- MAIN GRID CONTAINER -->
     <main class="max-w-7xl mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
         
-        <!-- LEFT PANEL -->
         <div id="seats-panel" class="lg:col-span-5 space-y-6 block transition-all duration-500 gsap-panel-left">
             <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl relative overflow-hidden">
                 <div class="mb-5">
@@ -260,7 +243,6 @@
             </div>
         </div>
 
-        <!-- RIGHT PANEL -->
         <div id="books-panel" class="lg:col-span-7 space-y-6 hidden lg:block transition-all duration-500 gsap-panel-right">
             <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -278,13 +260,11 @@
                 </div>
 
                 <div id="student-books-container" class="grid grid-cols-1 md:grid-cols-2 gap-5 transition-all duration-500">
-                    <!-- Cards loop dynamically here -->
-                </div>
+                    </div>
             </div>
         </div>
     </main>
 
-    <!-- BRANDED STUDENT SYSTEM AUTHOR FOOTER -->
     <footer class="max-w-7xl mx-auto p-6 text-center text-[10px] font-mono font-bold text-slate-400 tracking-wider relative z-10 border-t border-[#E6DFD3]/40 mt-12">
         SYSTEM DESIGNED & DEVELOPED BY <span class="text-slate-600">YASHPNEET SINGH</span> | B.SC COMPUTER SCIENCE (4TH SEM OVER)
     </footer>
@@ -388,6 +368,7 @@
             } catch(e) { console.error(e); }
         }
 
+        document.getElementById('hud-total-busy');
         function calculateHUDAnalytics(seats) {
             const busy = seats.filter(s => s.is_occupied).length;
             const open = seats.length - busy;
