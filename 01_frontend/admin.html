@@ -3,313 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Librarian Control Terminal</title>
+    <title>Librarian Core Terminal | Management Node</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
-        /* Custom elite styles for deep-space UI aesthetics */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.45);
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF8F5;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .display-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* 🌌 KINETIC AURORA RADIAL MESH BACKGROUND (Matches Student Vibe) */
+        .aurora-bg-mesh {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(at 15% 20%, rgba(205, 238, 255, 0.65) 0, transparent 45%), 
+                radial-gradient(at 90% 15%, rgba(255, 210, 226, 0.55) 0, transparent 45%),
+                radial-gradient(at 50% 80%, rgba(243, 228, 255, 0.45) 0, transparent 50%),
+                linear-gradient(rgba(230, 223, 211, 0.35) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(230, 223, 211, 0.35) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px, 24px 24px;
+        }
+
+        .aurora-bg-mesh::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            mix-blend-mode: overlay;
+        }
+
+        /* 🧊 HIGH-CONTRAST GLASSMORPHIC CONTAINERS */
+        .premium-glass-shell {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(24px) saturate(120%);
+            -webkit-backdrop-filter: blur(24px) saturate(120%);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 
+                0px 30px 60px -15px rgba(200, 185, 165, 0.25),
+                0px 1px 4px rgba(0, 0, 0, 0.01);
+        }
+
+        .premium-glass-card {
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 12px 28px -8px rgba(220, 210, 190, 0.15);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .premium-glass-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 20px 32px -8px rgba(180, 195, 215, 0.4);
+        }
+
+        /* 🤖 MANAGEMENT OVERRIDE CONTROL INTERACT CELLS */
+        .admin-node-cell {
+            border: 1px solid rgba(230, 223, 211, 0.8);
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-[#020617] font-sans min-h-screen text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-indigo-200 overflow-x-hidden">
+<body class="min-h-screen text-slate-700 antialiased selection:bg-sky-100 opacity-0" id="admin-viewport">
 
-    <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="aurora-bg-mesh"></div>
 
-    <div id="login-overlay" class="fixed inset-0 bg-[#020617]/95 backdrop-blur-xl z-50 flex items-center justify-center p-4 transition-all duration-500">
-        <div class="glass-panel p-8 rounded-2xl w-full max-w-md shadow-2xl border border-white/5 text-center relative overflow-hidden group">
-            <div class="absolute -top-24 -left-24 w-48 h-48 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none group-hover:bg-indigo-600/30 transition-all duration-500"></div>
-            
-            <div class="inline-flex bg-gradient-to-tr from-indigo-600 to-indigo-400 p-4 rounded-2xl text-white shadow-xl shadow-indigo-500/30 mb-5 border border-indigo-400/20">
-                <i class="fa-solid fa-shield-halved text-2xl"></i>
+    <div id="login-modal" class="fixed inset-0 bg-slate-900/20 backdrop-blur-xl z-[100] flex items-center justify-center p-4 transition-all duration-500">
+        <div class="bg-white border border-[#E6DFD3] rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl transform transition-all text-center">
+            <div class="bg-[#CDEEFF] w-14 h-14 rounded-2xl flex items-center justify-center text-[#3A78C4] border border-[#B3E0FF]/60 mx-auto mb-4">
+                <i class="fa-solid fa-shield-halved text-xl"></i>
             </div>
-            <h2 class="text-2xl font-black text-white tracking-tight">System Access Restricted</h2>
-            <p class="text-xs text-slate-400 mt-1 mb-6 uppercase tracking-wider font-semibold">Enter Cryptographic Authentication Key</p>
+            <h3 class="text-xl font-800 text-slate-900 display-font tracking-tight">Gatekeeper Terminal Challenge</h3>
+            <p class="text-xs text-slate-400 mt-1 font-medium">Input administrative password pin to gain control loops</p>
             
-            <div class="space-y-4 text-left">
-                <div>
-                    <label class="block text-[10px] font-bold text-indigo-400/80 uppercase tracking-widest mb-2">Master Console Key</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-lock-open absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs transition-colors"></i>
-                        <input id="admin-pass-input" type="password" placeholder="••••••••" class="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/20 transition-all placeholder:text-slate-600">
-                    </div>
-                </div>
-                <button onclick="executeAdminLogin()" class="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-indigo-600/20 hover:shadow-indigo-500/30 mt-2 flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
-                    <i class="fa-solid fa-unlock-keyhole text-sm"></i> Unlock Terminal Console
+            <div class="mt-6 space-y-4">
+                <input id="admin-password-input" type="password" placeholder="••••••••" class="w-full text-center px-4 py-3.5 bg-[#FAF8F5] border border-[#E6DFD3] rounded-xl text-sm tracking-widest focus:outline-none focus:border-[#4A90E2] focus:ring-4 focus:ring-sky-100 transition-all font-mono font-bold">
+                <button onclick="executeAdminAuthentication()" class="w-full bg-gradient-to-r from-[#3A78C4] to-[#4A90E2] text-white font-800 text-xs tracking-wider uppercase py-4 rounded-xl shadow-md hover:shadow-sky-200 transition-all transform active:scale-98 font-mono">
+                    Verify Credentials
                 </button>
+                <p id="login-error-msg" class="text-xs text-pink-500 font-bold hidden mt-2"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Access Refused</p>
             </div>
         </div>
     </div>
 
-    <div id="main-terminal-content" class="hidden opacity-0 transition-opacity duration-500">
-        <nav class="bg-slate-950/40 backdrop-blur-xl border-b border-white/5 sticky top-0 z-40 px-6 py-4 shadow-2xl">
-            <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <div class="flex items-center gap-3.5">
-                    <div class="bg-gradient-to-tr from-indigo-600 to-cyan-500 p-2.5 rounded-xl text-white shadow-xl shadow-indigo-500/20 border border-white/10">
-                        <i class="fa-solid fa-terminal text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-black tracking-tight bg-gradient-to-r from-indigo-400 via-indigo-100 to-cyan-400 bg-clip-text text-transparent">Librarian Core Terminal</h1>
-                        <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5 flex items-center gap-1.5">
-                            <span class="inline-block w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-[0_0_8px_#6366f1]"></span> Master Control Node
-                        </p>
-                    </div>
+    <div class="max-w-7xl mx-auto p-4 sm:p-6 relative z-10 hidden" id="main-admin-dashboard">
+        
+        <header class="bg-[#FAF8F5]/80 border-b border-[#E6DFD3] pb-4 mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3.5">
+                <div class="bg-gradient-to-tr from-[#FFD2E2] to-[#FFAEC9] w-11 h-11 rounded-2xl flex items-center justify-center text-[#D84A75] border border-[#FFAEC9]/60 shadow-sm">
+                    <i class="fa-solid fa-terminal text-base"></i>
                 </div>
                 <div>
-                    <button onclick="terminateTerminalSession()" class="text-xs font-bold text-slate-400 bg-slate-900/60 border border-slate-800 px-4 py-2 rounded-xl hover:bg-rose-950/30 hover:border-rose-500/30 hover:text-rose-400 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-rose-500/5">
-                        <i class="fa-solid fa-power-off text-xs"></i> Lock Terminal
-                    </button>
+                    <h1 class="text-lg font-800 text-slate-900 display-font leading-tight">Librarian Core Terminal</h1>
+                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Master Control Node Matrix</p>
                 </div>
             </div>
-        </nav>
+            <button onclick="terminateSessionLogout()" class="bg-white border border-[#E6DFD3] hover:border-slate-300 text-slate-500 hover:text-slate-800 px-3.5 py-2 rounded-xl text-[10px] font-800 tracking-wider uppercase font-mono transition-colors shadow-sm">
+                Lock Terminal <i class="fa-solid fa-lock-open text-[8px] ml-1"></i>
+            </button>
+        </header>
 
-        <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <div class="lg:col-span-1 space-y-6">
-                <div class="glass-panel p-6 rounded-2xl shadow-2xl relative overflow-hidden">
+            <section class="lg:col-span-5 space-y-6">
+                <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl relative overflow-hidden">
                     <div class="mb-5">
-                        <h2 class="text-lg font-black text-white tracking-tight flex items-center gap-2">
-                            <i class="fa-solid fa-circle-nodes text-indigo-400"></i> Live Seat Controls
+                        <h2 class="text-base font-800 text-slate-900 display-font flex items-center gap-2">
+                            <i class="fa-solid fa-chair text-pink-400 text-sm"></i> Live Workstation Overrides
                         </h2>
-                        <p class="text-xs text-slate-400 mt-0.5">Broadcast absolute system overrides to the student mesh</p>
+                        <p class="text-xs text-slate-400 mt-0.5 font-medium">Broadcast absolute system overrides straight to student layout</p>
                     </div>
-                    <div id="seats-admin-container" class="grid grid-cols-2 gap-4 pt-1">
+
+                    <div class="border border-[#E6DFD3] rounded-2xl p-4 bg-[#FAF8F5]/30 max-h-[580px] overflow-y-auto no-scrollbar shadow-inner">
+                        <div id="admin-seats-control-container" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lg:col-span-7 space-y-6">
+                <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl">
+                    <div class="mb-6">
+                        <h2 class="text-base font-800 text-slate-900 display-font flex items-center gap-2">
+                            <i class="fa-solid fa-book-bookmark text-sky-400 text-sm"></i> Catalog Logistics Desk
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5 font-medium">Manage distribution digital tokens and checkout chains</p>
+                    </div>
+
+                    <div id="admin-books-logistics-container" class="space-y-4 max-h-[580px] overflow-y-auto pr-1 no-scrollbar">
                         </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="lg:col-span-2 space-y-6">
-                <div class="glass-panel p-6 rounded-2xl shadow-2xl">
-                    <div>
-                        <h2 class="text-lg font-black text-white tracking-tight flex items-center gap-2">
-                            <i class="fa-solid fa-sliders text-indigo-400"></i> Catalog Logistics Desk
-                        </h2>
-                        <p class="text-xs text-slate-400 mt-0.5">Manage distribution digital tokens and checkout chains</p>
-                    </div>
-                    <div id="books-admin-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                        </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <div id="issue-modal" class="fixed inset-0 bg-[#020617]/80 backdrop-blur-md hidden flex items-center justify-center z-50 p-4 transition-all duration-300">
-        <div class="glass-panel p-6 rounded-2xl w-full max-w-md shadow-2xl relative border border-white/10 animate-in fade-in zoom-in-95 duration-200">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-black text-white tracking-tight flex items-center gap-2">
-                    <i class="fa-solid fa-passport text-indigo-400"></i> Initialize Material Issue
-                </h3>
-                <button onclick="closeIssueModal()" class="text-slate-400 hover:text-white bg-slate-900/60 border border-slate-800 p-1.5 rounded-lg transition-colors"><i class="fa-solid fa-xmark text-sm"></i></button>
-            </div>
-            
-            <p id="modal-book-title" class="text-xs font-bold text-indigo-300 bg-indigo-950/30 px-3 py-2.5 rounded-xl border border-indigo-500/20 mb-5 leading-relaxed flex items-center gap-2">
-                <i class="fa-solid fa-book text-indigo-400/80"></i>
-                <span id="modal-book-title-text"></span>
-            </p>
-            <input type="hidden" id="modal-book-id">
-            
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Student ID Token</label>
-                    <input id="student-id-input" type="text" placeholder="e.g., STU-2026-99" class="w-full px-4 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-slate-700">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Full Student Legal Name</label>
-                    <input id="student-name-input" type="text" placeholder="e.g., Yash Sharma" class="w-full px-4 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-slate-700">
-                </div>
-                <button onclick="submitIssueRequest()" class="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold py-3 rounded-xl shadow-lg shadow-indigo-600/20 transition-all duration-300 mt-2 flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
-                    <i class="fa-solid fa-check-to-slot text-xs"></i> Authorize Distribution Ledger
-                </button>
-            </div>
         </div>
     </div>
 
     <script>
         const BACKEND_URL = 'https://college-library-hub.onrender.com';
         const socket = io(BACKEND_URL);
+        let administrativeSessionToken = localStorage.getItem('admin_token') || null;
 
         document.addEventListener("DOMContentLoaded", () => {
-            const token = sessionStorage.getItem("admin_token");
-            if (token) {
-                initializeProtectedTerminal();
-            }
+            gsap.to("#admin-viewport", { opacity: 1, duration: 0.5 });
+            verifyActiveSessionState();
         });
 
-        async function executeAdminLogin() {
-            const password = document.getElementById('admin-pass-input').value;
+        function verifyActiveSessionState() {
+            const loginModal = document.getElementById('login-modal');
+            const mainDash = document.getElementById('main-admin-dashboard');
+            
+            if (administrativeSessionToken) {
+                loginModal.classList.add('hidden', 'pointer-events-none');
+                mainDash.classList.remove('hidden');
+                fetchAdminGridData();
+                fetchAdminLogisticsBooks();
+            } else {
+                loginModal.classList.remove('hidden', 'pointer-events-none');
+                mainDash.classList.add('hidden');
+            }
+        }
+
+        async function executeAdminAuthentication() {
+            const password = document.getElementById('admin-password-input').value.trim();
+            const errorMsg = document.getElementById('login-error-msg');
+            
             try {
                 const response = await fetch(`${BACKEND_URL}/api/admin/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ password })
                 });
-
                 const data = await response.json();
-                if (!response.ok) throw new Error(data.error || "Login Rejected.");
 
-                sessionStorage.setItem("admin_token", data.token);
-                initializeProtectedTerminal();
-            } catch (error) {
-                alert("Security Authorization Halted: " + error.message);
-            }
+                if (data.success) {
+                    localStorage.setItem('admin_token', data.token);
+                    administrativeSessionToken = data.token;
+                    errorMsg.classList.add('hidden');
+                    verifyActiveSessionState();
+                } else {
+                    errorMsg.classList.remove('hidden');
+                }
+            } catch(e) { errorMsg.classList.remove('hidden'); }
         }
 
-        function initializeProtectedTerminal() {
-            document.getElementById('login-overlay').classList.add('opacity-0', 'pointer-events-none');
-            setTimeout(() => document.getElementById('login-overlay').classList.add('hidden'), 500);
-            
-            const mainContent = document.getElementById('main-terminal-content');
-            mainContent.classList.remove('hidden');
-            setTimeout(() => mainContent.classList.add('opacity-100'), 50);
-            
-            loadAdminSeats();
-            loadAdminBooks();
+        function terminateSessionLogout() {
+            localStorage.removeItem('admin_token');
+            administrativeSessionToken = null;
+            verifyActiveSessionState();
+            document.getElementById('admin-password-input').value = '';
         }
 
-        function terminateTerminalSession() {
-            sessionStorage.removeItem("admin_token");
-            window.location.reload();
+        // =========================================================================
+        // 🪑 ADMIN WORKSTATION RENDER CONTROLLERS (WITH LIVE SESSION MARKS)
+        // =========================================================================
+        function formatRelativeSessionTime(timestampString) {
+            if (!timestampString) return "Available";
+            const diff = new Date() - new Date(timestampString);
+            const totalMins = Math.floor(diff / 1000 / 60);
+            if (totalMins < 1) return "Checked in just now";
+            if (totalMins < 60) return `Active ${totalMins}m`;
+            return `Active ${Math.floor(totalMins / 60)}h ${totalMins % 60}m`;
         }
 
-        function getAuthHeaders() {
-            const token = sessionStorage.getItem("admin_token");
-            return {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            };
-        }
-
-        async function loadAdminSeats() {
+        async function fetchAdminGridData() {
             try {
                 const response = await fetch(`${BACKEND_URL}/api/seats`);
                 const seats = await response.json();
-                const container = document.getElementById('seats-admin-container');
+                const container = document.getElementById('admin-seats-control-container');
                 container.innerHTML = '';
 
                 seats.forEach(seat => {
-                    const active = seat.is_occupied;
-                    const button = document.createElement('button');
-                    button.onclick = () => toggleSeatStatus(seat.seat_number);
+                    const cell = document.createElement('div');
+                    cell.className = "admin-node-cell p-3.5 rounded-2xl flex flex-col justify-between items-center text-center transition-all duration-300 relative overflow-hidden group";
                     
-                    // Hyper-tactile glowing card elements depending on tracking parameters
-                    button.className = `p-4 rounded-xl border font-bold text-left transition-all duration-300 flex flex-col justify-between h-24 relative overflow-hidden group transform hover:-translate-y-0.5 ${
-                        active 
-                        ? 'bg-rose-950/10 border-rose-500/20 text-rose-400 shadow-[0_0_15px_rgba(244,63,94,0.03)] hover:border-rose-500/40 hover:shadow-[0_0_20px_rgba(244,63,94,0.1)]' 
-                        : 'bg-emerald-950/10 border-emerald-500/20 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.03)] hover:border-emerald-500/40 hover:shadow-[0_0_20px_rgba(16,185,129,0.1)]'
-                    }`;
+                    const timeTrackingTag = seat.is_occupied ? formatRelativeSessionTime(seat.occupied_since) : 'Vacant Node';
 
-                    button.innerHTML = `
-                        <div class="absolute -right-4 -bottom-4 w-12 h-12 rounded-full blur-xl opacity-20 transition-all duration-300 group-hover:scale-125 ${active ? 'bg-rose-500' : 'bg-emerald-500'}"></div>
-                        <div class="flex justify-between items-center w-full z-10">
-                            <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold font-mono">Node ${seat.seat_number}</span>
-                            <span class="w-1.5 h-1.5 rounded-full ${active ? 'bg-rose-500 shadow-[0_0_8px_#f43f5e]' : 'bg-emerald-500 shadow-[0_0_8px_#10b981]'}"></span>
-                        </div>
-                        <div class="text-xs font-black tracking-tight flex items-center gap-2 mt-2 z-10">
-                            <i class="fa-solid ${active ? 'fa-user-lock text-rose-500/80' : 'fa-lock-open text-emerald-500/80'}"></i>
-                            ${active ? 'Force Free' : 'Force Occupy'}
-                        </div>
-                    `;
-                    container.appendChild(button);
-                });
-            } catch (error) { console.error(error); }
-        }
-
-        async function loadAdminBooks() {
-            try {
-                const response = await fetch(`${BACKEND_URL}/api/books`);
-                const books = await response.json();
-                const container = document.getElementById('books-admin-container');
-                container.innerHTML = '';
-
-                books.forEach(book => {
-                    const avail = book.is_available;
-                    const div = document.createElement('div');
-                    div.className = "p-5 bg-slate-900/20 border border-white/[0.03] rounded-xl flex flex-col justify-between gap-4 hover:border-white/[0.08] hover:bg-slate-900/40 transition-all duration-300 group";
-                    div.innerHTML = `
+                    cell.innerHTML = `
                         <div>
-                            <div class="flex justify-between items-start gap-2 mb-1.5">
-                                <h3 class="font-black text-slate-200 text-sm tracking-tight leading-snug group-hover:text-indigo-400 transition-colors">${book.title}</h3>
-                                <span class="text-[8px] uppercase font-black tracking-widest px-2 py-0.5 rounded-md border shrink-0 ${avail ? 'bg-emerald-500/5 border-emerald-500/20 text-emerald-400' : 'bg-rose-500/5 border-rose-500/20 text-rose-400'}">${avail ? 'Stock' : 'Out'}</span>
+                            <div class="text-[10px] font-bold font-mono text-slate-400 tracking-tight">NODE ${seat.seat_number}</div>
+                            <div class="text-[8px] font-bold tracking-tight font-mono mt-0.5 truncate max-w-full ${seat.is_occupied ? 'text-[#D84A75]' : 'text-emerald-500'}">
+                                ${timeTrackingTag}
                             </div>
-                            <p class="text-xs text-slate-400 font-medium">By ${book.author}</p>
-                            <span class="inline-flex mt-3 text-[9px] bg-slate-950/80 border border-slate-800 font-bold rounded-lg px-2.5 py-1 text-slate-400 items-center gap-1.5"><i class="fa-solid fa-map-pin text-indigo-500/70"></i> ${book.shelf_location}</span>
                         </div>
-                        <button onclick="${avail ? `openIssueModal(${book.id}, '${book.title.replace(/'/g, "\\'")}')` : `returnBookRequest(${book.id})`}" class="w-full py-2.5 rounded-xl text-xs font-bold border transition-all duration-200 flex items-center justify-center gap-2 transform active:scale-[0.98] ${avail ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg shadow-indigo-600/10 hover:bg-indigo-500 hover:shadow-indigo-500/20' : 'bg-slate-800/80 border-slate-700/60 text-slate-300 hover:bg-slate-700'}" style="outline:none;">
-                            <i class="fa-solid ${avail ? 'fa-paper-plane text-[10px]' : 'fa-rotate-left'}"></i>${avail ? 'Issue Material' : 'Log Return Check-In'}
+                        <button onclick="requestNodeOverride(${seat.seat_number})" class="mt-4 w-full text-[8px] font-900 tracking-wider uppercase font-mono py-2 rounded-xl border transition-all duration-300 ${
+                            seat.is_occupied 
+                            ? 'bg-[#FFD2E2] border-[#FFAEC9] text-[#D84A75] hover:bg-rose-500 hover:text-white hover:border-rose-500' 
+                            : 'bg-[#CDEEFF] border-[#B3E0FF] text-[#3A78C4] hover:bg-sky-500 hover:text-white hover:border-sky-500'
+                        }">
+                            ${seat.is_occupied ? 'Force Free' : 'Force Occupy'}
                         </button>
                     `;
-                    container.appendChild(div);
+                    container.appendChild(cell);
                 });
-            } catch (error) { console.error(error); }
+            } catch(e) { console.error(e); }
         }
 
-        async function toggleSeatStatus(seat_number) {
+        async function requestNodeOverride(seat_number) {
             try {
                 const response = await fetch(`${BACKEND_URL}/api/seats/toggle`, {
                     method: 'POST',
-                    headers: getAuthHeaders(),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${administrativeSessionToken}`
+                    },
                     body: JSON.stringify({ seat_number })
                 });
-                if (!response.ok) { const d = await response.json(); alert(d.error); }
-            } catch (error) { console.error(error); }
+                if(response.status === 401 || response.status === 403) terminateSessionLogout();
+            } catch(e) { console.error(e); }
         }
 
-        function openIssueModal(id, title) {
-            document.getElementById('modal-book-id').value = id;
-            document.getElementById('modal-book-title-text').innerText = title;
-            const modal = document.getElementById('issue-modal');
-            modal.classList.remove('hidden');
-            setTimeout(() => modal.classList.add('flex'), 10);
-        }
-        function closeIssueModal() {
-            const modal = document.getElementById('issue-modal');
-            modal.classList.add('hidden');
+        // =========================================================================
+        // 📚 ADMIN LOGISTICS BOOK HANDLERS 
+        // =========================================================================
+        async function fetchAdminLogisticsBooks() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/books`);
+                const books = await response.json();
+                const container = document.getElementById('admin-books-logistics-container');
+                container.innerHTML = '';
+
+                books.forEach(book => {
+                    const card = document.createElement('div');
+                    card.className = "premium-glass-card p-4 rounded-2xl flex flex-col sm:flex-row justify-between sm:items-center gap-4";
+                    
+                    let secondaryActionMarkup = '';
+                    if (book.is_available) {
+                        secondaryActionMarkup = `
+                            <div class="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
+                                <input id="student-id-input-${book.id}" type="text" placeholder="Student ID" class="w-full sm:w-24 bg-[#FAF8F5] border border-[#E6DFD3] rounded-lg px-2.5 py-1.5 text-[10px] font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#4A90E2]">
+                                <input id="student-name-input-${book.id}" type="text" placeholder="Full Name" class="w-full sm:w-32 bg-[#FAF8F5] border border-[#E6DFD3] rounded-lg px-2.5 py-1.5 text-[10px] font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#4A90E2]">
+                                <button onclick="requestBookIssue(${book.id})" class="w-full sm:w-auto bg-[#3A78C4] hover:bg-[#4A90E2] text-white text-[9px] font-800 tracking-wider uppercase font-mono px-3.5 py-2 rounded-xl shadow-sm transition-colors whitespace-nowrap">Issue Asset</button>
+                            </div>
+                        `;
+                    } else {
+                        secondaryActionMarkup = `
+                            <button onclick="requestBookReturn(${book.id})" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 border border-[#E6DFD3] text-slate-700 text-[9px] font-800 tracking-wider uppercase font-mono px-4 py-2 rounded-xl transition-colors whitespace-nowrap"> Log Return Check-In</button>
+                        `;
+                    }
+
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[8px] font-bold font-mono tracking-widest uppercase bg-[#ECEFF1] px-2 py-0.5 rounded border border-slate-200 text-slate-500">${book.shelf_location}</span>
+                                <span class="text-[8px] font-bold font-mono tracking-wider px-2 py-0.5 rounded ${book.is_available ? 'bg-emerald-50 text-emerald-600 border border-emerald-200' : 'bg-rose-50 text-rose-600 border border-rose-200'}">${book.is_available ? 'STOCK' : 'OUT'}</span>
+                            </div>
+                            <h3 class="font-800 text-slate-900 text-xs mt-2 display-font tracking-tight">${book.title}</h3>
+                            <p class="text-[11px] text-slate-400 font-medium">By ${book.author}</p>
+                        </div>
+                        ${secondaryActionMarkup}
+                    `;
+                    container.appendChild(card);
+                });
+            } catch(e) { console.error(e); }
         }
 
-        async function submitIssueRequest() {
-            const book_id = document.getElementById('modal-book-id').value;
-            const student_id = document.getElementById('student-id-input').value.trim();
-            const student_name = document.getElementById('student-name-input').value.trim();
+        async function requestBookIssue(book_id) {
+            const student_id = document.getElementById(`student-id-input-${book_id}`).value.trim();
+            const student_name = document.getElementById(`student-name-input-${book_id}`).value.trim();
+
+            if(!student_id || !student_name) return alert("Fill out transaction fields cleanly!");
 
             try {
                 const response = await fetch(`${BACKEND_URL}/api/books/issue`, {
                     method: 'POST',
-                    headers: getAuthHeaders(),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${administrativeSessionToken}`
+                    },
                     body: JSON.stringify({ book_id, student_id, student_name })
                 });
-                const data = await response.json();
-                if (!response.ok) throw new Error(data.error);
-                closeIssueModal();
-                loadAdminBooks();
-            } catch (error) { alert(error.message); }
+                if(response.status === 401 || response.status === 403) terminateSessionLogout();
+            } catch(e) { console.error(e); }
         }
 
-        async function returnBookRequest(book_id) {
-            if (!confirm("Are you sure you want to log a return check-in for this material?")) return;
+        async function requestBookReturn(book_id) {
             try {
                 const response = await fetch(`${BACKEND_URL}/api/books/return`, {
                     method: 'POST',
-                    headers: getAuthHeaders(),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${administrativeSessionToken}`
+                    },
                     body: JSON.stringify({ book_id })
                 });
-                const data = await response.json();
-                if (!response.ok) throw new Error(data.error);
-                loadAdminBooks();
-            } catch (error) { alert(error.message); }
+                if(response.status === 401 || response.status === 403) terminateSessionLogout();
+            } catch(e) { console.error(e); }
         }
 
-        socket.on('seatUpdated', () => { if(!document.getElementById('main-terminal-content').classList.contains('hidden')) loadAdminSeats(); });
-        socket.on('bookUpdated', () => { if(!document.getElementById('main-terminal-content').classList.contains('hidden')) loadAdminBooks(); });
+        // =========================================================================
+        // 🔌 SOCKET REAL-TIME LISTENERS
+        // =========================================================================
+        socket.on('seatUpdated', () => { fetchAdminGridData(); });
+        socket.on('bookUpdated', () => { fetchAdminLogisticsBooks(); });
     </script>
 </body>
 </html>
