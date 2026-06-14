@@ -8,32 +8,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <style>
-        /* Premium custom scrollbar to match our dark theme aesthetics */
+        /* Premium custom scrollbar to match our deep-space aesthetics */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #4f46e5; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
     </style>
 </head>
-<body class="bg-slate-950 font-sans min-h-screen text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200">
+<body class="bg-[#020617] font-sans min-h-screen text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-indigo-200 overflow-x-hidden">
 
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="absolute bottom-10 right-1/4 w-96 h-96 bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none"></div>
 
-    <nav class="bg-slate-900/60 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-50 px-6 py-4 shadow-xl">
+    <nav class="bg-slate-950/40 backdrop-blur-xl border-b border-white/5 sticky top-0 z-50 px-6 py-4 shadow-2xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="bg-gradient-to-tr from-indigo-600 to-cyan-500 p-2.5 rounded-xl text-white shadow-lg shadow-indigo-500/20">
+            <div class="flex items-center gap-3.5">
+                <div class="bg-gradient-to-tr from-indigo-600 to-cyan-500 p-2.5 rounded-xl text-white shadow-xl shadow-indigo-500/20 border border-white/10">
                     <i class="fa-solid fa-graduation-cap text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-black tracking-tight bg-gradient-to-r from-indigo-400 via-indigo-200 to-cyan-400 bg-clip-text text-transparent">College Library Hub</h1>
-                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Digital Student Gateway</p>
+                    <h1 class="text-xl font-black tracking-tight bg-gradient-to-r from-indigo-400 via-indigo-100 to-cyan-400 bg-clip-text text-transparent">College Library Hub</h1>
+                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Digital Student Gateway</p>
                 </div>
             </div>
-            <div class="flex items-center gap-2 bg-slate-950/60 border border-slate-800 px-3 py-1.5 rounded-xl">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-xs font-semibold text-slate-300 tracking-wide uppercase text-[10px]">Live Sync Node</span>
+            <div class="flex items-center gap-2 bg-slate-950/60 border border-white/5 px-3.5 py-2 rounded-xl shadow-inner">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse"></span>
+                <span class="text-[10px] font-black text-slate-400 tracking-widest uppercase font-mono">Live Matrix Sync</span>
             </div>
         </div>
     </nav>
@@ -41,14 +47,12 @@
     <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
         
         <div class="lg:col-span-1 space-y-6">
-            <div class="bg-slate-900/40 border border-slate-800/60 backdrop-blur-md p-6 rounded-2xl shadow-xl">
-                <div class="mb-5 flex justify-between items-start">
-                    <div>
-                        <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
-                            <i class="fa-solid fa-couch text-indigo-400"></i> Reading Bay Status
-                        </h2>
-                        <p class="text-xs text-slate-400 mt-0.5">Find an open hub slot in real-time before walking in</p>
-                    </div>
+            <div class="glass-panel p-6 rounded-2xl shadow-2xl relative overflow-hidden">
+                <div class="mb-5">
+                    <h2 class="text-lg font-black text-white tracking-tight flex items-center gap-2">
+                        <i class="fa-solid fa-couch text-indigo-400"></i> Reading Bay Status
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Verify an open processing slot instantly from anywhere</p>
                 </div>
 
                 <div id="student-seats-container" class="grid grid-cols-2 gap-4">
@@ -57,18 +61,18 @@
         </div>
 
         <div class="lg:col-span-2 space-y-6">
-            <div class="bg-slate-900/40 border border-slate-800/60 backdrop-blur-md p-6 rounded-2xl shadow-xl">
+            <div class="glass-panel p-6 rounded-2xl shadow-2xl">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                     <div>
-                        <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
-                            <i class="fa-solid fa-book-bookmark text-indigo-400"></i> Knowledge Catalog Discovery
+                        <h2 class="text-lg font-black text-white tracking-tight flex items-center gap-2">
+                            <i class="fa-solid fa-book-bookmark text-indigo-400"></i> Knowledge Catalog
                         </h2>
-                        <p class="text-xs text-slate-400 mt-0.5">Search and check real-time availability of global library stocks</p>
+                        <p class="text-xs text-slate-400 mt-0.5">Browse material stocks and inventory positioning</p>
                     </div>
 
                     <div class="relative w-full md:w-72">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Search title, author, shelf..." class="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-indigo-500/80 focus:ring-1 focus:ring-indigo-500/30 transition-all">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs transition-colors"></i>
+                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Search titles, authors, shelves..." class="w-full pl-10 pr-4 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/20 transition-all">
                     </div>
                 </div>
 
@@ -79,18 +83,16 @@
     </main>
 
     <script>
-        // Standardized absolute path definitions to prevent multi-domain routing snags
         const BACKEND_URL = 'https://college-library-hub.onrender.com';
         const socket = io(BACKEND_URL);
 
-        // Core boot sequences running right on page load initialize
         document.addEventListener("DOMContentLoaded", () => {
             fetchLiveSeats();
             fetchLiveBooks();
         });
 
         // =========================================================================
-        // 🛰️ LIVE SEAT SYNC NETWORKING SECTION
+        // 🛰️ LIVE SEAT REAL-TIME NETWORK MESH
         // =========================================================================
         async function fetchLiveSeats() {
             try {
@@ -103,32 +105,31 @@
                     const occupied = seat.is_occupied;
                     const card = document.createElement('div');
                     
-                    // High-Tier Glassmorphism design states based on active database flag
-                    card.className = `p-4 rounded-xl border transition-all duration-300 flex flex-col justify-between h-24 relative overflow-hidden ${
+                    // Matching Premium Glassmorphism styling structures 
+                    card.className = `p-4 rounded-xl border transition-all duration-300 flex flex-col justify-between h-24 relative overflow-hidden group ${
                         occupied 
-                        ? 'bg-rose-950/10 border-rose-500/20 text-rose-400 shadow-[0_0_20px_rgba(244,63,94,0.02)]' 
-                        : 'bg-emerald-950/10 border-emerald-500/20 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.02)]'
+                        ? 'bg-rose-950/10 border-rose-500/20 text-rose-400 shadow-[0_0_15px_rgba(244,63,94,0.03)] hover:border-rose-500/40 hover:shadow-[0_0_20px_rgba(244,63,94,0.08)]' 
+                        : 'bg-emerald-950/10 border-emerald-500/20 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.03)] hover:border-emerald-500/40 hover:shadow-[0_0_20px_rgba(16,185,129,0.08)]'
                     }`;
 
                     card.innerHTML = `
-                        <div class="absolute -right-4 -bottom-4 w-12 h-12 rounded-full blur-xl opacity-20 ${occupied ? 'bg-rose-500' : 'bg-emerald-500'}"></div>
-                        
+                        <div class="absolute -right-4 -bottom-4 w-12 h-12 rounded-full blur-xl opacity-20 transition-all duration-300 group-hover:scale-125 ${occupied ? 'bg-rose-500' : 'bg-emerald-500'}"></div>
                         <div class="flex justify-between items-center w-full z-10">
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Seat Node ${seat.seat_number}</span>
-                            <span class="w-1.5 h-1.5 rounded-full ${occupied ? 'bg-rose-500 animate-pulse' : 'bg-emerald-500'}"></span>
+                            <span class="text-[9px] font-bold uppercase tracking-widest text-slate-500 font-mono">Node ${seat.seat_number}</span>
+                            <span class="w-1.5 h-1.5 rounded-full ${occupied ? 'bg-rose-500 shadow-[0_0_8px_#f43f5e]' : 'bg-emerald-500 shadow-[0_0_8px_#10b981]'}"></span>
                         </div>
-                        <div class="text-sm font-black tracking-tight flex items-center gap-2 mt-2 z-10">
+                        <div class="text-xs font-black tracking-tight flex items-center gap-2 mt-2 z-10">
                             <i class="fa-solid ${occupied ? 'fa-user-slash text-rose-500/70' : 'fa-circle-check text-emerald-500/70'}"></i>
                             ${occupied ? 'Occupied / Busy' : 'Available Now'}
                         </div>
                     `;
                     container.appendChild(card);
                 });
-            } catch (error) { console.error("Seat fetch failure:", error); }
+            } catch (error) { console.error("Seat mesh pull fail:", error); }
         }
 
         // =========================================================================
-        // 📚 LIVE CATALOG MANAGEMENT NETWORK SECTION
+        // 📚 LIVE BOOK SEARCH AND LOGISTICS TRANSACTIONS TRACKING
         // =========================================================================
         async function fetchLiveBooks(searchQuery = '') {
             try {
@@ -141,72 +142,62 @@
                 const container = document.getElementById('student-books-container');
                 container.innerHTML = '';
 
-                // Handle clear, clean custom layout if search query yields zero matches
                 if (books.length === 0) {
-                    container.className = "flex flex-col items-center justify-center py-12 col-span-full text-center border border-dashed border-slate-800 rounded-2xl";
+                    container.className = "flex flex-col items-center justify-center py-12 col-span-full text-center border border-dashed border-slate-800 rounded-2xl bg-slate-950/20";
                     container.innerHTML = `
-                        <div class="text-slate-600 mb-3"><i class="fa-solid fa-book-open text-4xl"></i></div>
-                        <p class="text-sm font-bold text-slate-400">No Matching Materials Found</p>
-                        <p class="text-xs text-slate-500 mt-1">Refine your search tokens and parameters and try again</p>
+                        <div class="text-slate-700 mb-3"><i class="fa-solid fa-book-open text-3xl"></i></div>
+                        <p class="text-sm font-black text-slate-400 tracking-tight">No Materials Located</p>
+                        <p class="text-xs text-slate-600 mt-1">Refine your search parameters and tokens</p>
                     `;
                     return;
                 }
 
-                // Reset layout structure grid class strings if items populate accurately
                 container.className = "grid grid-cols-1 md:grid-cols-2 gap-4";
 
                 books.forEach(book => {
                     const available = book.is_available;
                     const card = document.createElement('div');
-                    card.className = "p-5 bg-slate-900/30 border border-slate-800/80 rounded-xl flex flex-col justify-between hover:border-slate-700/80 hover:-translate-y-0.5 transition-all duration-300 group";
+                    card.className = "p-5 bg-slate-900/20 border border-white/[0.03] rounded-xl flex flex-col justify-between hover:border-white/[0.08] hover:bg-slate-900/40 hover:-translate-y-0.5 transition-all duration-300 group";
                     
                     card.innerHTML = `
                         <div>
                             <div class="flex justify-between items-start gap-3 mb-1.5">
-                                <h3 class="font-bold text-slate-200 text-sm leading-snug group-hover:text-indigo-400 transition-colors">${book.title}</h3>
-                                <span class="text-[8px] uppercase font-black tracking-widest px-2 py-0.5 rounded-md border shrink-0 ${
-                                    available 
-                                    ? 'bg-emerald-500/5 border-emerald-500/20 text-emerald-400' 
-                                    : 'bg-rose-500/5 border-rose-500/20 text-rose-400'
-                                }">${available ? 'STOCK' : 'OUT'}</span>
+                                <h3 class="font-black text-slate-200 text-sm tracking-tight leading-snug group-hover:text-indigo-400 transition-colors">${book.title}</h3>
+                                <span class="text-[8px] uppercase font-black tracking-widest px-2 py-0.5 rounded-md border shrink-0 ${available ? 'bg-emerald-500/5 border-emerald-500/20 text-emerald-400' : 'bg-rose-500/5 border-rose-500/20 text-rose-400'}">${available ? 'STOCK' : 'OUT'}</span>
                             </div>
                             <p class="text-xs text-slate-400 font-medium mb-4">By ${book.author}</p>
                         </div>
-                        <div class="flex items-center justify-between pt-2 border-t border-slate-800/60 mt-auto">
+                        <div class="flex items-center justify-between pt-3 border-t border-white/[0.03] mt-auto">
                             <span class="text-[9px] bg-slate-950/80 border border-slate-800 font-bold rounded-lg px-2.5 py-1 text-slate-400 flex items-center gap-1.5">
-                                <i class="fa-solid fa-map-pin text-indigo-500/80"></i> ${book.shelf_location}
+                                <i class="fa-solid fa-map-pin text-indigo-500/70"></i> ${book.shelf_location}
                             </span>
-                            <span class="text-[10px] font-semibold ${available ? 'text-emerald-500/80' : 'text-slate-500'}">
-                                ${available ? 'Ready for Checkout' : 'Expected Back Soon'}
+                            <span class="text-[10px] font-black ${available ? 'text-emerald-500/80' : 'text-slate-600'}">
+                                ${available ? 'Ready for Issue' : 'On Loan'}
                             </span>
                         </div>
                     `;
                     container.appendChild(card);
                 });
-            } catch (error) { console.error("Catalog fetch failure:", error); }
+            } catch (error) { console.error("Catalog matrix pull fail:", error); }
         }
 
-        // Real-time live execution trigger logic for inputs keyboard listener
         let searchTimeout;
         function executeLiveSearch() {
             clearTimeout(searchTimeout);
             const query = document.getElementById('catalog-search').value.trim();
-            // Debounce function to protect backend engine from processing overloading queries
             searchTimeout = setTimeout(() => {
                 fetchLiveBooks(query);
             }, 250);
         }
 
         // =========================================================================
-        // 🔌 REAL-TIME WEBSOCKET EMIT LISTENERS INFRASTRUCTURE
+        // 🔌 BROADCAST WEB SOCKET CHANNELS LISTENERS
         // =========================================================================
         socket.on('seatUpdated', () => {
-            console.log('⚡ Real-Time Network Hub Event: Seat Vector Sync Triggered');
             fetchLiveSeats();
         });
 
         socket.on('bookUpdated', () => {
-            console.log('⚡ Real-Time Network Hub Event: Catalog Map Sync Triggered');
             const currentQuery = document.getElementById('catalog-search').value.trim();
             fetchLiveBooks(currentQuery);
         });
