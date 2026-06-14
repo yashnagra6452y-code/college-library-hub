@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Librarian Core Terminal | Management Node</title>
+    <title>ASBASJS Terminal | Master Management Node</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
@@ -22,7 +22,7 @@
             font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* 🌌 KINETIC AURORA RADIAL MESH BACKGROUND (Matches Student Vibe) */
+        /* 🌌 KINETIC AURORA RADIAL MESH BACKGROUND */
         .aurora-bg-mesh {
             position: fixed;
             inset: 0;
@@ -71,7 +71,6 @@
             box-shadow: 0 20px 32px -8px rgba(180, 195, 215, 0.4);
         }
 
-        /* 🤖 MANAGEMENT OVERRIDE CONTROL INTERACT CELLS */
         .admin-node-cell {
             border: 1px solid rgba(230, 223, 211, 0.8);
             background: rgba(255, 255, 255, 0.9);
@@ -112,8 +111,12 @@
                     <i class="fa-solid fa-terminal text-base"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg font-800 text-slate-900 display-font leading-tight">Librarian Core Terminal</h1>
-                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Master Control Node Matrix</p>
+                    <h1 class="text-base font-800 text-slate-900 display-font leading-tight">
+                        Librarian Core Terminal
+                    </h1>
+                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">
+                        ASBASJS Memorial College, Bela
+                    </p>
                 </div>
             </div>
             <button onclick="terminateSessionLogout()" class="bg-white border border-[#E6DFD3] hover:border-slate-300 text-slate-500 hover:text-slate-800 px-3.5 py-2 rounded-xl text-[10px] font-800 tracking-wider uppercase font-mono transition-colors shadow-sm">
@@ -129,7 +132,7 @@
                         <h2 class="text-base font-800 text-slate-900 display-font flex items-center gap-2">
                             <i class="fa-solid fa-chair text-pink-400 text-sm"></i> Live Workstation Overrides
                         </h2>
-                        <p class="text-xs text-slate-400 mt-0.5 font-medium">Broadcast absolute system overrides straight to student layout</p>
+                        <p class="text-xs text-slate-400 mt-0.5 font-medium">Broadcast absolute system overrides straight to student layout mesh</p>
                     </div>
 
                     <div class="border border-[#E6DFD3] rounded-2xl p-4 bg-[#FAF8F5]/30 max-h-[580px] overflow-y-auto no-scrollbar shadow-inner">
@@ -156,6 +159,10 @@
         </div>
     </div>
 
+    <footer class="max-w-7xl mx-auto p-6 text-center text-[10px] font-mono font-bold text-slate-400 tracking-wider border-t border-[#E6DFD3]/40 mt-12 hidden" id="admin-footer">
+        PROJECT ARCHITECTURE DEVELOPED BY <span class="text-slate-600">YASHPNEET SINGH</span> | DEPT OF PHYSICAL SCIENCE & CS
+    </footer>
+
     <script>
         const BACKEND_URL = 'https://college-library-hub.onrender.com';
         const socket = io(BACKEND_URL);
@@ -169,15 +176,18 @@
         function verifyActiveSessionState() {
             const loginModal = document.getElementById('login-modal');
             const mainDash = document.getElementById('main-admin-dashboard');
+            const footer = document.getElementById('admin-footer');
             
             if (administrativeSessionToken) {
                 loginModal.classList.add('hidden', 'pointer-events-none');
                 mainDash.classList.remove('hidden');
+                footer.classList.remove('hidden');
                 fetchAdminGridData();
                 fetchAdminLogisticsBooks();
             } else {
                 loginModal.classList.remove('hidden', 'pointer-events-none');
                 mainDash.classList.add('hidden');
+                footer.classList.add('hidden');
             }
         }
 
@@ -211,9 +221,6 @@
             document.getElementById('admin-password-input').value = '';
         }
 
-        // =========================================================================
-        // 🪑 ADMIN WORKSTATION RENDER CONTROLLERS (WITH LIVE SESSION MARKS)
-        // =========================================================================
         function formatRelativeSessionTime(timestampString) {
             if (!timestampString) return "Available";
             const diff = new Date() - new Date(timestampString);
@@ -270,9 +277,6 @@
             } catch(e) { console.error(e); }
         }
 
-        // =========================================================================
-        // 📚 ADMIN LOGISTICS BOOK HANDLERS 
-        // =========================================================================
         async function fetchAdminLogisticsBooks() {
             try {
                 const response = await fetch(`${BACKEND_URL}/api/books`);
@@ -348,9 +352,6 @@
             } catch(e) { console.error(e); }
         }
 
-        // =========================================================================
-        // 🔌 SOCKET REAL-TIME LISTENERS
-        // =========================================================================
         socket.on('seatUpdated', () => { fetchAdminGridData(); });
         socket.on('bookUpdated', () => { fetchAdminLogisticsBooks(); });
     </script>
