@@ -17,7 +17,6 @@
             background-size: 24px 24px;
         }
 
-        /* Premium scrollbars for scrolling through high capacity layouts */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #F7F4EF; border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: #E6DFD3; border-radius: 10px; }
@@ -35,41 +34,48 @@
 </head>
 <body class="min-h-screen text-slate-800 antialiased selection:bg-pink-200">
 
-    <nav class="bg-[#F7F4EF]/90 backdrop-blur-md border-b border-[#E6DFD3] sticky top-0 z-50 px-8 py-4">
+    <nav class="bg-[#F7F4EF]/90 backdrop-blur-md border-b border-[#E6DFD3] sticky top-0 z-50 px-6 sm:px-8 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-4">
-                <div class="bg-[#CDEEFF] w-12 h-12 rounded-2xl flex items-center justify-center text-[#4A90E2] shadow-sm border border-[#B3E0FF]">
-                    <i class="fa-solid fa-bookmark text-lg"></i>
+            <div class="flex items-center gap-3 sm:gap-4">
+                <div class="bg-[#CDEEFF] w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center text-[#4A90E2] shadow-sm border border-[#B3E0FF]">
+                    <i class="fa-solid fa-bookmark text-base sm:text-lg"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-800 tracking-tight text-slate-900">College Library Hub</h1>
-                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Your Cozy Study Sanctuary</p>
+                    <h1 class="text-lg sm:text-xl font-800 tracking-tight text-slate-900 leading-tight">College Library Hub</h1>
+                    <p class="text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Your Cozy Study Sanctuary</p>
                 </div>
             </div>
-            <div class="bg-[#ECEFF1] border border-slate-200 px-4 py-2 rounded-2xl flex items-center gap-2">
+            <div class="bg-[#ECEFF1] border border-slate-200 px-3 py-1.5 sm:px-4 sm:py-2 rounded-2xl flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)] animate-pulse"></span>
-                <span class="text-[10px] font-800 text-slate-500 uppercase tracking-wider">Live Connection Active</span>
+                <span class="text-[9px] sm:text-[10px] font-800 text-slate-500 uppercase tracking-wider">Live</span>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+    <div class="flex justify-center p-4 lg:hidden sticky top-[73px] z-40 bg-[#FDFBF7]/40 backdrop-blur-sm">
+        <div class="bg-[#F7F4EF] border border-[#E6DFD3] p-1.5 rounded-2xl flex gap-1 aesthetic-shadow">
+            <button id="toggle-seats-btn" onclick="switchMobileTab('seats')" class="px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4]">
+                <i class="fa-solid fa-compass"></i> Reading Room
+            </button>
+            <button id="toggle-books-btn" onclick="switchMobileTab('books')" class="px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 text-slate-500 hover:text-slate-800">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Catalog
+            </button>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
         
-        <div class="lg:col-span-5 space-y-6">
-            <div class="bg-[#F7F4EF] border border-[#E6DFD3] p-6 rounded-3xl aesthetic-shadow relative overflow-hidden">
-                <div class="mb-4 flex justify-between items-center">
-                    <div>
-                        <h2 class="text-lg font-800 text-slate-900 flex items-center gap-2">
-                            <i class="fa-solid fa-compass text-pink-400"></i> Reading Room Map
-                        </h2>
-                        <p class="text-xs text-slate-500 mt-0.5">Real-time modular floorplan — 70 seat configuration matrix</p>
-                    </div>
+        <div id="seats-panel" class="lg:col-span-5 space-y-6 block transition-all duration-300">
+            <div class="bg-[#F7F4EF] border border-[#E6DFD3] p-5 sm:p-6 rounded-3xl aesthetic-shadow relative overflow-hidden">
+                <div class="mb-4">
+                    <h2 class="text-lg font-800 text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-compass text-pink-400"></i> Reading Room Map
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Real-time modular floorplan — 70 seat configuration matrix</p>
                 </div>
 
-                <div class="border-2 border-dashed border-[#E6DFD3] rounded-2xl p-6 bg-[#FDFBF7]/60 relative max-h-[520px] overflow-y-auto select-none space-y-12 flex flex-col items-center">
-                    
+                <div class="border-2 border-dashed border-[#E6DFD3] rounded-2xl p-4 sm:p-6 bg-[#FDFBF7]/60 relative max-h-[520px] overflow-y-auto select-none space-y-12 flex flex-col items-center">
                     <div id="library-bays-container" class="w-full space-y-16 py-4 flex flex-col items-center"></div>
-
                     <div class="w-full text-center text-slate-300 font-mono text-[9px] pt-4 border-t border-[#F5F1E9]">
                         <i class="fa-solid fa-seedling text-emerald-400 text-sm animate-bounce mr-1"></i> Multi-Bay Hub Operational
                     </div>
@@ -77,8 +83,8 @@
             </div>
         </div>
 
-        <div class="lg:col-span-7 space-y-6">
-            <div class="bg-[#F7F4EF] border border-[#E6DFD3] p-6 rounded-3xl aesthetic-shadow">
+        <div id="books-panel" class="lg:col-span-7 space-y-6 hidden lg:block transition-all duration-300">
+            <div class="bg-[#F7F4EF] border border-[#E6DFD3] p-5 sm:p-6 rounded-3xl aesthetic-shadow">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                     <div class="flex gap-3">
                         <div class="mt-1 text-sky-400"><i class="fa-solid fa-wand-magic-sparkles text-xl"></i></div>
@@ -110,7 +116,35 @@
         });
 
         // =========================================================================
-        // 🪑 PROGRAMMATIC MULTI-BAY CLUSTER MATRIX GENERATOR
+        // 📱 MOBILE VIEW NAVIGATION CONTROLLER SWITCH ROUTINE
+        // =========================================================================
+        function switchMobileTab(tab) {
+            const seatsPanel = document.getElementById('seats-panel');
+            const booksPanel = document.getElementById('books-panel');
+            const seatsBtn = document.getElementById('toggle-seats-btn');
+            const booksBtn = document.getElementById('toggle-books-btn');
+
+            if (tab === 'seats') {
+                seatsPanel.classList.remove('hidden');
+                seatsPanel.classList.add('block');
+                booksPanel.classList.remove('block');
+                booksPanel.classList.add('hidden');
+
+                seatsBtn.className = "px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4]";
+                booksBtn.className = "px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 text-slate-500 hover:text-slate-800";
+            } else {
+                seatsPanel.classList.remove('block');
+                seatsPanel.classList.add('hidden');
+                booksPanel.classList.remove('hidden');
+                booksPanel.classList.add('block');
+
+                booksBtn.className = "px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4]";
+                seatsBtn.className = "px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 text-slate-500 hover:text-slate-800";
+            }
+        }
+
+        // =========================================================================
+        // 🪑 MULTI-BAY GENERATION LOOPS
         // =========================================================================
         async function fetchLiveHighCapacitySeats() {
             try {
@@ -119,38 +153,34 @@
                 const mainContainer = document.getElementById('library-bays-container');
                 mainContainer.innerHTML = '';
 
-                // Group seats programmatically into clusters of 10 seats per desk workbench
                 const seatsPerTable = 10;
                 const totalTables = Math.ceil(seats.length / seatsPerTable);
 
-                // Spatial coordinates relative to a single table box for a balanced layout profile
                 const relativeChairCoordinates = [
-                    { top: '8%',  left: '-40px' },   // Chair 1 (Left row)
-                    { top: '26%', left: '-40px' },   // Chair 2
-                    { top: '44%', left: '-40px' },   // Chair 3
-                    { top: '62%', left: '-40px' },   // Chair 4
-                    { top: '80%', left: '-40px' },   // Chair 5
-                    { top: '8%',  right: '-40px' },  // Chair 6 (Right row)
-                    { top: '26%', right: '-40px' },  // Chair 7
-                    { top: '44%', right: '-40px' },  // Chair 8
-                    { top: '62%', right: '-40px' },  // Chair 9
-                    { top: '80%', right: '-40px' }   // Chair 10
+                    { top: '8%',  left: '-40px' },   
+                    { top: '26%', left: '-40px' },   
+                    { top: '44%', left: '-40px' },   
+                    { top: '62%', left: '-40px' },   
+                    { top: '80%', left: '-40px' },   
+                    { top: '8%',  right: '-40px' },  
+                    { top: '26%', right: '-40px' },  
+                    { top: '44%', right: '-40px' },  
+                    { top: '62%', right: '-40px' },  
+                    { top: '80%', right: '-40px' }   
                 ];
 
                 for (let t = 0; t < totalTables; t++) {
                     const tableWrapper = document.createElement('div');
-                    tableWrapper.className = "wood-grain w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4 animate-fade-in";
+                    tableWrapper.className = "wood-grain w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4";
                     
                     tableWrapper.innerHTML = `
                         <div class="absolute inset-y-0 w-[2px] bg-[#DDBB97]/50 left-1/2 -translate-x-1/2 pointer-events-none"></div>
                         <div class="absolute inset-x-0 h-[2px] bg-[#DDBB97]/50 top-1/2 -translate-y-1/2 pointer-events-none"></div>
-                        
                         <div class="text-[8px] font-900 text-[#8B6B4F] uppercase tracking-widest bg-[#FDFBF7]/95 px-3 py-1.5 rounded-full border border-[#DDBB97]/40 z-10 shadow-sm font-mono select-none">
                             Study Section ${String.fromCharCode(65 + t)}
                         </div>
                     `;
 
-                    // Slice the database response array into segments matching this workspace table index scope
                     const tableSeatsSlice = seats.slice(t * seatsPerTable, (t + 1) * seatsPerTable);
 
                     tableSeatsSlice.forEach((seat, idx) => {
@@ -179,11 +209,11 @@
 
                     mainContainer.appendChild(tableWrapper);
                 }
-            } catch (error) { console.error("High Capacity matrix pull loop block split fault:", error); }
+            } catch (error) { console.error(error); }
         }
 
         // =========================================================================
-        // 📚 INTUITIVE DISCOVERY CATALOG ENGINE
+        // 📚 CATALOG RETRIEVAL LOOPS
         // =========================================================================
         async function fetchLiveBooksCatalog(searchQuery = '') {
             try {
@@ -211,7 +241,6 @@
                 books.forEach(book => {
                     const available = book.is_available;
                     const card = document.createElement('div');
-                    
                     card.className = "bg-[#FDFBF7] border border-[#E6DFD3] pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between hover:border-[#CBD5E1] hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 group relative overflow-hidden bg-gradient-to-b from-[#FDFBF7] to-[#F7F4EF]/30 aesthetic-shadow";
                     
                     card.innerHTML = `
@@ -220,13 +249,11 @@
                         }">
                             <span>${available ? 'OK' : 'OUT'}</span>
                         </div>
-
                         <div>
                             <span class="text-[8px] uppercase tracking-widest font-800 text-slate-400 font-mono bg-[#ECEFF1] px-2 py-0.5 rounded">Catalog Asset</span>
                             <h3 class="font-800 text-slate-900 text-sm mt-2.5 mb-1 group-hover:text-[#4A90E2] transition-colors leading-snug pr-6 tracking-tight">${book.title}</h3>
                             <p class="text-xs text-slate-500 font-medium">By ${book.author}</p>
                         </div>
-                        
                         <div class="flex items-center justify-between pt-4 border-t border-[#F5F1E9] mt-5">
                             <span class="text-[9px] bg-[#FDFBF7] border border-[#E6DFD3] font-bold rounded-xl px-3 py-1 text-slate-600 flex items-center gap-1.5 shadow-inner">
                                 <i class="fa-solid fa-map-pin text-[#4A90E2]/60"></i> ${book.shelf_location}
@@ -238,21 +265,16 @@
                     `;
                     container.appendChild(card);
                 });
-            } catch (error) { console.error("Catalog execution query fault loop:", error); }
+            } catch (error) { console.error(error); }
         }
 
         let searchTimeout;
         function executeLiveSearch() {
             clearTimeout(searchTimeout);
             const query = document.getElementById('catalog-search').value.trim();
-            searchTimeout = setTimeout(() => {
-                fetchLiveBooksCatalog(query);
-            }, 250);
+            searchTimeout = setTimeout(() => { fetchLiveBooksCatalog(query); }, 250);
         }
 
-        // =========================================================================
-        // 🔌 REACTION EVENT BROADCAST CHANNELS SOCKET MAPS
-        // =========================================================================
         socket.on('seatUpdated', () => { fetchLiveHighCapacitySeats(); });
         socket.on('bookUpdated', () => {
             const currentQuery = document.getElementById('catalog-search').value.trim();
