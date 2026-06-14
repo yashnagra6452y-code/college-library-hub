@@ -140,7 +140,7 @@
                 </div>
                 <div>
                     <h1 class="text-xs sm:text-sm font-800 tracking-tight text-slate-900 display-font leading-tight transition-colors duration-300 group-hover:text-[#3A78C4]">
-                        ASBASJS Memorial College, Bela
+                        ASBASJS Memorial College, Bela (Ropar)
                     </h1>
                     <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Physical Science & Computer Department</p>
                 </div>
@@ -180,17 +180,35 @@
         </div>
     </header>
 
-    <section class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10 gsap-hero-panel">
-        <div class="premium-glass-shell rounded-3xl p-5 sm:p-6 border border-white/70">
-            <div class="mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-chart-pie text-[#3A78C4] text-sm animate-pulse"></i>
-                <div>
-                    <h3 class="text-sm font-800 text-slate-900 display-font tracking-tight">Live Environmental Load Ratios</h3>
-                    <p class="text-[10px] text-slate-400 font-medium">Real-time room occupancy analysis by building sectors</p>
-                </div>
+    <section class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10 gsap-hero-panel grid grid-cols-1 md:grid-cols-12 gap-6">
+        
+        <div class="premium-glass-shell rounded-3xl p-5 md:col-span-8 border border-white/70">
+            <div class="mb-3 flex items-center gap-2">
+                <i class="fa-solid fa-chart-pie text-[#3A78C4] text-xs animate-pulse"></i>
+                <h3 class="text-xs font-800 text-slate-900 display-font tracking-tight">Live Environmental Load Ratios</h3>
             </div>
-            <div class="w-full h-24 sm:h-28 relative flex items-center justify-center">
+            <div class="w-full h-24 relative flex items-center justify-center">
                 <canvas id="live-occupancy-chart-canvas"></canvas>
+            </div>
+        </div>
+
+        <div class="premium-glass-shell rounded-3xl p-5 md:col-span-4 border border-white/70 flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between border-b border-[#E6DFD3]/60 pb-2 mb-2">
+                    <span class="text-[9px] uppercase tracking-widest font-900 text-slate-400 font-mono">Institutional Profile</span>
+                    <span class="text-[8px] bg-sky-50 text-[#3A78C4] px-1.5 py-0.5 rounded font-bold border border-sky-100">Affiliated to PBI Univ</span>
+                </div>
+                <p class="text-[10px] text-slate-500 font-medium leading-relaxed">
+                    This automated allocation terminal acts as a pilot framework supporting the evolution of a smart campus architecture at Bela.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-4">
+                <a href="http://www.belacollege.org" target="_blank" class="bg-white hover:bg-slate-50 border border-[#E6DFD3] text-center text-[9px] font-mono font-bold py-2 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 text-slate-600">
+                    <i class="fa-solid fa-globe text-slate-400 text-[8px]"></i> College Main
+                </a>
+                <a href="http://www.belacollege.org/Syllabus.aspx" target="_blank" class="bg-white hover:bg-slate-50 border border-[#E6DFD3] text-center text-[9px] font-mono font-bold py-2 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 text-slate-600">
+                    <i class="fa-solid fa-book-open text-slate-400 text-[8px]"></i> Department
+                </a>
             </div>
         </div>
     </section>
@@ -252,7 +270,7 @@
     </main>
 
     <footer class="max-w-7xl mx-auto p-6 text-center text-[10px] font-mono font-bold text-slate-400 tracking-wider relative z-10 border-t border-[#E6DFD3]/40 mt-12">
-        SYSTEM DESIGNED & DEVELOPED BY <span class="text-slate-600">YASHPNEET SINGH</span> | B.SC COMPUTER SCIENCE
+        SYSTEM DESIGNED & DEVELOPED BY <span class="text-slate-600">YASHPNEET SINGH</span> | B.SC COMPUTER SCIENCE (4TH SEM OVER)
     </footer>
 
     <script>
@@ -324,7 +342,7 @@
                         borderColor: ['#3A78C4', '#D84A75'],
                         borderWidth: 1.5,
                         borderRadius: 8,
-                        barThickness: 24
+                        barThickness: 16
                     }]
                 },
                 options: {
@@ -337,13 +355,13 @@
                     scales: {
                         x: {
                             grid: { display: false },
-                            ticks: { font: { family: 'Plus Jakarta Sans', size: 10, weight: 'bold' } },
+                            ticks: { font: { family: 'Plus Jakarta Sans', size: 9, weight: 'bold' } },
                             min: 0,
                             max: 30
                         },
                         y: {
                             grid: { display: false },
-                            ticks: { font: { family: 'Plus Jakarta Sans', size: 10, weight: 'bold' }, color: '#334155' }
+                            ticks: { font: { family: 'Plus Jakarta Sans', size: 9, weight: 'bold' }, color: '#334155' }
                         }
                     }
                 }
@@ -519,7 +537,7 @@
                     container.appendChild(card);
                 });
 
-                gsap.from("#student-books-container > div", { opacity: 0, y: 20, duration: 0.5, stagger: 0.06 });
+                gsap.from("#student-books-container > div", { opacity: 0, y: 20, duration: 0.5,     stagger: 0.06 });
             } catch (error) { console.error(error); }
         }
 
