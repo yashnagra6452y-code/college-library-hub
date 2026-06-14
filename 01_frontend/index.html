@@ -20,74 +20,80 @@
             font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* 🌌 DEEP LAYERED AMBIENT BACKGROUND TEXTURE */
+        /* 🌌 LAYERED AMBIENT BACKGROUND GRID */
         .ambient-glow-layer {
             position: fixed;
             inset: 0;
             z-index: 1;
             pointer-events: none;
             background-image: 
-                radial-gradient(at 10% 15%, rgba(205, 238, 255, 0.5) 0, transparent 40%), 
-                radial-gradient(at 95% 10%, rgba(255, 210, 226, 0.45) 0, transparent 45%),
-                radial-gradient(at 50% 85%, rgba(240, 225, 255, 0.35) 0, transparent 50%),
-                linear-gradient(rgba(230, 223, 211, 0.25) 1px, transparent 1px), 
-                linear-gradient(90deg, rgba(230, 223, 211, 0.25) 1px, transparent 1px);
+                radial-gradient(at 10% 15%, rgba(205, 238, 255, 0.6) 0, transparent 45%), 
+                radial-gradient(at 95% 10%, rgba(255, 210, 226, 0.5) 0, transparent 45%),
+                radial-gradient(at 50% 85%, rgba(240, 225, 255, 0.4) 0, transparent 50%),
+                linear-gradient(rgba(230, 223, 211, 0.3) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(230, 223, 211, 0.3) 1px, transparent 1px);
             background-size: 100% 100%, 100% 100%, 100% 100%, 28px 28px, 28px 28px;
         }
 
-        /* 🧊 ULTRA-PREMIUM GLASSMORPHISM CANVAS */
+        /* 🧊 HIGH-FIDELITY GLASS SURFACE */
         .glass-canvas {
-            background: rgba(255, 255, 255, 0.65);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 
-                0px 30px 60px -15px rgba(200, 185, 165, 0.3),
+                0px 30px 60px -15px rgba(200, 185, 165, 0.25),
                 0px 1px 3px rgba(0, 0, 0, 0.01);
         }
 
+        /* 🗂️ TACTILE HOVER CARDS */
         .glass-card-inner {
             background: rgba(255, 255, 255, 0.85);
             border: 1px solid rgba(235, 228, 215, 0.7);
-            box-shadow: 0 10px 24px -6px rgba(225, 215, 195, 0.25);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 24px -6px rgba(225, 215, 195, 0.2);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card-inner:hover {
+            transform: translateY(-6px);
+            border-color: rgba(74, 144, 226, 0.4);
+            box-shadow: 0 20px 32px -8px rgba(180, 195, 215, 0.5);
+            background: rgba(255, 255, 255, 0.95);
         }
 
-        /* 🌳 COZY SCANDI OAK TEXTURE BLOCKS */
+        /* 🌳 SCANDINAVIAN OAK WORKBENCH */
         .scandi-oak-bench {
             background: linear-gradient(135deg, #F8EFE2 0%, #EFE1CD 100%);
             border: 2px solid #DAD0BE;
             box-shadow: 
                 inset 0 2px 4px rgba(255, 255, 255, 0.7),
-                0 16px 36px -10px rgba(185, 170, 150, 0.4);
+                0 16px 36px -10px rgba(185, 170, 150, 0.35);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .scandi-oak-bench:hover {
+            transform: scale(1.02);
+            box-shadow: 0 24px 48px -12px rgba(165, 150, 130, 0.5);
         }
 
-        /* 🧚‍♀️ AMBIENT FLOATING VECTOR KEYFRAME ENGINE */
-        .float-node-y { animation: float-drift-y 9s infinite ease-in-out; }
-        .float-node-x { animation: float-drift-x 11s infinite ease-in-out; }
-        .float-node-slow { animation: float-rotate 25s infinite linear; }
+        /* 🧚‍♀️ CONTINUOUS AMBIENT FLUID MOTIONS */
+        .float-node-y { animation: floatDriftY 8s infinite ease-in-out; }
+        .float-node-x { animation: floatDriftX 10s infinite ease-in-out; }
 
-        @keyframes float-drift-y {
+        @keyframes floatDriftY {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-16px) rotate(4deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
         }
-        @keyframes float-drift-x {
+        @keyframes floatDriftX {
             0%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
-            50% { transform: translateX(12px) translateY(-8px) rotate(-3deg); }
-        }
-        @keyframes float-rotate {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.05); }
-            100% { transform: rotate(360deg) scale(1); }
+            50% { transform: translateX(10px) translateY(-6px) rotate(-2deg); }
         }
 
-        /* ⚡ LIVE RADAR PULSE SIGNAL RING */
+        /* ⚡ LIVE RADAR DETECTION GLOW RING */
         .radar-pulse-active {
-            animation: radar-glow-ring 2.5s infinite ease-in-out;
+            animation: radarGlowRing 2.5s infinite ease-in-out;
         }
-        @keyframes radar-glow-ring {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(58, 120, 196, 0.5), 0 4px 12px rgba(58, 120, 196, 0.15); border-color: #B3E0FF; }
-            50% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(58, 120, 196, 0), 0 16px 32px rgba(58, 120, 196, 0.35); border-color: #3A78C4; }
+        @keyframes radarGlowRing {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(58, 120, 196, 0.6), 0 4px 12px rgba(58, 120, 196, 0.15); border-color: #B3E0FF; }
+            50% { transform: scale(1.1); box-shadow: 0 0 0 12px rgba(58, 120, 196, 0), 0 16px 32px rgba(58, 120, 196, 0.4); border-color: #3A78C4; }
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -98,12 +104,11 @@
 
     <div class="ambient-glow-layer"></div>
 
-    <div class="hidden md:block absolute top-[18%] left-[3%] text-sky-200/40 text-7xl pointer-events-none select-none float-node-y z-0"><i class="fa-solid fa-graduation-cap"></i></div>
-    <div class="hidden md:block absolute top-[55%] left-[42%] text-pink-200/30 text-8xl pointer-events-none select-none float-node-x z-0"><i class="fa-solid fa-book-bookmark"></i></div>
-    <div class="hidden md:block absolute top-[30%] right-[4%] text-purple-200/35 text-6xl pointer-events-none select-none float-node-y z-0"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-    <div class="hidden md:block absolute bottom-[8%] left-[8%] text-amber-200/40 text-7xl pointer-events-none select-none float-node-slow z-0"><i class="fa-solid fa-compass text-slate-300/30"></i></div>
+    <div class="hidden lg:block absolute top-[15%] left-[2%] text-sky-300/35 text-6xl pointer-events-none select-none float-node-y z-0"><i class="fa-solid fa-graduation-cap"></i></div>
+    <div class="hidden lg:block absolute top-[58%] left-[43%] text-pink-300/30 text-7xl pointer-events-none select-none float-node-x z-0"><i class="fa-solid fa-book-bookmark"></i></div>
+    <div class="hidden lg:block absolute top-[28%] right-[3%] text-purple-300/35 text-5xl pointer-events-none select-none float-node-y z-0"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
 
-    <nav class="bg-[#FAF8F5]/75 backdrop-blur-xl border-b border-[#E6DFD3] sticky top-0 z-50 px-6 sm:px-8 py-4 transition-all duration-500">
+    <nav class="bg-[#FAF8F5]/75 backdrop-blur-xl border-b border-[#E6DFD3] sticky top-0 z-50 px-6 sm:px-8 py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex justify-between items-center relative z-10">
             <div class="flex items-center gap-3.5 group cursor-pointer">
                 <div class="bg-gradient-to-tr from-[#CDEEFF] to-[#B3E0FF] w-11 h-11 rounded-2xl flex items-center justify-center text-[#3A78C4] border border-[#B3E0FF]/60 shadow-sm relative overflow-hidden">
@@ -115,7 +120,7 @@
                     <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Automated Architecture Stream</p>
                 </div>
             </div>
-            <div class="bg-white/80 border border-[#E6DFD3] px-3.5 py-1.5 rounded-xl flex items-center gap-2.5 shadow-sm hover:border-slate-300 transition-colors duration-300">
+            <div class="bg-white/80 border border-[#E6DFD3] px-3.5 py-1.5 rounded-xl flex items-center gap-2.5 shadow-sm hover:border-slate-300 transition-all duration-300">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] animate-pulse"></span>
                 <span class="text-[9px] font-800 text-slate-500 uppercase tracking-widest font-mono">Live Matrix Sync</span>
             </div>
@@ -123,8 +128,8 @@
     </nav>
 
     <header class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10">
-        <div class="glass-canvas rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row justify-between items-center gap-8 relative overflow-hidden border border-white/60">
-            <div class="absolute -right-16 -top-16 w-44 h-44 bg-gradient-to-br from-pink-200/20 to-purple-200/10 rounded-full blur-3xl pointer-events-none select-none"></div>
+        <div class="glass-canvas rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row justify-between items-center gap-8 relative overflow-hidden border border-white/70">
+            <div class="absolute -right-16 -top-16 w-44 h-44 bg-gradient-to-br from-pink-200/15 to-purple-200/10 rounded-full blur-3xl pointer-events-none select-none"></div>
             
             <div class="flex flex-col sm:flex-row items-center gap-6 w-full lg:w-auto text-center sm:text-left">
                 <div class="bg-white/95 w-16 h-16 rounded-2xl flex items-center justify-center text-slate-400 border border-[#E6DFD3] shadow-md shrink-0 transform transition-transform duration-500 hover:rotate-6">
@@ -142,7 +147,7 @@
             </div>
             
             <div class="w-full lg:w-auto shrink-0">
-                <button onclick="executeMagicSeatMatch()" class="w-full lg:w-auto bg-gradient-to-r from-[#3A78C4] to-[#4A90E2] hover:from-[#4A90E2] hover:to-[#3A78C4] text-white font-800 text-xs tracking-wider uppercase px-6 py-4 rounded-xl shadow-md shadow-sky-200/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-200 active:translate-y-0 active:scale-98 flex items-center justify-center gap-2.5 font-mono">
+                <button onclick="executeMagicSeatMatch()" class="w-full lg:w-auto bg-gradient-to-r from-[#3A78C4] to-[#4A90E2] hover:from-[#4A90E2] hover:to-[#3A78C4] text-white font-800 text-xs tracking-wider uppercase px-6 py-4 rounded-xl shadow-md shadow-sky-200/40 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-200 active:translate-y-0 active:scale-98 flex items-center justify-center gap-2.5 font-mono">
                     <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i> Find Me an Open Seat Now
                 </button>
             </div>
@@ -234,7 +239,7 @@
         }
 
         // =========================================================================
-        // 🪑 STABILIZED SCANDI OAK STRUCTURE MAP ARCHITECTURE
+        // 🪑 STABILIZED WORKBENCH MATRIX LOOPS
         // =========================================================================
         function renderModularZoneGrid(seats) {
             const mainContainer = document.getElementById('library-bays-container');
@@ -255,13 +260,13 @@
                 if (globalCurrentZoneFilter !== 'all' && globalCurrentZoneFilter !== tableZone) continue;
 
                 const tableWrapper = document.createElement('div');
-                tableWrapper.className = "scandi-oak-bench w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4 transition-all duration-500 ease-out transform hover:scale-[1.03] hover:shadow-2xl";
+                tableWrapper.className = "scandi-oak-bench w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4 transform ease-out";
                 
                 tableWrapper.innerHTML = `
                     <div class="absolute inset-y-0 w-[1px] bg-[#DBCEB4]/50 left-1/2 -translate-x-1/2 pointer-events-none"></div>
                     <div class="absolute inset-x-0 h-[1px] bg-[#DBCEB4]/50 top-1/2 -translate-y-1/2 pointer-events-none"></div>
                     
-                    <div class="text-[9px] font-700 text-[#7C654D] uppercase tracking-wider bg-white/95 px-3 py-2 rounded-xl border border-[#D9CDBC]/60 z-10 shadow-md display-font select-none flex flex-col items-center gap-0.5 group-hover:border-[#3A78C4]">
+                    <div class="text-[9px] font-700 text-[#7C654D] uppercase tracking-wider bg-white/95 px-3 py-2 rounded-xl border border-[#D9CDBC]/60 z-10 shadow-md display-font select-none flex flex-col items-center gap-0.5">
                         <span>Section ${String.fromCharCode(65 + t)}</span>
                         <span class="text-[6px] text-slate-400 font-sans font-normal tracking-normal lowercase">${zoneLabelText}</span>
                     </div>
@@ -274,7 +279,7 @@
                     const position = relativeChairCoordinates[idx];
 
                     const chairDiv = document.createElement('div');
-                    chairDiv.className = "absolute w-10 h-10 flex items-center justify-center transition-all duration-500 z-20";
+                    chairDiv.className = "absolute w-10 h-10 flex items-center justify-center transition-all duration-300 z-20";
                     chairDiv.id = `chair-node-anchor-${seat.seat_number}`;
                     
                     if (position.left) chairDiv.style.left = position.left;
@@ -298,7 +303,7 @@
         }
 
         // =========================================================================
-        // 📚 AUTO-TINT PASTEL HIGH-ELEVATION CARDS LOOPS
+        // 📚 HOVER ELEVATION BOOK CARDS CATALOG
         // =========================================================================
         async function fetchLiveBooksCatalog(searchQuery = '') {
             try {
@@ -314,7 +319,7 @@
                 if (books.length === 0) {
                     container.className = "flex flex-col items-center justify-center py-16 col-span-full text-center border border-dashed border-[#E6DFD3] rounded-2xl bg-white/60";
                     container.innerHTML = `
-                        <div class="text-[#E6DFD3] text-4xl mb-3"><i class="fa-solid fa-folder-open animate-bounce"></i></div>
+                        <div class="text-[#E6DFD3] text-4xl mb-3"><i class="fa-solid fa-folder-open"></i></div>
                         <p class="text-xs font-mono font-bold text-slate-500">No matching assets found in registers</p>
                     `;
                     return;
@@ -338,11 +343,10 @@
                     }
 
                     const card = document.createElement('div');
-                    // Premium micro animation classes: hover:-translate-y-1.5 and hover:shadow-2xl
-                    card.className = `bg-white border border-[#E6DFD3] pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between hover:border-slate-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-slate-200/80 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) group relative overflow-hidden bg-gradient-to-b ${themeGradient} glass-card-inner`;
+                    card.className = `bg-white border border-[#E6DFD3] pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between group relative overflow-hidden bg-gradient-to-b ${themeGradient} glass-card-inner`;
                     
                     card.innerHTML = `
-                        <div class="absolute top-0 right-4 w-7 h-8 flex items-center justify-center text-[8px] font-900 tracking-wider font-mono text-white rounded-b-md shadow-sm transition-all duration-300 group-hover:h-10 ${
+                        <div class="absolute top-0 right-4 w-7 h-8 flex items-center justify-center text-[8px] font-900 tracking-wider font-mono text-white rounded-b-md shadow-sm transition-all duration-300 group-hover:h-9 ${
                             available ? 'bg-[#98D8C8]' : 'bg-[#FF9AA2]'
                         }">
                             <span>${available ? 'IN' : 'OUT'}</span>
@@ -352,7 +356,7 @@
                             <span class="text-[8px] uppercase tracking-widest font-900 px-2 py-0.5 rounded border font-mono ${tagDesignBadge}">
                                 ${titleLower.includes('physics') || titleLower.includes('algorithm') ? 'Boutique Collection' : 'Standard Catalog'}
                             </span>
-                            <h3 class="font-800 text-slate-900 text-xs mt-3 mb-1 group-hover:text-[#4A90E2] transition-colors duration-300 display-font leading-snug pr-5">${book.title}</h3>
+                            <h3 class="font-800 text-slate-900 text-xs mt-3 mb-1 group-hover:text-[#4A90E2] transition-colors duration-200 display-font leading-snug pr-5 tracking-tight">${book.title}</h3>
                             <p class="text-xs text-slate-400 font-medium">By ${book.author}</p>
                         </div>
                         
@@ -371,7 +375,7 @@
         }
 
         // =========================================================================
-        // ⚡ TRANSITION MODULE SELECTION FILTERS & EVENTS
+        // ⚡ ACTIVE FILTER RESPONSES
         // =========================================================================
         function filterRadarZone(zone) {
             globalCurrentZoneFilter = zone;
