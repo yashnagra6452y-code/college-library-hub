@@ -56,29 +56,33 @@
         
         <div class="lg:col-span-5 space-y-6">
             <div class="bg-[#F7F4EF] border border-[#E6DFD3] p-6 rounded-3xl aesthetic-shadow relative overflow-hidden">
-                <div class="mb-6">
-                    <h2 class="text-lg font-800 text-slate-900 flex items-center gap-2">
-                        <i class="fa-solid fa-compass text-pink-400"></i> Reading Room Blueprint
-                    </h2>
-                    <p class="text-xs text-slate-500 mt-0.5">Real-time room architecture—pick an open spot</p>
+                <div class="mb-6 flex items-start gap-3">
+                    <div class="mt-1 text-pink-400"><i class="fa-solid fa-compass text-xl"></i></div>
+                    <div>
+                        <h2 class="text-lg font-800 text-slate-900">Reading Room Blueprint</h2>
+                        <p class="text-xs text-slate-500 mt-0.5">Real-time room architecture—pick an open spot</p>
+                    </div>
                 </div>
 
-                <div class="border-2 border-dashed border-[#E6DFD3] rounded-2xl p-8 bg-[#FDFBF7]/60 flex flex-col items-center justify-center relative min-h-[380px]">
+                <div class="border-2 border-dashed border-[#E6DFD3] rounded-2xl p-4 bg-[#FDFBF7]/60 flex items-center justify-center relative min-h-[400px] w-full select-none">
                     <div class="absolute top-0 left-1/4 right-1/4 h-2 bg-[#ECEFF1] rounded-b-md flex items-center justify-center">
                         <span class="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Main Glass Arches</span>
                     </div>
                     
-                    <div id="library-table" class="wood-grain w-44 h-68 rounded-3xl relative flex flex-col items-center justify-center z-10 transition-all duration-500">
-                        <div class="absolute inset-y-0 w-0.5 bg-[#DDBB97]/60 left-1/2 -translate-x-1/2"></div>
-                        <div class="absolute inset-x-0 h-0.5 bg-[#DDBB97]/60 top-1/2 -translate-y-1/2"></div>
+                    <div id="library-table" class="wood-grain w-48 h-72 rounded-3xl relative transition-all duration-500 ease-out flex items-center justify-center">
                         
-                        <div class="text-[9px] font-800 text-[#8B6B4F] uppercase tracking-widest bg-[#FDFBF7]/90 px-3 py-1.5 rounded-full border border-[#DDBB97]/40 z-10 shadow-sm">Oak Wood Bay</div>
+                        <div class="absolute inset-y-0 w-[2px] bg-[#DDBB97]/50 left-1/2 -translate-x-1/2 pointer-events-none"></div>
+                        <div class="absolute inset-x-0 h-[2px] bg-[#DDBB97]/50 top-1/2 -translate-y-1/2 pointer-events-none"></div>
                         
-                        <div id="visual-chairs-mesh"></div>
+                        <div class="text-[9px] font-800 text-[#8B6B4F] uppercase tracking-widest bg-[#FDFBF7]/95 px-3 py-1.5 rounded-full border border-[#DDBB97]/40 z-10 shadow-sm font-mono">
+                            Oak Wood Bay
+                        </div>
+                        
+                        <div id="visual-chairs-mesh" class="absolute inset-0 w-full h-full pointer-events-none"></div>
                     </div>
 
-                    <div class="absolute bottom-4 right-4 flex items-center gap-1 text-slate-400 font-mono text-[10px]">
-                        <i class="fa-solid fa-seedling text-emerald-400 text-base animate-bounce"></i> Cozy Corner
+                    <div class="absolute bottom-4 right-4 flex items-center gap-1 text-slate-400 font-mono text-[9px]">
+                        <i class="fa-solid fa-seedling text-emerald-400 text-sm animate-bounce"></i> Cozy Corner
                     </div>
                 </div>
             </div>
@@ -87,16 +91,17 @@
         <div class="lg:col-span-7 space-y-6">
             <div class="bg-[#F7F4EF] border border-[#E6DFD3] p-6 rounded-3xl aesthetic-shadow">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-                    <div>
-                        <h2 class="text-lg font-800 text-slate-900 flex items-center gap-2">
-                            <i class="fa-solid fa-wand-magic-sparkles text-sky-400"></i> Discover Materials
-                        </h2>
-                        <p class="text-xs text-slate-500 mt-0.5">Type to filter through boutique knowledge cards</p>
+                    <div class="flex gap-3">
+                        <div class="mt-1 text-sky-400"><i class="fa-solid fa-wand-magic-sparkles text-xl"></i></div>
+                        <div>
+                            <h2 class="text-lg font-800 text-slate-900">Discover Materials</h2>
+                            <p class="text-xs text-slate-500 mt-0.5">Type to filter through boutique knowledge cards</p>
+                        </div>
                     </div>
 
                     <div class="relative w-full sm:w-72">
                         <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Search titles, authors, rows..." class="w-full pl-10 pr-4 py-3 bg-[#FDFBF7] border border-[#E6DFD3] rounded-2xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-sky-400 focus:ring-4 focus:ring-sky-100 transition-all font-medium shadow-inner">
+                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Search titles, authors, shelves..." class="w-full pl-10 pr-4 py-3 bg-[#FDFBF7] border border-[#E6DFD3] rounded-2xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-sky-400 focus:ring-4 focus:ring-sky-100 transition-all font-medium shadow-inner">
                     </div>
                 </div>
 
@@ -115,6 +120,9 @@
             fetchLiveBooksCatalog();
         });
 
+        // =========================================================================
+        // 🪑 STABILIZED AESTHETIC VISUAL SEAT MAP MESH
+        // =========================================================================
         async function fetchLiveSeatsMesh() {
             try {
                 const response = await fetch(`${BACKEND_URL}/api/seats`);
@@ -122,12 +130,13 @@
                 const container = document.getElementById('visual-chairs-mesh');
                 container.innerHTML = '';
 
+                // Map absolute spatial spacing offsets to sit precisely on the stabilized table boundaries
                 const layoutCoordinates = [
-                    { top: '10%', left: '-55px' },   
-                    { top: '40%', left: '-55px' },   
-                    { top: '70%', left: '-55px' },   
-                    { top: '25%', right: '-55px' },  
-                    { top: '55%', right: '-55px' }   
+                    { top: '12%', left: '-34px' },   // Node 1 (Left Side Top)
+                    { top: '42%', left: '-34px' },   // Node 2 (Left Side Mid)
+                    { top: '72%', left: '-34px' },   // Node 3 (Left Side Bottom)
+                    { top: '25%', right: '-34px' },  // Node 4 (Right Side Top)
+                    { top: '55%', right: '-34px' }   // Node 5 (Right Side Bottom)
                 ];
 
                 seats.forEach((seat, idx) => {
@@ -135,12 +144,13 @@
                     const position = layoutCoordinates[idx] || { top: '0px', left: '0px' };
                     
                     const chairWrapper = document.createElement('div');
-                    chairWrapper.className = "absolute w-12 h-12 flex items-center justify-center transition-all duration-500 ease-out z-20";
+                    chairWrapper.className = "absolute w-12 h-12 flex items-center justify-center transition-all duration-500 ease-out z-20 pointer-events-auto";
                     
                     if (position.left) chairWrapper.style.left = position.left;
                     if (position.right) chairWrapper.style.right = position.right;
                     chairWrapper.style.top = position.top;
 
+                    // Creative Layout state: Occupied shifts out slightly and turns pink, open pulls neat and sky-blue
                     chairWrapper.innerHTML = `
                         <div class="w-10 h-10 rounded-xl border-2 flex flex-col items-center justify-center transition-all duration-500 shadow-md ${
                             occupied 
@@ -153,9 +163,12 @@
                     `;
                     container.appendChild(chairWrapper);
                 });
-            } catch (error) { console.error(error); }
+            } catch (error) { console.error("Visual seat map rendering break:", error); }
         }
 
+        // =========================================================================
+        // 📚 INTERACTIVE BOOK DECK Discovery Hub
+        // =========================================================================
         async function fetchLiveBooksCatalog(searchQuery = '') {
             try {
                 const url = searchQuery 
@@ -183,8 +196,8 @@
                     const available = book.is_available;
                     const card = document.createElement('div');
                     
-                    // Added extra internal padding (pt-7) to separate text from the absolute ribbon tag
-                    card.className = "bg-[#FDFBF7] border border-[#E6DFD3] pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between hover:border-[#CBD5E1] hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 group relative overflow-hidden bg-gradient-to-b from-[#FDFBF7] to-[#F7F4EF]/30";
+                    // Premium bookstore card style structure featuring hover lifts and subtle gradients
+                    card.className = "bg-[#FDFBF7] border border-[#E6DFD3] pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between hover:border-[#CBD5E1] hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 group relative overflow-hidden bg-gradient-to-b from-[#FDFBF7] to-[#F7F4EF]/30 aesthetic-shadow";
                     
                     card.innerHTML = `
                         <div class="absolute top-0 right-4 w-8 h-9 flex items-center justify-center text-[8px] font-900 tracking-wider uppercase text-white rounded-b-md shadow-sm transition-all duration-300 group-hover:h-10 ${
@@ -195,12 +208,12 @@
 
                         <div>
                             <span class="text-[8px] uppercase tracking-widest font-800 text-slate-400 font-mono bg-[#ECEFF1] px-2 py-0.5 rounded">Catalog Asset</span>
-                            <h3 class="font-800 text-slate-900 text-sm mt-2.5 mb-1 group-hover:text-[#4A90E2] transition-colors leading-snug pr-6">${book.title}</h3>
+                            <h3 class="font-800 text-slate-900 text-sm mt-2.5 mb-1 group-hover:text-[#4A90E2] transition-colors leading-snug pr-6 tracking-tight">${book.title}</h3>
                             <p class="text-xs text-slate-500 font-medium">By ${book.author}</p>
                         </div>
                         
                         <div class="flex items-center justify-between pt-4 border-t border-[#F5F1E9] mt-5">
-                            <span class="text-[9px] bg-[#FDFBF7] border border-[#E6DFD3] font-bold rounded-xl px-3 py-1 text-slate-600 flex items-center gap-1.5">
+                            <span class="text-[9px] bg-[#FDFBF7] border border-[#E6DFD3] font-bold rounded-xl px-3 py-1 text-slate-600 flex items-center gap-1.5 shadow-inner">
                                 <i class="fa-solid fa-map-pin text-[#4A90E2]/60"></i> ${book.shelf_location}
                             </span>
                             <span class="text-[10px] font-800 tracking-tight ${available ? 'text-[#3AA487]' : 'text-slate-400'}">
@@ -210,7 +223,7 @@
                     `;
                     container.appendChild(card);
                 });
-            } catch (error) { console.error(error); }
+            } catch (error) { console.error("Catalog loop execution failure:", error); }
         }
 
         let searchTimeout;
@@ -222,6 +235,9 @@
             }, 250);
         }
 
+        // =========================================================================
+        // 🔌 BROADCAST EVENT MATRIX SOCKET CHANNELS
+        // =========================================================================
         socket.on('seatUpdated', () => { fetchLiveSeatsMesh(); });
         socket.on('bookUpdated', () => {
             const currentQuery = document.getElementById('catalog-search').value.trim();
