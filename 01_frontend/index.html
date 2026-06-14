@@ -37,7 +37,6 @@
             background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px, 24px 24px;
         }
 
-        /* Applying the high-end architectural fractal grain overlay */
         .aurora-bg-mesh::before {
             content: "";
             position: absolute;
@@ -228,18 +227,14 @@
         });
 
         // =========================================================================
-        // 🛰️ 2026 PREMIUM PHYSICS ENGINE MECHANICS (GSAP ENGINE ROUTINES)
+        // 🛰️ GSAP RUNTIME ENGINE PHYSICS
         // =========================================================================
         function initializeGSAPViewportCore() {
-            // Smoothly reveal view context after layouts settle to protect from layout flashes
             gsap.to("#master-body-viewport", { opacity: 1, duration: 0.6, ease: "power2.out" });
-
-            // Stagger entry physics for structural panels
             gsap.from("#gsap-hero-panel", { y: -30, opacity: 0, duration: 0.8, ease: "power3.out" });
             gsap.from(".gsap-panel-left", { x: -40, opacity: 0, duration: 0.9, ease: "power4.out", delay: 0.1 });
             gsap.from(".gsap-panel-right", { x: 40, opacity: 0, duration: 0.9, ease: "power4.out", delay: 0.1 });
 
-            // Premium Magnetic Button tracking initialization mapping
             const magneticBtn = document.getElementById("magic-allocate-btn");
             const container = document.getElementById("magnetic-button-container");
 
@@ -248,13 +243,9 @@
                     const rect = container.getBoundingClientRect();
                     const x = e.clientX - rect.left - rect.width / 2;
                     const y = e.clientY - rect.top - rect.height / 2;
-
-                    // Pull button slightly toward user cursor vectors
                     gsap.to(magneticBtn, { x: x * 0.45, y: y * 0.45, duration: 0.3, ease: "power2.out" });
                 });
-
                 container.addEventListener("mouseleave", () => {
-                    // Elastic snapback curve sequence
                     gsap.to(magneticBtn, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
                 });
             }
@@ -277,8 +268,25 @@
         }
 
         // =========================================================================
-        // 🪑 MODULAR BLUEPRINT MATRIX GRID ENGINE
+        // 🪑 MODULAR BLUEPRINT MATRIX GRID ENGINE (WITH TIME RELATIVE LOGIC)
         // =========================================================================
+        function formatRelativeSessionTime(timestampString) {
+            if (!timestampString) return "Available";
+            
+            const checkedInTime = new Date(timestampString);
+            const currentTime = new Date();
+            const differenceInMs = currentTime - checkedInTime;
+            
+            const totalMinutes = Math.floor(differenceInMs / 1000 / 60);
+            
+            if (totalMinutes < 1) return "Just checked in";
+            if (totalMinutes < 60) return `Busy ${totalMinutes}m`;
+            
+            const hours = Math.floor(totalMinutes / 60);
+            const looseMinutes = totalMinutes % 60;
+            return looseMinutes > 0 ? `Busy ${hours}h ${looseMinutes}m` : `Busy ${hours}h`;
+        }
+
         function renderModularZoneGrid(seats) {
             const mainContainer = document.getElementById('library-bays-container');
             mainContainer.innerHTML = '';
@@ -317,14 +325,24 @@
                     const position = relativeChairCoordinates[idx];
 
                     const chairDiv = document.createElement('div');
-                    chairDiv.className = "absolute w-10 h-10 flex items-center justify-center transition-transform duration-300 z-20";
+                    chairDiv.className = "absolute w-10 h-10 flex items-center justify-center transition-transform duration-300 z-20 group/chair";
                     chairDiv.id = `chair-node-anchor-${seat.seat_number}`;
                     
                     if (position.left) chairDiv.style.left = position.left;
                     if (position.right) chairDiv.style.right = position.right;
                     chairDiv.style.top = position.top;
 
+                    // Compute dynamic relative session text string 
+                    const sessionTrackingBadge = formatRelativeSessionTime(seat.occupied_since);
+
                     chairDiv.innerHTML = `
+                        <div class="absolute bottom-full mb-2 hidden group-hover/chair:flex flex-col items-center z-30 pointer-events-none animate-fade-in whitespace-nowrap">
+                            <span class="bg-slate-900 text-white text-[9px] font-bold px-2 py-1 rounded-md shadow-lg tracking-wide">
+                                ${sessionTrackingBadge}
+                            </span>
+                            <div class="w-1.5 h-1.5 bg-slate-900 rotate-45 -mt-1"></div>
+                        </div>
+
                         <div class="w-9 h-9 rounded-xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm transform hover:scale-110 cursor-pointer ${
                             occupied 
                             ? 'bg-[#FFD2E2] border-[#FFAEC9] text-[#D84A75] shadow-pink-100/60' 
@@ -339,12 +357,11 @@
                 mainContainer.appendChild(tableWrapper);
             }
             
-            // Re-apply smooth upward fade to dynamically rendered items
             gsap.from("#library-bays-container > div", { opacity: 0, y: 15, duration: 0.4, ease: "power2.out", force3D: true, stagger: 0.05 });
         }
 
         // =========================================================================
-        // 📚 AUTO-TINT PASTEL BOOKS INVENTORY ENGINE
+        // 📚 Discovery ASSET CATALOG ENGINE
         // =========================================================================
         async function fetchLiveBooksCatalog(searchQuery = '') {
             try {
@@ -376,10 +393,10 @@
                     let tagDesignBadge = "bg-[#ECEFF1] border border-slate-200 text-slate-600";
                     
                     if (titleLower.includes('algorithm') || titleLower.includes('python')) {
-                        themeGradient = "from-white via-white to-purple-50/40 hover:to-purple-100/20";
+                        themeGradient = "from-white via-white to-purple-50/40 group-hover:to-purple-100/20";
                         tagDesignBadge = "bg-purple-50 border border-purple-100 text-purple-600";
                     } else if (titleLower.includes('physics')) {
-                        themeGradient = "from-white via-white to-sky-50/40 hover:to-sky-100/20";
+                        themeGradient = "from-white via-white to-sky-50/40 group-hover:to-sky-100/20";
                         tagDesignBadge = "bg-sky-50 border border-sky-100 text-[#3A78C4]";
                     }
 
@@ -413,13 +430,12 @@
                     container.appendChild(card);
                 });
 
-                // GSAP smooth staggering reveal slide for dynamic books
                 gsap.from("#student-books-container > div", { opacity: 0, y: 20, duration: 0.5, cubicBezier: "0.16, 1, 0.3, 1", stagger: 0.06 });
             } catch (error) { console.error(error); }
         }
 
         // =========================================================================
-        // ⚡ MATRIX INTERACT CHANNELS ROUTINES
+        // ⚡ MATRIX NAVIGATION MAP LAYER ROUTINES
         // =========================================================================
         function filterRadarZone(zone) {
             globalCurrentZoneFilter = zone;
@@ -482,7 +498,16 @@
             }
         }
 
-        socket.on('seatUpdated', () => { fetchSystemRadarData(); });
+        // Catch full returned server column parameters inside dynamic matrix streams
+        socket.on('seatUpdated', (updatedSeat) => {
+            const seatIndex = systemSeatsArray.findIndex(s => s.seat_number === updatedSeat.seat_number);
+            if (seatIndex !== -1) {
+                systemSeatsArray[seatIndex] = updatedSeat;
+                calculateHUDAnalytics(systemSeatsArray);
+                renderModularZoneGrid(systemSeatsArray);
+            }
+        });
+        
         socket.on('bookUpdated', () => {
             const currentQuery = document.getElementById('catalog-search').value.trim();
             fetchLiveBooksCatalog(currentQuery);
