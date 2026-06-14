@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Library Hub | Immersive Student Gateway</title>
+    <title>Library Matrix Hub | Immersive Student Gateway</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
         
@@ -21,76 +22,76 @@
             font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* 🌌 KINETIC AURORA RADIAL MESH BACKGROUND */
+        /* 🌌 KINETIC RADIAL GLOW MATRIX & SHADER MAP OVERLAY */
         .aurora-bg-mesh {
             position: fixed;
             inset: 0;
             z-index: 1;
             pointer-events: none;
             background-image: 
-                radial-gradient(at 15% 20%, rgba(205, 238, 255, 0.65) 0, transparent 45%), 
-                radial-gradient(at 90% 15%, rgba(255, 210, 226, 0.55) 0, transparent 45%),
-                radial-gradient(at 50% 80%, rgba(243, 228, 255, 0.45) 0, transparent 50%),
+                radial-gradient(at 15% 20%, rgba(205, 238, 255, 0.7) 0, transparent 45%), 
+                radial-gradient(at 90% 15%, rgba(255, 210, 226, 0.6) 0, transparent 45%),
+                radial-gradient(at 50% 80%, rgba(243, 228, 255, 0.5) 0, transparent 50%),
                 linear-gradient(rgba(230, 223, 211, 0.35) 1px, transparent 1px), 
                 linear-gradient(90deg, rgba(230, 223, 211, 0.35) 1px, transparent 1px);
             background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px, 24px 24px;
         }
 
-        /* 🧊 HIGH-CONTRAST GLASSMORPHIC CONTAINER LAYERS */
+        /* Applying the high-end architectural fractal grain overlay */
+        .aurora-bg-mesh::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            mix-blend-mode: overlay;
+        }
+
+        /* 🧊 GLASSMORPHIC FRAME SURFACES */
         .premium-glass-shell {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(24px) saturate(120%);
             -webkit-backdrop-filter: blur(24px) saturate(120%);
             border: 1px solid rgba(255, 255, 255, 0.7);
             box-shadow: 
-                0px 30px 60px -15px rgba(200, 185, 165, 0.25),
+                0px 30px 60px -15px rgba(200, 185, 165, 0.22),
                 0px 1px 4px rgba(0, 0, 0, 0.01);
         }
 
-        /* 🗂️ TACTILE 3D HOVER INTERACTION CARDS */
+        /* 🗂️ TACTILE HOVER INTERACTION CARDS */
         .premium-glass-card {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.7);
-            box-shadow: 0 12px 28px -8px rgba(220, 210, 190, 0.2);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .premium-glass-card:hover {
-            transform: translateY(-8px) scale(1.015);
-            background: rgba(255, 255, 255, 0.96);
-            border-color: rgba(58, 120, 196, 0.4);
-            box-shadow: 0 28px 40px -10px rgba(175, 190, 215, 0.5);
+            box-shadow: 0 12px 28px -8px rgba(220, 210, 190, 0.18);
+            transition: border-color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
         }
 
-        /* 🌳 SCANDI MINIMALIST OAK WORKBENCHES */
+        /* 🌳 COZY SCANDINAVIAN OAK WORKBENCHES */
         .scandi-oak-bench {
             background: linear-gradient(135deg, #F8EFE2 0%, #EFE1CD 100%);
             border: 2px solid #DAD0BE;
             box-shadow: 
                 inset 0 2px 4px rgba(255, 255, 255, 0.7),
                 0 16px 36px -10px rgba(185, 170, 150, 0.35);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .scandi-oak-bench:hover {
-            transform: scale(1.03);
-            box-shadow: 0 24px 48px -12px rgba(165, 150, 130, 0.45);
+            transition: box-shadow 0.4s ease, transform 0.4s ease;
         }
 
-        /* 🧚‍♀️ AMBIENT FLOATING MECHANICAL MOTIONS */
-        .drift-node-y { animation: floatY 7s infinite ease-in-out; }
-        .drift-node-x { animation: floatX 9s infinite ease-in-out; }
+        /* 🧚‍♀️ AMBIENT DRIFT CODES */
+        .drift-node-y { animation: floatY 8s infinite ease-in-out; }
+        .drift-node-x { animation: floatX 10s infinite ease-in-out; }
 
         @keyframes floatY {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-14px) rotate(4deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
         }
         @keyframes floatX {
             0%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
-            50% { transform: translateX(12px) translateY(-8px) rotate(-3deg); }
+            50% { transform: translateX(10px) translateY(-6px) rotate(-2deg); }
         }
 
-        /* ⚡ LIVE BROADCAST DETECTOR GLOW RING */
+        /* ⚡ REAL-TIME BROADCAST HIGHLIGHT RIPPLE */
         .radar-pulse-active {
             animation: radarGlowRing 2.5s infinite ease-in-out;
         }
@@ -103,13 +104,13 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="min-h-screen text-slate-700 antialiased selection:bg-sky-100 selection:text-sky-900">
+<body class="min-h-screen text-slate-700 antialiased selection:bg-sky-100 selection:text-sky-900 opacity-0" id="master-body-viewport">
 
     <div class="aurora-bg-mesh"></div>
 
-    <div class="hidden lg:block absolute top-[14%] left-[3%] text-sky-300/35 text-6xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-graduation-cap"></i></div>
-    <div class="hidden lg:block absolute top-[58%] left-[43%] text-pink-300/30 text-7xl pointer-events-none select-none drift-node-x z-0"><i class="fa-solid fa-book-bookmark"></i></div>
-    <div class="hidden lg:block absolute top-[25%] right-[3%] text-purple-300/35 text-5xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+    <div class="hidden lg:block absolute top-[14%] left-[3%] text-sky-300/40 text-6xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-graduation-cap"></i></div>
+    <div class="hidden lg:block absolute top-[58%] left-[43%] text-pink-300/35 text-7xl pointer-events-none select-none drift-node-x z-0"><i class="fa-solid fa-book-bookmark"></i></div>
+    <div class="hidden lg:block absolute top-[25%] right-[3%] text-purple-300/40 text-5xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
 
     <nav class="bg-[#FAF8F5]/75 backdrop-blur-xl border-b border-[#E6DFD3] sticky top-0 z-50 px-6 sm:px-8 py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex justify-between items-center relative z-10">
@@ -130,7 +131,7 @@
         </div>
     </nav>
 
-    <header class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10">
+    <header id="gsap-hero-panel" class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10">
         <div class="premium-glass-shell rounded-3xl p-6 sm:p-8 flex flex-col lg:flex-row justify-between items-center gap-8 relative overflow-hidden border border-white/70">
             <div class="absolute -right-16 -top-16 w-44 h-44 bg-gradient-to-br from-pink-200/15 to-purple-200/10 rounded-full blur-3xl pointer-events-none select-none"></div>
             
@@ -149,8 +150,8 @@
                 </div>
             </div>
             
-            <div class="w-full lg:w-auto shrink-0">
-                <button onclick="executeMagicSeatMatch()" class="w-full lg:w-auto bg-gradient-to-r from-[#3A78C4] to-[#4A90E2] hover:from-[#4A90E2] hover:to-[#3A78C4] text-white font-800 text-xs tracking-wider uppercase px-6 py-4 rounded-xl shadow-md shadow-sky-200/40 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-200 active:translate-y-0 active:scale-98 flex items-center justify-center gap-2.5 font-mono">
+            <div class="w-full lg:w-auto shrink-0 flex justify-center items-center" id="magnetic-button-container">
+                <button id="magic-allocate-btn" onclick="executeMagicSeatMatch()" class="w-full lg:w-auto bg-gradient-to-r from-[#3A78C4] to-[#4A90E2] text-white font-800 text-xs tracking-wider uppercase px-6 py-4 rounded-xl shadow-md shadow-sky-200/40 transition-shadow duration-300 flex items-center justify-center gap-2.5 font-mono relative">
                     <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i> Find Me an Open Seat Now
                 </button>
             </div>
@@ -170,7 +171,7 @@
 
     <main class="max-w-7xl mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
         
-        <div id="seats-panel" class="lg:col-span-5 space-y-6 block transition-all duration-500">
+        <div id="seats-panel" class="lg:col-span-5 space-y-6 block transition-all duration-500 gsap-panel-left">
             <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl relative overflow-hidden">
                 <div class="mb-5">
                     <h2 class="text-base font-800 text-slate-900 display-font flex items-center gap-2">
@@ -191,7 +192,7 @@
             </div>
         </div>
 
-        <div id="books-panel" class="lg:col-span-7 space-y-6 hidden lg:block transition-all duration-500">
+        <div id="books-panel" class="lg:col-span-7 space-y-6 hidden lg:block transition-all duration-500 gsap-panel-right">
             <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                     <div>
@@ -223,7 +224,41 @@
         document.addEventListener("DOMContentLoaded", () => {
             fetchSystemRadarData();
             fetchLiveBooksCatalog();
+            initializeGSAPViewportCore();
         });
+
+        // =========================================================================
+        // 🛰️ 2026 PREMIUM PHYSICS ENGINE MECHANICS (GSAP ENGINE ROUTINES)
+        // =========================================================================
+        function initializeGSAPViewportCore() {
+            // Smoothly reveal view context after layouts settle to protect from layout flashes
+            gsap.to("#master-body-viewport", { opacity: 1, duration: 0.6, ease: "power2.out" });
+
+            // Stagger entry physics for structural panels
+            gsap.from("#gsap-hero-panel", { y: -30, opacity: 0, duration: 0.8, ease: "power3.out" });
+            gsap.from(".gsap-panel-left", { x: -40, opacity: 0, duration: 0.9, ease: "power4.out", delay: 0.1 });
+            gsap.from(".gsap-panel-right", { x: 40, opacity: 0, duration: 0.9, ease: "power4.out", delay: 0.1 });
+
+            // Premium Magnetic Button tracking initialization mapping
+            const magneticBtn = document.getElementById("magic-allocate-btn");
+            const container = document.getElementById("magnetic-button-container");
+
+            if (window.innerWidth > 1024 && magneticBtn && container) {
+                container.addEventListener("mousemove", (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+
+                    // Pull button slightly toward user cursor vectors
+                    gsap.to(magneticBtn, { x: x * 0.45, y: y * 0.45, duration: 0.3, ease: "power2.out" });
+                });
+
+                container.addEventListener("mouseleave", () => {
+                    // Elastic snapback curve sequence
+                    gsap.to(magneticBtn, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
+                });
+            }
+        }
 
         async function fetchSystemRadarData() {
             try {
@@ -242,7 +277,7 @@
         }
 
         // =========================================================================
-        // 🪑 STABILIZED SCANDI OAK BLUEPRINT BUILD ENGINE
+        // 🪑 MODULAR BLUEPRINT MATRIX GRID ENGINE
         // =========================================================================
         function renderModularZoneGrid(seats) {
             const mainContainer = document.getElementById('library-bays-container');
@@ -263,7 +298,7 @@
                 if (globalCurrentZoneFilter !== 'all' && globalCurrentZoneFilter !== tableZone) continue;
 
                 const tableWrapper = document.createElement('div');
-                tableWrapper.className = "scandi-oak-bench w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4";
+                tableWrapper.className = "scandi-oak-bench w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4 transform hover:scale-[1.025] hover:shadow-xl duration-500 ease-out";
                 
                 tableWrapper.innerHTML = `
                     <div class="absolute inset-y-0 w-[1px] bg-[#DBCEB4]/50 left-1/2 -translate-x-1/2 pointer-events-none"></div>
@@ -282,7 +317,7 @@
                     const position = relativeChairCoordinates[idx];
 
                     const chairDiv = document.createElement('div');
-                    chairDiv.className = "absolute w-10 h-10 flex items-center justify-center transition-all duration-300 z-20";
+                    chairDiv.className = "absolute w-10 h-10 flex items-center justify-center transition-transform duration-300 z-20";
                     chairDiv.id = `chair-node-anchor-${seat.seat_number}`;
                     
                     if (position.left) chairDiv.style.left = position.left;
@@ -303,10 +338,13 @@
 
                 mainContainer.appendChild(tableWrapper);
             }
+            
+            // Re-apply smooth upward fade to dynamically rendered items
+            gsap.from("#library-bays-container > div", { opacity: 0, y: 15, duration: 0.4, ease: "power2.out", force3D: true, stagger: 0.05 });
         }
 
         // =========================================================================
-        // 📚 AUTOMATED ADAPTIVE PASTEL Discovery CATALOG SYSTEM
+        // 📚 AUTO-TINT PASTEL BOOKS INVENTORY ENGINE
         // =========================================================================
         async function fetchLiveBooksCatalog(searchQuery = '') {
             try {
@@ -338,15 +376,14 @@
                     let tagDesignBadge = "bg-[#ECEFF1] border border-slate-200 text-slate-600";
                     
                     if (titleLower.includes('algorithm') || titleLower.includes('python')) {
-                        themeGradient = "from-white via-white to-purple-50/40 group-hover:to-purple-100/30";
+                        themeGradient = "from-white via-white to-purple-50/40 hover:to-purple-100/20";
                         tagDesignBadge = "bg-purple-50 border border-purple-100 text-purple-600";
                     } else if (titleLower.includes('physics')) {
-                        themeGradient = "from-white via-white to-sky-50/40 group-hover:to-sky-100/30";
+                        themeGradient = "from-white via-white to-sky-50/40 hover:to-sky-100/20";
                         tagDesignBadge = "bg-sky-50 border border-sky-100 text-[#3A78C4]";
                     }
 
                     const card = document.createElement('div');
-                    // Embedded with premium tactile class: .premium-glass-card 
                     card.className = `pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between group relative overflow-hidden bg-gradient-to-b ${themeGradient} premium-glass-card`;
                     
                     card.innerHTML = `
@@ -375,11 +412,14 @@
                     `;
                     container.appendChild(card);
                 });
+
+                // GSAP smooth staggering reveal slide for dynamic books
+                gsap.from("#student-books-container > div", { opacity: 0, y: 20, duration: 0.5, cubicBezier: "0.16, 1, 0.3, 1", stagger: 0.06 });
             } catch (error) { console.error(error); }
         }
 
         // =========================================================================
-        // ⚡ ACTIVE NAVIGATION MATRIX ACTIONS CONTROL CHANNELS
+        // ⚡ MATRIX INTERACT CHANNELS ROUTINES
         // =========================================================================
         function filterRadarZone(zone) {
             globalCurrentZoneFilter = zone;
