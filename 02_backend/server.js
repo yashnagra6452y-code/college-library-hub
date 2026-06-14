@@ -74,6 +74,7 @@ app.post('/api/admin/login', (req, res) => {
 
 app.get('/api/seats', async (req, res) => {
     try {
+        // Explicitly ensuring all columns, including the new timestamp data field, are sorted cleanly
         const result = await pool.query('SELECT * FROM library_seats ORDER BY seat_number ASC');
         res.json(result.rows);
     } catch (error) {
@@ -116,12 +117,42 @@ app.post('/api/seats/toggle', authenticateToken, async (req, res) => {
         }
 
         const newStatus = !currentSeat.rows[0].is_occupied;
-        await pool.query('UPDATE library_seats SET is_occupied = $1 WHERE seat_number = $2', [newStatus, seat_number]);
+        let updateQuery;
+        let updateParams = [newStatus, seat_number];
 
-        io.emit('seatUpdated', { seat_number, is_occupied: newStatus });
-        res.json({ message: `Seat ${seat_number} toggled successfully`, is_occupied: newStatus });
+        if (newStatus) {
+            // 📥 Seat is becoming occupied: Stamp with current time moment
+            updateQuery = `
+                UPDATE library_seats 
+                SET is_occupied = $1, 
+                    occupied_since = CURRENT_TIMESTAMP 
+                WHERE seat_number = $2 
+                RETURNING *;
+            `;
+        } else {
+            // 📤 Seat is being vacated: Wipe timestamp tracking back to NULL
+            updateQuery = `
+                UPDATE library_seats 
+                SET is_occupied = $1, 
+                    occupied_since = NULL 
+                WHERE seat_number = $2 
+                RETURNING *;
+            `;
+        }
+
+        const updateResult = await pool.query(updateQuery, updateParams);
+        const updatedSeatData = updateResult.rows[0];
+
+        // 📡 Broadcast full updated database row object including the new timestamp to the frontend pool
+        io.emit('seatUpdated', updatedSeatData);
+        
+        res.json({ 
+            message: `Seat ${seat_number} toggled successfully`, 
+            is_occupied: updatedSeatData.is_occupied,
+            occupied_since: updatedSeatData.occupied_since
+        });
     } catch (error) {
-        console.error("Error toggling seat:", error);
+        console.error("Error toggling seat matrix cell:", error);
         res.status(500).json({ error: "Internal server error" });
     }
 });
