@@ -7,73 +7,94 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <style>
+        /* Custom elite styles for deep-space UI aesthetics */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+    </style>
 </head>
-<body class="bg-slate-900 font-sans min-h-screen text-slate-100">
+<body class="bg-[#020617] font-sans min-h-screen text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-indigo-200 overflow-x-hidden">
 
-    <div id="login-overlay" class="fixed inset-0 bg-slate-950 z-50 flex items-center justify-center p-4">
-        <div class="bg-slate-800 border border-slate-700 p-8 rounded-2xl w-full max-w-md shadow-2xl text-center">
-            <div class="inline-flex bg-indigo-600/10 p-4 rounded-full text-indigo-400 border border-indigo-500/20 mb-4">
-                <i class="fa-solid fa-shield-halved text-3xl"></i>
+    <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <div id="login-overlay" class="fixed inset-0 bg-[#020617]/95 backdrop-blur-xl z-50 flex items-center justify-center p-4 transition-all duration-500">
+        <div class="glass-panel p-8 rounded-2xl w-full max-w-md shadow-2xl border border-white/5 text-center relative overflow-hidden group">
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none group-hover:bg-indigo-600/30 transition-all duration-500"></div>
+            
+            <div class="inline-flex bg-gradient-to-tr from-indigo-600 to-indigo-400 p-4 rounded-2xl text-white shadow-xl shadow-indigo-500/30 mb-5 border border-indigo-400/20">
+                <i class="fa-solid fa-shield-halved text-2xl"></i>
             </div>
-            <h2 class="text-xl font-black text-white tracking-tight">System Access Restricted</h2>
-            <p class="text-xs text-slate-400 mt-1 mb-6">Enter administrative cryptographic authentication key</p>
+            <h2 class="text-2xl font-black text-white tracking-tight">System Access Restricted</h2>
+            <p class="text-xs text-slate-400 mt-1 mb-6 uppercase tracking-wider font-semibold">Enter Cryptographic Authentication Key</p>
             
             <div class="space-y-4 text-left">
                 <div>
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Master Console Key</label>
+                    <label class="block text-[10px] font-bold text-indigo-400/80 uppercase tracking-widest mb-2">Master Console Key</label>
                     <div class="relative">
-                        <i class="fa-solid fa-key absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-                        <input id="admin-pass-input" type="password" placeholder="••••••••" class="w-full pl-9 pr-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500 transition-all">
+                        <i class="fa-solid fa-lock-open absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs transition-colors"></i>
+                        <input id="admin-pass-input" type="password" placeholder="••••••••" class="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/20 transition-all placeholder:text-slate-600">
                     </div>
                 </div>
-                <button onclick="executeAdminLogin()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-indigo-600/20 mt-2 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-unlock-keyhole"></i> Unlock Terminal Console
+                <button onclick="executeAdminLogin()" class="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-indigo-600/20 hover:shadow-indigo-500/30 mt-2 flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-unlock-keyhole text-sm"></i> Unlock Terminal Console
                 </button>
             </div>
         </div>
     </div>
 
-    <div id="main-terminal-content" class="hidden">
-        <nav class="bg-slate-800 border-b border-slate-700 sticky top-0 z-40 px-6 py-4 shadow-xl">
+    <div id="main-terminal-content" class="hidden opacity-0 transition-opacity duration-500">
+        <nav class="bg-slate-950/40 backdrop-blur-xl border-b border-white/5 sticky top-0 z-40 px-6 py-4 shadow-2xl">
             <div class="max-w-7xl mx-auto flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <div class="bg-indigo-600 p-2.5 rounded-xl text-white shadow-lg shadow-indigo-500/30">
+                <div class="flex items-center gap-3.5">
+                    <div class="bg-gradient-to-tr from-indigo-600 to-cyan-500 p-2.5 rounded-xl text-white shadow-xl shadow-indigo-500/20 border border-white/10">
                         <i class="fa-solid fa-terminal text-xl"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl font-black tracking-tight bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Librarian Management Node</h1>
-                        <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">System Control Terminal</p>
+                        <h1 class="text-xl font-black tracking-tight bg-gradient-to-r from-indigo-400 via-indigo-100 to-cyan-400 bg-clip-text text-transparent">Librarian Core Terminal</h1>
+                        <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5 flex items-center gap-1.5">
+                            <span class="inline-block w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-[0_0_8px_#6366f1]"></span> Master Control Node
+                        </p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4">
-                    <button onclick="terminateTerminalSession()" class="text-xs font-bold text-slate-400 bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-lg hover:bg-rose-950/40 hover:border-rose-500/40 hover:text-rose-400 transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-power-off"></i> Lock Terminal
+                <div>
+                    <button onclick="terminateTerminalSession()" class="text-xs font-bold text-slate-400 bg-slate-900/60 border border-slate-800 px-4 py-2 rounded-xl hover:bg-rose-950/30 hover:border-rose-500/30 hover:text-rose-400 transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-rose-500/5">
+                        <i class="fa-solid fa-power-off text-xs"></i> Lock Terminal
                     </button>
                 </div>
             </div>
         </nav>
 
         <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
             <div class="lg:col-span-1 space-y-6">
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
-                    <div class="mb-4">
-                        <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
-                            <i class="fa-solid fa-toggle-on text-indigo-400"></i> Live Seat Controls
+                <div class="glass-panel p-6 rounded-2xl shadow-2xl relative overflow-hidden">
+                    <div class="mb-5">
+                        <h2 class="text-lg font-black text-white tracking-tight flex items-center gap-2">
+                            <i class="fa-solid fa-circle-nodes text-indigo-400"></i> Live Seat Controls
                         </h2>
-                        <p class="text-xs text-slate-400">Tap nodes to instantly broadcast override toggles</p>
+                        <p class="text-xs text-slate-400 mt-0.5">Broadcast absolute system overrides to the student mesh</p>
                     </div>
-                    <div id="seats-admin-container" class="grid grid-cols-2 gap-4 pt-2">
+                    <div id="seats-admin-container" class="grid grid-cols-2 gap-4 pt-1">
                         </div>
                 </div>
             </div>
 
             <div class="lg:col-span-2 space-y-6">
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl">
+                <div class="glass-panel p-6 rounded-2xl shadow-2xl">
                     <div>
-                        <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
+                        <h2 class="text-lg font-black text-white tracking-tight flex items-center gap-2">
                             <i class="fa-solid fa-sliders text-indigo-400"></i> Catalog Logistics Desk
                         </h2>
-                        <p class="text-xs text-slate-400">Manage digital distribution tokens across the user cluster</p>
+                        <p class="text-xs text-slate-400 mt-0.5">Manage distribution digital tokens and checkout chains</p>
                     </div>
                     <div id="books-admin-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                         </div>
@@ -82,27 +103,32 @@
         </main>
     </div>
 
-    <div id="issue-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center z-50 p-4">
-        <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl w-full max-w-md shadow-2xl">
+    <div id="issue-modal" class="fixed inset-0 bg-[#020617]/80 backdrop-blur-md hidden flex items-center justify-center z-50 p-4 transition-all duration-300">
+        <div class="glass-panel p-6 rounded-2xl w-full max-w-md shadow-2xl relative border border-white/10 animate-in fade-in zoom-in-95 duration-200">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-passport text-indigo-400"></i> Initialize Book Issue
+                <h3 class="text-lg font-black text-white tracking-tight flex items-center gap-2">
+                    <i class="fa-solid fa-passport text-indigo-400"></i> Initialize Material Issue
                 </h3>
-                <button onclick="closeIssueModal()" class="text-slate-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button onclick="closeIssueModal()" class="text-slate-400 hover:text-white bg-slate-900/60 border border-slate-800 p-1.5 rounded-lg transition-colors"><i class="fa-solid fa-xmark text-sm"></i></button>
             </div>
-            <p id="modal-book-title" class="text-sm font-semibold text-indigo-300 bg-indigo-950/40 px-3 py-2 rounded-xl border border-indigo-500/20 mb-4"></p>
+            
+            <p id="modal-book-title" class="text-xs font-bold text-indigo-300 bg-indigo-950/30 px-3 py-2.5 rounded-xl border border-indigo-500/20 mb-5 leading-relaxed flex items-center gap-2">
+                <i class="fa-solid fa-book text-indigo-400/80"></i>
+                <span id="modal-book-title-text"></span>
+            </p>
             <input type="hidden" id="modal-book-id">
+            
             <div class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Student ID Token</label>
-                    <input id="student-id-input" type="text" placeholder="e.g., STU-2026-99" class="w-full px-3 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500 transition-all">
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Student ID Token</label>
+                    <input id="student-id-input" type="text" placeholder="e.g., STU-2026-99" class="w-full px-4 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-slate-700">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">Full Student Legal Name</label>
-                    <input id="student-name-input" type="text" placeholder="e.g., Yash Sharma" class="w-full px-3 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500 transition-all">
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Full Student Legal Name</label>
+                    <input id="student-name-input" type="text" placeholder="e.g., Yash Sharma" class="w-full px-4 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-slate-700">
                 </div>
-                <button onclick="submitIssueRequest()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition mt-2 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-check-to-slot"></i> Authorize Distribution
+                <button onclick="submitIssueRequest()" class="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold py-3 rounded-xl shadow-lg shadow-indigo-600/20 transition-all duration-300 mt-2 flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-check-to-slot text-xs"></i> Authorize Distribution Ledger
                 </button>
             </div>
         </div>
@@ -112,7 +138,6 @@
         const BACKEND_URL = 'https://college-library-hub.onrender.com';
         const socket = io(BACKEND_URL);
 
-        // Check if there is an active valid token session on boot execution
         document.addEventListener("DOMContentLoaded", () => {
             const token = sessionStorage.getItem("admin_token");
             if (token) {
@@ -120,7 +145,6 @@
             }
         });
 
-        // 🔑 EXECUTE SERVER-SIDE SECURE VERIFICATION LOGIN
         async function executeAdminLogin() {
             const password = document.getElementById('admin-pass-input').value;
             try {
@@ -133,7 +157,6 @@
                 const data = await response.json();
                 if (!response.ok) throw new Error(data.error || "Login Rejected.");
 
-                // Save secure token across session lifetime tracks
                 sessionStorage.setItem("admin_token", data.token);
                 initializeProtectedTerminal();
             } catch (error) {
@@ -142,8 +165,13 @@
         }
 
         function initializeProtectedTerminal() {
-            document.getElementById('login-overlay').classList.add('hidden');
-            document.getElementById('main-terminal-content').classList.remove('hidden');
+            document.getElementById('login-overlay').classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => document.getElementById('login-overlay').classList.add('hidden'), 500);
+            
+            const mainContent = document.getElementById('main-terminal-content');
+            mainContent.classList.remove('hidden');
+            setTimeout(() => mainContent.classList.add('opacity-100'), 50);
+            
             loadAdminSeats();
             loadAdminBooks();
         }
@@ -153,7 +181,6 @@
             window.location.reload();
         }
 
-        // Helper function to dynamically append authorization tokens to headers
         function getAuthHeaders() {
             const token = sessionStorage.getItem("admin_token");
             return {
@@ -162,7 +189,6 @@
             };
         }
 
-        // ✅ INJECTED DISCOVERY SEGMENT EXPLICITLY (/api/seats)
         async function loadAdminSeats() {
             try {
                 const response = await fetch(`${BACKEND_URL}/api/seats`);
@@ -174,23 +200,30 @@
                     const active = seat.is_occupied;
                     const button = document.createElement('button');
                     button.onclick = () => toggleSeatStatus(seat.seat_number);
-                    button.className = `p-4 rounded-xl border font-bold text-left transition-all duration-200 flex flex-col justify-between h-24 ${
-                        active ? 'bg-rose-950/30 border-rose-500/40 text-rose-400' : 'bg-emerald-950/30 border-emerald-500/40 text-emerald-400'
+                    
+                    // Hyper-tactile glowing card elements depending on tracking parameters
+                    button.className = `p-4 rounded-xl border font-bold text-left transition-all duration-300 flex flex-col justify-between h-24 relative overflow-hidden group transform hover:-translate-y-0.5 ${
+                        active 
+                        ? 'bg-rose-950/10 border-rose-500/20 text-rose-400 shadow-[0_0_15px_rgba(244,63,94,0.03)] hover:border-rose-500/40 hover:shadow-[0_0_20px_rgba(244,63,94,0.1)]' 
+                        : 'bg-emerald-950/10 border-emerald-500/20 text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.03)] hover:border-emerald-500/40 hover:shadow-[0_0_20px_rgba(16,185,129,0.1)]'
                     }`;
 
                     button.innerHTML = `
-                        <div class="flex justify-between items-center w-full">
-                            <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">Node ${seat.seat_number}</span>
-                            <span class="w-2 h-2 rounded-full ${active ? 'bg-rose-500 animate-pulse' : 'bg-emerald-500'}"></span>
+                        <div class="absolute -right-4 -bottom-4 w-12 h-12 rounded-full blur-xl opacity-20 transition-all duration-300 group-hover:scale-125 ${active ? 'bg-rose-500' : 'bg-emerald-500'}"></div>
+                        <div class="flex justify-between items-center w-full z-10">
+                            <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold font-mono">Node ${seat.seat_number}</span>
+                            <span class="w-1.5 h-1.5 rounded-full ${active ? 'bg-rose-500 shadow-[0_0_8px_#f43f5e]' : 'bg-emerald-500 shadow-[0_0_8px_#10b981]'}"></span>
                         </div>
-                        <div class="text-base font-black tracking-tight flex items-center gap-2 mt-2"><i class="fa-solid ${active ? 'fa-user-lock text-rose-500' : 'fa-door-open text-emerald-500'}"></i>${active ? 'Force Occupied' : 'Force Free'}</div>
+                        <div class="text-xs font-black tracking-tight flex items-center gap-2 mt-2 z-10">
+                            <i class="fa-solid ${active ? 'fa-user-lock text-rose-500/80' : 'fa-lock-open text-emerald-500/80'}"></i>
+                            ${active ? 'Force Free' : 'Force Occupy'}
+                        </div>
                     `;
                     container.appendChild(button);
                 });
             } catch (error) { console.error(error); }
         }
 
-        // ✅ INJECTED DISCOVERY SEGMENT EXPLICITLY (/api/books)
         async function loadAdminBooks() {
             try {
                 const response = await fetch(`${BACKEND_URL}/api/books`);
@@ -201,18 +234,18 @@
                 books.forEach(book => {
                     const avail = book.is_available;
                     const div = document.createElement('div');
-                    div.className = "p-4 bg-slate-800/40 border border-slate-700/60 rounded-xl flex flex-col justify-between gap-4";
+                    div.className = "p-5 bg-slate-900/20 border border-white/[0.03] rounded-xl flex flex-col justify-between gap-4 hover:border-white/[0.08] hover:bg-slate-900/40 transition-all duration-300 group";
                     div.innerHTML = `
                         <div>
-                            <div class="flex justify-between items-start gap-2 mb-1">
-                                <h3 class="font-bold text-slate-100 text-sm leading-snug">${book.title}</h3>
-                                <span class="text-[9px] uppercase font-bold tracking-widest px-2 py-0.5 rounded border ${avail ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-rose-500/10 border-rose-500/20 text-rose-400'}">${avail ? 'Stock' : 'Out'}</span>
+                            <div class="flex justify-between items-start gap-2 mb-1.5">
+                                <h3 class="font-black text-slate-200 text-sm tracking-tight leading-snug group-hover:text-indigo-400 transition-colors">${book.title}</h3>
+                                <span class="text-[8px] uppercase font-black tracking-widest px-2 py-0.5 rounded-md border shrink-0 ${avail ? 'bg-emerald-500/5 border-emerald-500/20 text-emerald-400' : 'bg-rose-500/5 border-rose-500/20 text-rose-400'}">${avail ? 'Stock' : 'Out'}</span>
                             </div>
                             <p class="text-xs text-slate-400 font-medium">By ${book.author}</p>
-                            <span class="inline-block mt-2 text-[10px] bg-slate-900 border border-slate-700 font-bold rounded px-2 py-0.5 text-slate-400"><i class="fa-solid fa-map-pin mr-1 text-slate-500"></i> ${book.shelf_location}</span>
+                            <span class="inline-flex mt-3 text-[9px] bg-slate-950/80 border border-slate-800 font-bold rounded-lg px-2.5 py-1 text-slate-400 items-center gap-1.5"><i class="fa-solid fa-map-pin text-indigo-500/70"></i> ${book.shelf_location}</span>
                         </div>
-                        <button onclick="${avail ? `openIssueModal(${book.id}, '${book.title.replace(/'/g, "\\'")}')` : `returnBookRequest(${book.id})`}" class="w-full py-2 rounded-lg text-xs font-bold border transition-all duration-150 flex items-center justify-center gap-1.5 ${avail ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-slate-700 border-slate-600 text-slate-300'}">
-                            <i class="fa-solid ${avail ? 'fa-paper-plane' : 'fa-rotate-left'}"></i>${avail ? 'Issue Material' : 'Log Return'}
+                        <button onclick="${avail ? `openIssueModal(${book.id}, '${book.title.replace(/'/g, "\\'")}')` : `returnBookRequest(${book.id})`}" class="w-full py-2.5 rounded-xl text-xs font-bold border transition-all duration-200 flex items-center justify-center gap-2 transform active:scale-[0.98] ${avail ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg shadow-indigo-600/10 hover:bg-indigo-500 hover:shadow-indigo-500/20' : 'bg-slate-800/80 border-slate-700/60 text-slate-300 hover:bg-slate-700'}" style="outline:none;">
+                            <i class="fa-solid ${avail ? 'fa-paper-plane text-[10px]' : 'fa-rotate-left'}"></i>${avail ? 'Issue Material' : 'Log Return Check-In'}
                         </button>
                     `;
                     container.appendChild(div);
@@ -233,11 +266,14 @@
 
         function openIssueModal(id, title) {
             document.getElementById('modal-book-id').value = id;
-            document.getElementById('modal-book-title').innerText = title;
-            document.getElementById('issue-modal').classList.remove('hidden');
+            document.getElementById('modal-book-title-text').innerText = title;
+            const modal = document.getElementById('issue-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.add('flex'), 10);
         }
         function closeIssueModal() {
-            document.getElementById('issue-modal').classList.add('hidden');
+            const modal = document.getElementById('issue-modal');
+            modal.classList.add('hidden');
         }
 
         async function submitIssueRequest() {
