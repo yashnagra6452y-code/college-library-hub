@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ASBASJS Memorial College | Library Matrix Portal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -61,11 +61,14 @@
             box-shadow: 0 10px 25px -10px rgba(120, 110, 90, 0.08);
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .premium-glass-card:hover {
-            transform: translateY(-6px) scale(1.015);
-            background: #FFFFFF;
-            border-color: rgba(217, 119, 6, 0.25);
-            box-shadow: 0 24px 36px -8px rgba(180, 150, 100, 0.2);
+        
+        @media (min-width: 1024px) {
+            .premium-glass-card:hover {
+                transform: translateY(-6px) scale(1.015);
+                background: #FFFFFF;
+                border-color: rgba(217, 119, 6, 0.25);
+                box-shadow: 0 24px 36px -8px rgba(180, 150, 100, 0.2);
+            }
         }
 
         /* 🌳 PREMIUM WARM OAK WOOD BENCHES */
@@ -115,58 +118,55 @@
     <div class="hidden lg:block absolute top-[22%] right-[5%] text-pink-400/20 text-5xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-feather-pointed"></i></div>
 
     <!-- CLEAN COZY NAV BAR -->
-    <nav class="bg-[#FDFBF7]/60 backdrop-blur-md border-b border-[#EFEAE2] sticky top-0 z-50 px-6 sm:px-10 py-4">
+    <nav class="bg-[#FDFBF7]/60 backdrop-blur-md border-b border-[#EFEAE2] sticky top-0 z-50 px-4 sm:px-10 py-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center relative z-10">
-            <div class="flex items-center gap-3.5 group cursor-pointer">
-                <div class="bg-amber-50 border border-amber-200/60 w-11 h-11 rounded-2xl flex items-center justify-center text-amber-700 shadow-sm">
-                    <i class="fa-solid fa-seedling text-base transition-transform duration-500 group-hover:rotate-12"></i>
+            <div class="flex items-center gap-3 group cursor-pointer">
+                <div class="bg-amber-50 border border-amber-200/60 w-10 h-10 rounded-2xl flex items-center justify-center text-amber-700 shadow-sm">
+                    <i class="fa-solid fa-seedling text-sm transition-transform duration-500 group-hover:rotate-12"></i>
                 </div>
                 <div>
                     <h1 class="text-xs sm:text-sm font-700 tracking-tight text-slate-800 display-font leading-tight">
-                        ASBASJS Memorial College, Bela (Ropar)
+                        ASBASJS Memorial College, Bela
                     </h1>
                     <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Smart Student Space Portal</p>
                 </div>
             </div>
-            <div class="bg-white border border-[#EFEAE2] px-3.5 py-1.5 rounded-xl flex items-center gap-2.5 shadow-sm">
-                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                <span class="text-[9px] font-700 text-slate-400 uppercase tracking-widest font-mono">Connected</span>
+            <div class="bg-white border border-[#EFEAE2] px-3 py-1.5 rounded-xl flex items-center gap-2 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                <span class="text-[8px] font-700 text-slate-400 uppercase tracking-widest font-mono">Connected</span>
             </div>
         </div>
     </nav>
 
     <!-- 🌟 SANCTUARY GREETING HERO -->
     <header class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10">
-        <div id="gsap-hero-panel" class="premium-glass-shell rounded-[2rem] p-6 sm:p-10 flex flex-col md:flex-row justify-between items-center gap-8 border border-white">
+        <div id="gsap-hero-panel" class="premium-glass-shell rounded-[2rem] p-6 sm:p-8 flex flex-col md:flex-row justify-between items-center gap-6 border border-white">
             
-            <div class="flex flex-col sm:flex-row items-center gap-6 w-full md:w-auto text-center sm:text-left relative z-10">
-                <div class="w-20 h-20 bg-amber-50 rounded-2xl flex items-center justify-center border border-amber-100 shrink-0 shadow-inner">
-                    <i class="fa-solid fa-couch text-xl text-amber-700"></i>
+            <div class="flex flex-col sm:flex-row items-center gap-5 w-full md:w-auto text-center sm:text-left relative z-10">
+                <div class="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center border border-amber-100 shrink-0 shadow-inner">
+                    <i class="fa-solid fa-couch text-lg text-amber-700"></i>
                 </div>
                 <div>
-                    <h2 class="text-xl sm:text-2xl font-800 text-slate-800 display-font tracking-tight leading-tight">Welcome to Sanctuary Desk</h2>
+                    <h2 class="text-lg sm:text-xl font-800 text-slate-800 display-font tracking-tight leading-tight">Welcome to Sanctuary Desk</h2>
                     <p class="text-xs text-slate-400 mt-1 font-medium">Take a deep breath. Find your zone, grab your books, and study completely stress-free.</p>
                     
-                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 mt-4 text-[10px] font-mono font-bold">
-                        <!-- CHILL STUDENT FRIENDLY CARD LABELS -->
+                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-3 text-[10px] font-mono font-bold">
                         <span id="hud-total-busy" class="bg-rose-50 border border-rose-100 text-rose-600 px-3 py-1 rounded-xl shadow-sm">0 Seats Taken</span>
                         <span id="hud-total-open" class="bg-emerald-50 border border-emerald-100 text-emerald-600 px-3 py-1 rounded-xl shadow-sm">0 Seats Available</span>
                     </div>
                 </div>
             </div>
             
-            <!-- FIXED: MAGNETIC ALIGNMENT PARENT ELEMENT CONTEXT CONTAINER -->
-            <div class="w-full md:w-auto h-24 shrink-0 flex justify-center items-center relative z-10" id="magnetic-button-container">
-                <button id="magic-allocate-btn" onclick="executeMagicSeatMatch()" class="bg-slate-800 hover:bg-slate-900 text-amber-100 font-700 text-xs tracking-wider uppercase px-6 py-4 rounded-xl shadow-md flex items-center justify-center gap-2.5 font-mono pointer-events-auto">
+            <div class="w-full md:w-auto shrink-0 flex justify-center items-center relative z-10" id="magnetic-button-container">
+                <button id="magic-allocate-btn" onclick="executeMagicSeatMatch()" class="w-full md:w-auto bg-slate-800 hover:bg-slate-900 text-amber-100 font-700 text-xs tracking-wider uppercase px-5 py-3.5 rounded-xl shadow-md flex items-center justify-center gap-2 font-mono">
                     <i class="fa-solid fa-compass text-[10px]"></i> Quick Match a Desk
                 </button>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- 📊 LOAD RATIOS & DETAILS LINK -->
+    <!-- 📊 LOAD RATIOS -->
     <section class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10 gsap-hero-panel grid grid-cols-1 md:grid-cols-12 gap-6">
-        <!-- Chart Block -->
         <div class="premium-glass-shell rounded-3xl p-5 md:col-span-8 border border-white">
             <div class="mb-3 flex items-center gap-2 text-slate-400">
                 <i class="fa-solid fa-chart-bar text-xs"></i>
@@ -177,7 +177,6 @@
             </div>
         </div>
 
-        <!-- Meta Info Block -->
         <div class="premium-glass-shell rounded-3xl p-5 md:col-span-4 border border-white flex flex-col justify-between">
             <div>
                 <span class="text-[9px] uppercase tracking-widest font-700 text-amber-700 font-mono">System Intel</span>
@@ -186,7 +185,7 @@
                 </p>
             </div>
             <div class="mt-4">
-                <a href="https://belacollege.org/" target="_blank" class="w-full bg-white hover:bg-amber-50/40 border border-[#EFEAE2] text-center text-[10px] font-mono font-bold py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 text-slate-500 hover:text-amber-800">
+                <a href="https://belacollege.org/" target="_blank" class="w-full bg-white hover:bg-amber-50/40 border border-[#EFEAE2] text-center text-[10px] font-mono font-bold py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 text-slate-500">
                     Visit Main Campus Site <i class="fa-solid fa-arrow-up-right-from-square text-[8px] opacity-60"></i>
                 </a>
             </div>
@@ -194,45 +193,45 @@
     </section>
 
     <!-- MOBILE NAVIGATION BUTTONS -->
-    <div class="flex justify-center p-4 lg:hidden sticky top-[73px] z-40 backdrop-blur-md">
-        <div class="bg-white/80 border border-[#EFEAE2] p-1 rounded-2xl flex gap-1 shadow-sm">
-            <button id="toggle-seats-btn" onclick="switchMobileTab('seats')" class="px-5 py-2.5 rounded-xl text-xs font-700 transition-all flex items-center gap-2 bg-slate-800 text-amber-50">
+    <div class="flex justify-center p-4 lg:hidden sticky top-[69px] z-40 backdrop-blur-md">
+        <div class="bg-white/90 border border-[#EFEAE2] p-1 rounded-2xl flex gap-1 shadow-sm">
+            <button id="toggle-seats-btn" onclick="switchMobileTab('seats')" class="px-5 py-2.5 rounded-xl text-xs font-700 transition-all bg-slate-800 text-amber-50">
                 Space Map
             </button>
-            <button id="toggle-books-btn" onclick="switchMobileTab('books')" class="px-5 py-2.5 rounded-xl text-xs font-700 transition-all flex items-center gap-2 text-slate-400 hover:text-slate-700">
+            <button id="toggle-books-btn" onclick="switchMobileTab('books')" class="px-5 py-2.5 rounded-xl text-xs font-700 transition-all text-slate-400 hover:text-slate-700">
                 Catalog Desk
             </button>
         </div>
     </div>
 
     <!-- MAIN MATRIX CONTAINER -->
-    <main class="max-w-7xl mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
         
         <!-- SEAT CONTROL SYSTEM -->
         <div id="seats-panel" class="lg:col-span-5 space-y-6 block transition-all duration-500 gsap-panel-left">
-            <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl">
-                <div class="mb-5">
+            <div class="premium-glass-shell p-5 rounded-3xl">
+                <div class="mb-4">
                     <h2 class="text-sm font-700 text-slate-800 uppercase tracking-wider font-mono flex items-center gap-2">
                         <i class="fa-solid fa-map-location-dot text-amber-600"></i> Desks Blueprint
                     </h2>
                 </div>
 
-                <div class="bg-white/60 border border-[#EFEAE2] p-1 rounded-xl flex gap-1 mb-6 overflow-x-auto no-scrollbar">
+                <div class="bg-white/60 border border-[#EFEAE2] p-1 rounded-xl flex gap-1 mb-5 overflow-x-auto no-scrollbar">
                     <button id="zone-btn-all" onclick="filterRadarZone('all')" class="px-4 py-2 rounded-lg text-xs font-700 transition-all whitespace-nowrap bg-slate-800 text-white">All Tables</button>
                     <button id="zone-btn-main" onclick="filterRadarZone('main')" class="px-4 py-2 rounded-lg text-xs font-700 transition-all whitespace-nowrap text-slate-400 hover:text-slate-700">🌳 Oak Center</button>
                     <button id="zone-btn-quiet" onclick="filterRadarZone('quiet')" class="px-4 py-2 rounded-lg text-xs font-700 transition-all whitespace-nowrap text-slate-400 hover:text-slate-700">🤫 Silent Pods</button>
                 </div>
 
-                <div class="border border-[#EFEAE2] rounded-2xl p-6 bg-white/20 max-h-[500px] overflow-y-auto space-y-12 flex flex-col items-center shadow-inner">
-                    <div id="library-bays-container" class="w-full space-y-16 py-4 flex flex-col items-center"></div>
+                <div class="border border-[#EFEAE2] rounded-2xl p-4 bg-white/20 max-h-[480px] overflow-y-auto space-y-12 flex flex-col items-center shadow-inner">
+                    <div id="library-bays-container" class="w-full space-y-16 py-2 flex flex-col items-center"></div>
                 </div>
             </div>
         </div>
 
         <!-- ASSET BOOK CATALOG CONTROL -->
         <div id="books-panel" class="lg:col-span-7 space-y-6 hidden lg:block transition-all duration-500 gsap-panel-right">
-            <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div class="premium-glass-shell p-5 rounded-3xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
                     <div>
                         <h2 class="text-sm font-700 text-slate-800 uppercase tracking-wider font-mono flex items-center gap-2">
                             <i class="fa-solid fa-book text-amber-600"></i> Available Catalog Bank
@@ -245,20 +244,25 @@
                     </div>
                 </div>
 
-                <div id="student-books-container" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div id="student-books-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <!-- Cards populate dynamically here -->
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- CALM SYSTEM FOOTER -->
     <footer class="max-w-7xl mx-auto p-6 text-center text-[10px] font-mono font-bold text-slate-400 tracking-wider relative z-10 border-t border-[#EFEAE2] mt-12">
         SANCTUARY ARCHITECTURE PORTAL | CORE SYSTEM DESIGNED BY YASHPNEET SINGH
     </footer>
 
     <script>
-        const BACKEND_URL = 'https://college-library-hub.onrender.com';
+        // CRITICAL FIX: Ensure https:// secure protocol formatting is structurally locked down
+        let backendString = 'https://college-library-hub.onrender.com';
+        if (window.location.protocol === 'http:' && !window.location.hostname.includes('localhost')) {
+            window.location.href = window.location.href.replace('http:', 'https:');
+        }
+        
+        const BACKEND_URL = backendString;
         const socket = io(BACKEND_URL);
 
         let systemSeatsArray = [];
@@ -272,12 +276,11 @@
         });
 
         function initializeGSAPPhysicsEngine() {
-            gsap.to("#master-body-viewport", { opacity: 1, duration: 0.6, ease: "power2.out" });
-            gsap.from("#gsap-hero-panel", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" });
-            gsap.from(".gsap-panel-left", { x: -30, opacity: 0, duration: 0.8, ease: "power3.out", delay: 0.1 });
-            gsap.from(".gsap-panel-right", { x: 30, opacity: 0, duration: 0.8, ease: "power3.out", delay: 0.1 });
+            gsap.to("#master-body-viewport", { opacity: 1, duration: 0.5, ease: "power2.out" });
+            gsap.from("#gsap-hero-panel", { y: -15, opacity: 0, duration: 0.7, ease: "power3.out" });
+            gsap.from(".gsap-panel-left", { x: -20, opacity: 0, duration: 0.7, ease: "power3.out", delay: 0.05 });
+            gsap.from(".gsap-panel-right", { x: 20, opacity: 0, duration: 0.7, ease: "power3.out", delay: 0.05 });
 
-            // RESTORED: FULLY FUNCTIONAL MAGNETIC PHYSCIS TRACKER BLOCK
             const magneticBtn = document.getElementById("magic-allocate-btn");
             const container = document.getElementById("magnetic-button-container");
 
@@ -289,18 +292,21 @@
                     gsap.to(magneticBtn, { x: x * 0.45, y: y * 0.45, duration: 0.3, ease: "power2.out" });
                 });
                 container.addEventListener("mouseleave", () => {
-                    gsap.to(magneticBtn, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
+                    gsap.to(magneticBtn, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.4)" });
                 });
             }
         }
 
         function triggerLiveMetricsRecompilation(seats) {
+            // CRITICAL FIX: Add full contextual verification protection barriers for mobile engines
+            const canvasElement = document.getElementById('live-occupancy-chart-canvas');
+            if (!canvasElement) return;
+
             const mainCenterSeats = seats.slice(0, 30);
             const silentPodsSeats = seats.slice(30);
 
             const mainCenterOccupied = mainCenterSeats.filter(s => s.is_occupied).length;
             const silentPodsOccupied = silentPodsSeats.filter(s => s.is_occupied).length;
-
             const chartDataValues = [mainCenterOccupied, silentPodsOccupied];
 
             if (liveChartJSInstance) {
@@ -309,7 +315,9 @@
                 return;
             }
 
-            const ctx = document.getElementById('live-occupancy-chart-canvas').getContext('2d');
+            const ctx = canvasElement.getContext('2d');
+            if (!ctx) return;
+
             liveChartJSInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -328,15 +336,12 @@
                     indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
                         x: {
                             grid: { display: false },
                             ticks: { font: { family: 'Plus Jakarta Sans', size: 9, weight: 'bold' }, color: '#94a3b8' },
-                            min: 0,
-                            max: 30
+                            min: 0, max: 30
                         },
                         y: {
                             grid: { display: false },
@@ -364,7 +369,6 @@
             const busyLabel = document.getElementById('hud-total-busy');
             const openLabel = document.getElementById('hud-total-open');
             
-            // CONVERTED TO CHILL LABELS IN RUNTIME LOOP
             if (busyLabel) busyLabel.innerHTML = `<i class="fa-solid fa-couch mr-1.5"></i> ${busy} Seats Taken`;
             if (openLabel) openLabel.innerHTML = `<i class="fa-solid fa-feather mr-1.5"></i> ${open} Seats Available`;
         }
@@ -387,8 +391,8 @@
             const totalTables = Math.ceil(seats.length / seatsPerTable);
 
             const relativeChairCoordinates = [
-                { top: '8%',  left: '-40px' }, { top: '26%', left: '-40px' }, { top: '44%', left: '-40px' }, { top: '62%', left: '-40px' }, { top: '80%', left: '-40px' },
-                { top: '8%',  right: '-40px' }, { top: '26%', right: '-40px' }, { top: '44%', right: '-40px' }, { top: '62%', right: '-40px' }, { top: '80%', right: '-40px' }
+                { top: '8%',  left: '-36px' }, { top: '26%', left: '-36px' }, { top: '44%', left: '-36px' }, { top: '62%', left: '-36px' }, { top: '80%', left: '-36px' },
+                { top: '8%',  right: '-36px' }, { top: '26%', right: '-36px' }, { top: '44%', right: '-36px' }, { top: '62%', right: '-36px' }, { top: '80%', right: '-36px' }
             ];
 
             for (let t = 0; t < totalTables; t++) {
@@ -398,13 +402,13 @@
                 if (globalCurrentZoneFilter !== 'all' && globalCurrentZoneFilter !== tableZone) continue;
 
                 const tableWrapper = document.createElement('div');
-                tableWrapper.className = "scandi-oak-bench w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4";
+                tableWrapper.className = "scandi-oak-bench w-48 sm:w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4";
                 
                 tableWrapper.innerHTML = `
                     <div class="absolute inset-y-0 w-[1px] bg-[#DBCEB4]/40 left-1/2 -translate-x-1/2 pointer-events-none"></div>
                     <div class="absolute inset-x-0 h-[1px] bg-[#DBCEB4]/40 top-1/2 -translate-y-1/2 pointer-events-none"></div>
                     
-                    <div class="text-[9px] font-700 text-[#7C654D] uppercase tracking-wider bg-white/95 px-3.5 py-2 rounded-xl border border-[#D9CDBC]/50 z-10 shadow-sm display-font select-none flex flex-col items-center">
+                    <div class="text-[9px] font-700 text-[#7C654D] uppercase tracking-wider bg-white/95 px-3 py-2 rounded-xl border border-[#D9CDBC]/50 z-10 shadow-sm display-font select-none flex flex-col items-center">
                         <span>Table ${String.fromCharCode(65 + t)}</span>
                         <span class="text-[6px] text-slate-400 font-sans tracking-normal lowercase mt-0.5">${zoneLabelText}</span>
                     </div>
@@ -417,7 +421,7 @@
                     const position = relativeChairCoordinates[idx];
 
                     const chairDiv = document.createElement('div');
-                    chairDiv.className = "absolute w-10 h-10 flex items-center justify-center transition-all duration-300 z-20 group/chair";
+                    chairDiv.className = "absolute w-9 h-9 flex items-center justify-center transition-all duration-300 z-20 group/chair";
                     chairDiv.id = `chair-node-anchor-${seat.seat_number}`;
                     
                     if (position.left) chairDiv.style.left = position.left;
@@ -432,7 +436,7 @@
                             <div class="w-1 h-1 bg-slate-800 rotate-45 -mt-0.5"></div>
                         </div>
 
-                        <div class="w-9 h-9 rounded-xl border flex flex-col items-center justify-center transition-all duration-300 shadow-sm transform hover:scale-110 cursor-pointer ${
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl border flex flex-col items-center justify-center transition-all duration-300 shadow-sm transform hover:scale-110 cursor-pointer ${
                             occupied 
                             ? 'bg-rose-50 border-rose-200 text-rose-500' 
                             : 'bg-emerald-50 border-emerald-200 text-emerald-600 hover:bg-emerald-100'
@@ -465,7 +469,7 @@
                     return;
                 }
 
-                container.className = "grid grid-cols-1 md:grid-cols-2 gap-5";
+                container.className = "grid grid-cols-1 md:grid-cols-2 gap-4";
 
                 books.forEach(book => {
                     const available = book.is_available;
