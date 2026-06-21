@@ -62,10 +62,10 @@
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .premium-glass-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-6px) scale(1.015);
             background: #FFFFFF;
             border-color: rgba(217, 119, 6, 0.25);
-            box-shadow: 0 25px 40px -15px rgba(180, 150, 100, 0.22);
+            box-shadow: 0 24px 36px -8px rgba(180, 150, 100, 0.2);
         }
 
         /* 🌳 PREMIUM WARM OAK WOOD BENCHES */
@@ -136,8 +136,8 @@
     </nav>
 
     <!-- 🌟 SANCTUARY GREETING HERO -->
-    <header id="gsap-hero-panel" class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10">
-        <div class="premium-glass-shell rounded-[2rem] p-6 sm:p-10 flex flex-col md:flex-row justify-between items-center gap-8 border border-white">
+    <header class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10">
+        <div id="gsap-hero-panel" class="premium-glass-shell rounded-[2rem] p-6 sm:p-10 flex flex-col md:flex-row justify-between items-center gap-8 border border-white">
             
             <div class="flex flex-col sm:flex-row items-center gap-6 w-full md:w-auto text-center sm:text-left relative z-10">
                 <div class="w-20 h-20 bg-amber-50 rounded-2xl flex items-center justify-center border border-amber-100 shrink-0 shadow-inner">
@@ -148,19 +148,21 @@
                     <p class="text-xs text-slate-400 mt-1 font-medium">Take a deep breath. Find your zone, grab your books, and study completely stress-free.</p>
                     
                     <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 mt-4 text-[10px] font-mono font-bold">
-                        <span id="hud-total-busy" class="bg-rose-50 border border-rose-100 text-rose-600 px-3 py-1 rounded-xl shadow-sm">0 Nodes Busy</span>
-                        <span id="hud-total-open" class="bg-emerald-50 border border-emerald-100 text-emerald-600 px-3 py-1 rounded-xl shadow-sm">0 Spaces Open</span>
+                        <!-- CHILL STUDENT FRIENDLY CARD LABELS -->
+                        <span id="hud-total-busy" class="bg-rose-50 border border-rose-100 text-rose-600 px-3 py-1 rounded-xl shadow-sm">0 Seats Taken</span>
+                        <span id="hud-total-open" class="bg-emerald-50 border border-emerald-100 text-emerald-600 px-3 py-1 rounded-xl shadow-sm">0 Seats Available</span>
                     </div>
                 </div>
             </div>
             
-            <div class="w-full md:w-auto shrink-0 flex justify-center items-center relative z-10" id="magnetic-button-container">
-                <button id="magic-allocate-btn" onclick="executeMagicSeatMatch()" class="w-full md:w-auto bg-slate-800 hover:bg-slate-900 text-amber-100 font-700 text-xs tracking-wider uppercase px-6 py-4 rounded-xl shadow-md transition-all duration-300 flex items-center justify-center gap-2.5 font-mono">
+            <!-- FIXED: MAGNETIC ALIGNMENT PARENT ELEMENT CONTEXT CONTAINER -->
+            <div class="w-full md:w-auto h-24 shrink-0 flex justify-center items-center relative z-10" id="magnetic-button-container">
+                <button id="magic-allocate-btn" onclick="executeMagicSeatMatch()" class="bg-slate-800 hover:bg-slate-900 text-amber-100 font-700 text-xs tracking-wider uppercase px-6 py-4 rounded-xl shadow-md flex items-center justify-center gap-2.5 font-mono pointer-events-auto">
                     <i class="fa-solid fa-compass text-[10px]"></i> Quick Match a Desk
                 </button>
             </div>
         </div>
-    </header>
+    </section>
 
     <!-- 📊 LOAD RATIOS & DETAILS LINK -->
     <section class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10 gsap-hero-panel grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -274,6 +276,22 @@
             gsap.from("#gsap-hero-panel", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" });
             gsap.from(".gsap-panel-left", { x: -30, opacity: 0, duration: 0.8, ease: "power3.out", delay: 0.1 });
             gsap.from(".gsap-panel-right", { x: 30, opacity: 0, duration: 0.8, ease: "power3.out", delay: 0.1 });
+
+            // RESTORED: FULLY FUNCTIONAL MAGNETIC PHYSCIS TRACKER BLOCK
+            const magneticBtn = document.getElementById("magic-allocate-btn");
+            const container = document.getElementById("magnetic-button-container");
+
+            if (window.innerWidth > 1024 && magneticBtn && container) {
+                container.addEventListener("mousemove", (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    gsap.to(magneticBtn, { x: x * 0.45, y: y * 0.45, duration: 0.3, ease: "power2.out" });
+                });
+                container.addEventListener("mouseleave", () => {
+                    gsap.to(magneticBtn, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
+                });
+            }
         }
 
         function triggerLiveMetricsRecompilation(seats) {
@@ -346,8 +364,9 @@
             const busyLabel = document.getElementById('hud-total-busy');
             const openLabel = document.getElementById('hud-total-open');
             
-            if (busyLabel) busyLabel.innerHTML = `<i class="fa-solid fa-couch mr-1.5"></i> ${busy} Nodes Busy`;
-            if (openLabel) openLabel.innerHTML = `<i class="fa-solid fa-feather mr-1.5"></i> ${open} Spaces Open`;
+            // CONVERTED TO CHILL LABELS IN RUNTIME LOOP
+            if (busyLabel) busyLabel.innerHTML = `<i class="fa-solid fa-couch mr-1.5"></i> ${busy} Seats Taken`;
+            if (openLabel) openLabel.innerHTML = `<i class="fa-solid fa-feather mr-1.5"></i> ${open} Seats Available`;
         }
 
         function formatRelativeSessionTime(timestampString) {
