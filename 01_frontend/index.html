@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASBASJS Memorial College | Library Matrix Portal</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Socket.io Client -->
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <!-- GSAP Premium Animation Engine Core -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Industry Standard ChartJS Core Module Engine -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
@@ -47,76 +52,87 @@
             mix-blend-mode: overlay;
         }
 
-        /* 🧊 HIGH-CONTRAST GLASSMORPHIC CONTAINERS */
+        /* 🧊 PREMIUM INDUSTRY GLASSMORPHIC SHELL */
         .premium-glass-shell {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(24px) saturate(120%);
-            -webkit-backdrop-filter: blur(24px) saturate(120%);
-            border: 1px solid rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(24px) saturate(140%);
+            -webkit-backdrop-filter: blur(24px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 
-                0px 30px 60px -15px rgba(200, 185, 165, 0.22),
-                0px 1px 4px rgba(0, 0, 0, 0.01);
+                0px 40px 80px -15px rgba(195, 180, 155, 0.25),
+                0px 1px 6px rgba(0, 0, 0, 0.01);
         }
 
-        /* 🗂️ TACTILE HOVER INTERACTION CARDS */
+        /* 🗂️ FLUID HOVER CARD INTERACTION ARCHITECTURE */
         .premium-glass-card {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.7);
-            box-shadow: 0 12px 28px -8px rgba(220, 210, 190, 0.18);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 16px 32px -10px rgba(215, 205, 185, 0.25);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .premium-glass-card:hover {
-            transform: translateY(-6px) scale(1.015);
-            background: rgba(255, 255, 255, 0.95);
-            border-color: rgba(58, 120, 196, 0.35);
-            box-shadow: 0 24px 36px -8px rgba(180, 195, 215, 0.45);
+            transform: translateY(-8px) scale(1.015);
+            background: rgba(255, 255, 255, 0.98);
+            border-color: rgba(58, 120, 196, 0.45);
+            box-shadow: 0 32px 48px -12px rgba(170, 190, 215, 0.5);
         }
 
-        /* 🌳 COZY SCANDINAVIAN OAK WORKBENCHES */
+        /* 🌳 PREMIUM SCANDINAVIAN OAK WORKBENCHES */
         .scandi-oak-bench {
-            background: linear-gradient(135deg, #F8EFE2 0%, #EFE1CD 100%);
-            border: 2px solid #DAD0BE;
+            background: linear-gradient(135deg, #FDF7EE 0%, #F3E7D3 100%);
+            border: 2px solid #DFD5C3;
             box-shadow: 
-                inset 0 2px 4px rgba(255, 255, 255, 0.7),
-                0 16px 36px -10px rgba(185, 170, 150, 0.35);
-            transition: box-shadow 0.4s ease, transform 0.4s ease;
+                inset 0 3px 6px rgba(255, 255, 255, 0.8),
+                0 20px 40px -12px rgba(180, 165, 145, 0.4);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* 🧚‍♀️ AMBIENT DRIFT VECTOR MOTIONS */
-        .drift-node-y { animation: floatY 8s infinite ease-in-out; }
-        .drift-node-x { animation: floatX 10s infinite ease-in-out; }
+        /* ✨ INDUSTRY SHIMMER SKELETON GRADIENTS */
+        .shimmer-wave {
+            background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+            background-size: 200% 100%;
+            animation: industrialShimmer 1.5s infinite linear;
+        }
+        @keyframes industrialShimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* 🧚‍♀️ VECTOR FLOATING DRIFT MOTION */
+        .drift-node-y { animation: floatY 9s infinite ease-in-out; }
+        .drift-node-x { animation: floatX 11s infinite ease-in-out; }
 
         @keyframes floatY {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(3deg); }
+            50% { transform: translateY(-16px) rotate(4deg); }
         }
         @keyframes floatX {
             0%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
-            50% { transform: translateX(10px) translateY(-6px) rotate(-2deg); }
+            50% { transform: translateX(14px) translateY(-8px) rotate(-3deg); }
         }
 
-        /* ⚡ HARDWARE-ACCELERATED DYNAMIC FLUID GRAPHIC */
+        /* ⚡ HARDWARE-ACCELERATED COZY DYNAMIC FLUID GRAPHIC */
         .fluid-orb-glow {
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #B3E0FF, #FFAEC9, #F3E4FF, #CDEEFF);
+            background: linear-gradient(45deg, #CDEEFF, #FFD2E2, #F3E4FF, #B3E0FF);
             background-size: 400% 400%;
-            animation: fluidGlowMotion 12s infinite ease-in-out;
+            animation: fluidGlowMotion 14s infinite ease-in-out;
         }
         @keyframes fluidGlowMotion {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
 
-        /* ⚡ REAL-TIME HIGHLIGHT PULSE RADAR */
+        /* ⚡ PULSE RADAR WAVE TARGET GLOW */
         .radar-pulse-active {
             animation: radarGlowRing 2.5s infinite ease-in-out;
         }
         @keyframes radarGlowRing {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(58, 120, 196, 0.6), 0 4px 12px rgba(58, 120, 196, 0.15); border-color: #B3E0FF; }
-            50% { transform: scale(1.1); box-shadow: 0 0 0 12px rgba(58, 120, 196, 0), 0 16px 32px rgba(58, 120, 196, 0.4); border-color: #3A78C4; }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(58, 120, 196, 0.7), 0 6px 16px rgba(58, 120, 196, 0.2); border-color: #B3E0FF; }
+            50% { transform: scale(1.15); box-shadow: 0 0 0 16px rgba(58, 120, 196, 0), 0 24px 48px rgba(58, 120, 196, 0.5); border-color: #3A78C4; }
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -125,148 +141,164 @@
 </head>
 <body class="min-h-screen text-slate-700 antialiased selection:bg-sky-100 selection:text-sky-900 opacity-0" id="master-body-viewport">
 
+    <!-- 🌌 SYSTEM BACKGROUND GENERATOR OVERLAY -->
     <div class="aurora-bg-mesh"></div>
 
-    <div class="hidden lg:block absolute top-[14%] left-[3%] text-sky-300/40 text-6xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-graduation-cap"></i></div>
-    <div class="hidden lg:block absolute top-[58%] left-[43%] text-pink-300/35 text-7xl pointer-events-none select-none drift-node-x z-0"><i class="fa-solid fa-book-bookmark"></i></div>
-    <div class="hidden lg:block absolute top-[25%] right-[3%] text-purple-300/40 text-5xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+    <!-- BACKGROUND VECTOR DECORATIONS -->
+    <div class="hidden lg:block absolute top-[14%] left-[3%] text-sky-300/30 text-7xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-graduation-cap"></i></div>
+    <div class="hidden lg:block absolute top-[58%] left-[43%] text-pink-300/25 text-8xl pointer-events-none select-none drift-node-x z-0"><i class="fa-solid fa-book-bookmark"></i></div>
+    <div class="hidden lg:block absolute top-[25%] right-[3%] text-purple-300/30 text-6xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
 
-    <nav class="bg-[#FAF8F5]/75 backdrop-blur-xl border-b border-[#E6DFD3] sticky top-0 z-50 px-6 sm:px-8 py-4 transition-all duration-300">
+    <!-- INDUSTRIAL PREMIUM NAVIGATION BAR -->
+    <nav class="bg-[#FAF8F5]/80 backdrop-blur-2xl border-b border-[#E6DFD3] sticky top-0 z-50 px-6 sm:px-10 py-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto flex justify-between items-center relative z-10">
-            <div class="flex items-center gap-3.5 group cursor-pointer">
-                <div class="bg-gradient-to-tr from-[#CDEEFF] to-[#B3E0FF] w-11 h-11 rounded-2xl flex items-center justify-center text-[#3A78C4] border border-[#B3E0FF]/60 shadow-sm relative overflow-hidden">
-                    <div class="absolute inset-0 bg-white/30 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
-                    <i class="fa-solid fa-landmark text-base relative z-10 transition-transform duration-300 group-hover:scale-110"></i>
+            <div class="flex items-center gap-4 group cursor-pointer">
+                <div class="bg-gradient-to-tr from-[#CDEEFF] to-[#B3E0FF] w-12 h-12 rounded-2xl flex items-center justify-center text-[#3A78C4] border border-[#B3E0FF]/70 shadow-sm relative overflow-hidden">
+                    <div class="absolute inset-0 bg-white/40 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
+                    <i class="fa-solid fa-landmark text-lg relative z-10 transition-transform duration-300 group-hover:scale-110"></i>
                 </div>
                 <div>
-                    <h1 class="text-xs sm:text-sm font-800 tracking-tight text-slate-900 display-font leading-tight transition-colors duration-300 group-hover:text-[#3A78C4]">
+                    <h1 class="text-sm sm:text-base font-800 tracking-tight text-slate-900 display-font leading-tight transition-colors duration-300 group-hover:text-[#3A78C4]">
                         ASBASJS Memorial College, Bela (Ropar)
                     </h1>
-                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Physical Science & Computer Department</p>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Physical Science & Computer Department</p>
                 </div>
             </div>
-            <div class="bg-white/80 border border-[#E6DFD3] px-3.5 py-1.5 rounded-xl flex items-center gap-2.5 shadow-sm hover:border-slate-300 transition-all duration-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399] animate-pulse"></span>
-                <span class="text-[9px] font-800 text-slate-500 uppercase tracking-widest font-mono">Live Sync Engine</span>
+            <div class="bg-white/90 border border-[#E6DFD3] px-4 py-2 rounded-2xl flex items-center gap-3 shadow-sm hover:border-slate-300 transition-all duration-300">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_12px_#34d399] animate-pulse"></span>
+                <span class="text-[10px] font-800 text-slate-500 uppercase tracking-widest font-mono">Live Sync Engine</span>
             </div>
         </div>
     </nav>
 
+    <!-- 🌟 ENGAGING INDUSTRIAL HERO DASHBOARD HUD -->
     <header id="gsap-hero-panel" class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10">
-        <div class="premium-glass-shell rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row justify-between items-center gap-8 relative overflow-hidden border border-white/70">
+        <div class="premium-glass-shell rounded-3xl p-6 sm:p-10 flex flex-col md:flex-row justify-between items-center gap-8 relative overflow-hidden border border-white/80">
             
             <div class="flex flex-col sm:flex-row items-center gap-6 w-full md:w-auto text-center sm:text-left relative z-10">
-                <div class="w-24 h-24 sm:w-28 sm:h-24 bg-white rounded-2xl flex items-center justify-center border border-[#E6DFD3] shrink-0 shadow-inner overflow-hidden relative group">
-                    <div class="fluid-orb-glow absolute inset-0 opacity-85"></div>
-                    <div class="absolute inset-0 bg-white/10 backdrop-blur-[2px]"></div>
-                    <i class="fa-solid fa-graduation-cap text-2xl text-slate-800/80 relative z-10 transform transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6"></i>
+                <div class="w-24 h-24 sm:w-28 sm:h-28 bg-white rounded-2xl flex items-center justify-center border border-[#E6DFD3] shrink-0 shadow-inner overflow-hidden relative group">
+                    <div class="fluid-orb-glow absolute inset-0 opacity-90"></div>
+                    <div class="absolute inset-0 bg-white/20 backdrop-blur-[3px]"></div>
+                    <i class="fa-solid fa-graduation-cap text-3xl text-slate-800/80 relative z-10 transform transition-transform duration-700 group-hover:scale-110 group-hover:rotate-6"></i>
                 </div>
                 <div>
-                    <h2 class="text-xl sm:text-2xl font-800 text-slate-900 display-font tracking-tight leading-tight">Welcome to Sanctuary Desk</h2>
-                    <p class="text-xs text-slate-500 mt-1.5 font-medium">Real-time environmental sync portal for college libraries and smart student spaces.</p>
+                    <h2 class="text-2xl sm:text-3xl font-800 text-slate-900 display-font tracking-tight leading-tight">Welcome to Sanctuary Desk</h2>
+                    <p class="text-sm text-slate-500 mt-2 font-medium max-w-xl">Real-time environmental synchronization matrix for physical Science research hubs and computing spaces.</p>
                     
-                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 mt-4 text-[11px] font-mono font-bold">
-                        <span id="hud-total-busy" class="bg-[#FFD2E2] border border-[#FFAEC9] text-[#D84A75] px-3 py-1 rounded-xl shadow-sm flex items-center gap-1.5 transition-transform duration-300 hover:scale-105">0 Busy Units</span>
-                        <span id="hud-total-open" class="bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4] px-3 py-1 rounded-xl shadow-sm flex items-center gap-1.5 transition-transform duration-300 hover:scale-105">0 Clean Nodes</span>
+                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 mt-5 text-xs font-mono font-bold">
+                        <span id="hud-total-busy" class="bg-[#FFD2E2] border border-[#FFAEC9] text-[#D84A75] px-4 py-1.5 rounded-xl shadow-sm flex items-center gap-2 transition-all duration-300 hover:scale-105">0 Busy Units</span>
+                        <span id="hud-total-open" class="bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4] px-4 py-1.5 rounded-xl shadow-sm flex items-center gap-2 transition-all duration-300 hover:scale-105">0 Clean Nodes</span>
                     </div>
                 </div>
             </div>
             
             <div class="w-full md:w-auto shrink-0 flex justify-center items-center relative z-10" id="magnetic-button-container">
-                <button id="magic-allocate-btn" onclick="executeMagicSeatMatch()" class="w-full md:w-auto bg-gradient-to-r from-[#3A78C4] to-[#4A90E2] text-white font-800 text-xs tracking-wider uppercase px-6 py-4 rounded-xl shadow-md shadow-sky-200/40 transition-shadow duration-300 flex items-center justify-center gap-2.5 font-mono relative">
-                    <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i> Find Me an Open Seat Now
+                <button id="magic-allocate-btn" onclick="executeMagicSeatMatch()" class="w-full md:w-auto bg-gradient-to-r from-[#3A78C4] to-[#4A90E2] text-white font-800 text-xs tracking-wider uppercase px-8 py-4 rounded-xl shadow-md shadow-sky-200/40 hover:shadow-lg hover:shadow-sky-300/50 transition-all duration-300 flex items-center justify-center gap-3 font-mono relative">
+                    <i class="fa-solid fa-wand-magic-sparkles text-[11px]"></i> Find Me an Open Seat Now
                 </button>
             </div>
         </div>
     </header>
 
+    <!-- 📊 ANALYTICS HUD & COLLEGE VALIDATION BAR -->
     <section class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10 gsap-hero-panel grid grid-cols-1 md:grid-cols-12 gap-6">
-        <div class="premium-glass-shell rounded-3xl p-5 md:col-span-8 border border-white/70">
-            <div class="mb-3 flex items-center gap-2">
-                <i class="fa-solid fa-chart-pie text-[#3A78C4] text-xs animate-pulse"></i>
-                <h3 class="text-xs font-800 text-slate-900 display-font tracking-tight">Live Environmental Load Ratios</h3>
+        <!-- Load Ratios Chart -->
+        <div class="premium-glass-shell rounded-3xl p-6 md:col-span-8 border border-white/80">
+            <div class="mb-4 flex items-center gap-2.5">
+                <i class="fa-solid fa-chart-pie text-[#3A78C4] text-sm animate-pulse"></i>
+                <h3 class="text-xs font-800 text-slate-900 display-font tracking-tight uppercase tracking-wider">Live Environmental Load Ratios</h3>
             </div>
-            <div class="w-full h-24 relative flex items-center justify-center">
+            <div class="w-full h-28 relative flex items-center justify-center">
                 <canvas id="live-occupancy-chart-canvas"></canvas>
             </div>
         </div>
 
-        <div class="premium-glass-shell rounded-3xl p-5 md:col-span-4 border border-white/70 flex flex-col justify-between">
+        <!-- Official Identity Link Banner -->
+        <div class="premium-glass-shell rounded-3xl p-6 md:col-span-4 border border-white/80 flex flex-col justify-between">
             <div>
-                <div class="flex items-center justify-between border-b border-[#E6DFD3]/60 pb-2 mb-2">
-                    <span class="text-[9px] uppercase tracking-widest font-900 text-slate-400 font-mono">Institutional Profile</span>
-                    <span class="text-[8px] bg-sky-50 text-[#3A78C4] px-1.5 py-0.5 rounded font-bold border border-sky-100">Affiliated to PBI Univ</span>
+                <div class="flex items-center justify-between border-b border-[#E6DFD3]/60 pb-3 mb-3">
+                    <span class="text-[10px] uppercase tracking-widest font-900 text-slate-400 font-mono">Institutional Profile</span>
+                    <span class="text-[9px] bg-sky-50 text-[#3A78C4] px-2 py-0.5 rounded-md font-bold border border-sky-100/70">Affiliated to PBI Univ</span>
                 </div>
-                <p class="text-[10px] text-slate-500 font-medium leading-relaxed">
-                    This automated allocation terminal acts as a pilot framework supporting the evolution of a smart campus architecture at Bela.
+                <p class="text-xs text-slate-500 font-medium leading-relaxed">
+                    This automated system works as a unified live framework, managing resources and data across the campus database cluster cleanly.
                 </p>
             </div>
-            <div class="mt-4">
-                <a href="https://belacollege.org/" target="_blank" class="w-full bg-white hover:bg-slate-50 border border-[#E6DFD3] text-center text-[10px] font-mono font-bold py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 text-slate-600">
-                    <i class="fa-solid fa-graduation-cap text-slate-400 text-[10px]"></i> Visit Official College Website
+            <div class="mt-5">
+                <a href="https://belacollege.org/" target="_blank" class="w-full bg-white hover:bg-slate-50 border border-[#E6DFD3] text-center text-xs font-mono font-bold py-3.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 text-slate-600 hover:text-slate-800">
+                    <i class="fa-solid fa-graduation-cap text-slate-400 text-xs"></i> Visit Official College Website
                 </a>
             </div>
         </div>
     </section>
 
-    <div class="flex justify-center p-4 lg:hidden sticky top-[77px] z-40 backdrop-blur-md transition-all duration-300">
-        <div class="bg-[#F7F4EF]/90 border border-[#E6DFD3] p-1 rounded-2xl flex gap-1 shadow-md">
-            <button id="toggle-seats-btn" onclick="switchMobileTab('seats')" class="px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4] shadow-sm">
+    <!-- MOBILE NAVIGATION TABS -->
+    <div class="flex justify-center p-4 lg:hidden sticky top-[81px] z-40 backdrop-blur-md transition-all duration-300">
+        <div class="bg-[#F7F4EF]/95 border border-[#E6DFD3] p-1.5 rounded-2xl flex gap-1 shadow-md">
+            <button id="toggle-seats-btn" onclick="switchMobileTab('seats')" class="px-6 py-3 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4] shadow-sm">
                 <i class="fa-solid fa-compass"></i> Space Radar
             </button>
-            <button id="toggle-books-btn" onclick="switchMobileTab('books')" class="px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 text-slate-500 hover:text-slate-800">
+            <button id="toggle-books-btn" onclick="switchMobileTab('books')" class="px-6 py-3 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 text-slate-500 hover:text-slate-800">
                 <i class="fa-solid fa-book-bookmark"></i> Catalog
             </button>
         </div>
     </div>
 
+    <!-- MAIN GRID DASHBOARD MATRIX -->
     <main class="max-w-7xl mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
         
+        <!-- LEFT PANEL: SPATIAL BLUEPRINTS -->
         <div id="seats-panel" class="lg:col-span-5 space-y-6 block transition-all duration-500 gsap-panel-left">
-            <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl relative overflow-hidden">
-                <div class="mb-5">
-                    <h2 class="text-base font-800 text-slate-900 display-font flex items-center gap-2">
-                        <i class="fa-solid fa-compass text-pink-400 text-sm"></i> Space Architecture Matrix
+            <div class="premium-glass-shell p-6 sm:p-8 rounded-3xl relative overflow-hidden">
+                <div class="mb-6">
+                    <h2 class="text-lg font-800 text-slate-900 display-font flex items-center gap-2.5">
+                        <i class="fa-solid fa-compass text-pink-400 text-base"></i> Space Architecture Matrix
                     </h2>
-                    <p class="text-xs text-slate-400 mt-0.5 font-medium">Isolate study desks seamlessly by building layers</p>
+                    <p class="text-xs text-slate-400 mt-1 font-medium">Isolate study desks seamlessly by building layers</p>
                 </div>
 
-                <div class="bg-white/80 border border-[#E6DFD3] p-1 rounded-xl flex gap-1 mb-6 overflow-x-auto no-scrollbar shadow-inner">
-                    <button id="zone-btn-all" onclick="filterRadarZone('all')" class="px-4 py-2 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap bg-slate-900 text-white shadow-sm">All Registers</button>
-                    <button id="zone-btn-main" onclick="filterRadarZone('main')" class="px-4 py-2 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap text-slate-500 hover:text-slate-800 hover:bg-white/60">🌳 Oak Center</button>
-                    <button id="zone-btn-quiet" onclick="filterRadarZone('quiet')" class="px-4 py-2 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap text-slate-500 hover:text-slate-800 hover:bg-white/60">🤫 Silent Pods</button>
+                <div class="bg-white/90 border border-[#E6DFD3] p-1.5 rounded-xl flex gap-1 mb-6 overflow-x-auto no-scrollbar shadow-inner">
+                    <button id="zone-btn-all" onclick="filterRadarZone('all')" class="px-5 py-2.5 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap bg-slate-900 text-white shadow-sm">All Registers</button>
+                    <button id="zone-btn-main" onclick="filterRadarZone('main')" class="px-5 py-2.5 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap text-slate-500 hover:text-slate-800 hover:bg-white/60">🌳 Oak Center</button>
+                    <button id="zone-btn-quiet" onclick="filterRadarZone('quiet')" class="px-5 py-2.5 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap text-slate-500 hover:text-slate-800 hover:bg-white/60">🤫 Silent Pods</button>
                 </div>
 
-                <div class="border border-[#E6DFD3] rounded-2xl p-6 bg-[#FAF8F5]/20 relative max-h-[500px] overflow-y-auto space-y-12 flex flex-col items-center shadow-inner">
+                <div class="border border-[#E6DFD3] rounded-2xl p-6 bg-[#FAF8F5]/30 relative max-h-[520px] overflow-y-auto space-y-12 flex flex-col items-center shadow-inner">
                     <div id="library-bays-container" class="w-full space-y-16 py-4 flex flex-col items-center transition-all duration-500"></div>
                 </div>
             </div>
         </div>
 
+        <!-- RIGHT PANEL: DISCOVERY CATALOG DATA DESK -->
         <div id="books-panel" class="lg:col-span-7 space-y-6 hidden lg:block transition-all duration-500 gsap-panel-right">
-            <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div class="premium-glass-shell p-6 sm:p-8 rounded-3xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-5 mb-8">
                     <div>
-                        <h2 class="text-base font-800 text-slate-900 display-font flex items-center gap-2">
-                            <i class="fa-solid fa-layer-group text-sky-400 text-sm"></i> Discovery Asset Desk
+                        <h2 class="text-lg font-800 text-slate-900 display-font flex items-center gap-2.5">
+                            <i class="fa-solid fa-layer-group text-sky-400 text-base"></i> Discovery Asset Desk
                         </h2>
-                        <p class="text-xs text-slate-400 mt-0.5 font-medium">Fluid system search — instant availability tracking</p>
+                        <p class="text-xs text-slate-400 mt-1 font-medium">Fluid system search — instant availability tracking</p>
                     </div>
 
-                    <div class="relative w-full sm:w-64 rounded-xl shadow-sm transition-all duration-300 focus-within:shadow-md">
+                    <div class="relative w-full sm:w-72 rounded-xl shadow-sm transition-all duration-300 focus-within:shadow-md">
                         <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Type title, author, row tag..." class="w-full pl-10 pr-4 py-3 bg-white/90 border border-[#E6DFD3] rounded-xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#4A90E2] focus:ring-4 focus:ring-sky-100 transition-all font-medium">
+                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Type title, author, registration item..." class="w-full pl-11 pr-4 py-3.5 bg-white/95 border border-[#E6DFD3] rounded-xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#4A90E2] focus:ring-4 focus:ring-sky-100 transition-all font-medium">
                     </div>
                 </div>
 
-                <div id="student-books-container" class="grid grid-cols-1 md:grid-cols-2 gap-5 transition-all duration-500">
-                    </div>
+                <!-- CARDS LOAD HERE -->
+                <div id="student-books-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 transition-all duration-500">
+                    <!-- Dynamic Skeleton Loading Shimmer defaults on boot -->
+                    <div class="shimmer-wave h-40 rounded-2xl opacity-60"></div>
+                    <div class="shimmer-wave h-40 rounded-2xl opacity-60"></div>
+                </div>
             </div>
         </div>
     </main>
 
-    <footer class="max-w-7xl mx-auto p-6 text-center text-[10px] font-mono font-bold text-slate-400 tracking-wider relative z-10 border-t border-[#E6DFD3]/40 mt-12">
-        SYSTEM DESIGNED & DEVELOPED BY <span class="text-slate-600">YASHPNEET SINGH</span> | B.SC COMPUTER SCIENCE (4TH SEM OVER)
+    <!-- PREMIUM INTEGRITY FOOTER -->
+    <footer class="max-w-7xl mx-auto p-8 text-center text-xs font-mono font-bold text-slate-400 tracking-widest relative z-10 border-t border-[#E6DFD3]/40 mt-16">
+        SYSTEM DESIGNED & DEVELOPED BY <span class="text-slate-600 uppercase">Yashpneet Singh</span> | B.SC COMPUTER SCIENCE
     </footer>
 
     <script>
@@ -284,10 +316,10 @@
         });
 
         function initializeGSAPPhysicsEngine() {
-            gsap.to("#master-body-viewport", { opacity: 1, duration: 0.6, ease: "power2.out" });
-            gsap.from("#gsap-hero-panel", { y: -30, opacity: 0, duration: 0.8, ease: "power3.out" });
-            gsap.from(".gsap-panel-left", { x: -40, opacity: 0, duration: 0.9, ease: "power4.out", delay: 0.1 });
-            gsap.from(".gsap-panel-right", { x: 40, opacity: 0, duration: 0.9, ease: "power4.out", delay: 0.1 });
+            gsap.to("#master-body-viewport", { opacity: 1, duration: 0.7, ease: "power2.out" });
+            gsap.from("#gsap-hero-panel", { y: -35, opacity: 0, duration: 0.9, ease: "power3.out" });
+            gsap.from(".gsap-panel-left", { x: -45, opacity: 0, duration: 1.0, ease: "power4.out", delay: 0.1 });
+            gsap.from(".gsap-panel-right", { x: 45, opacity: 0, duration: 1.0, ease: "power4.out", delay: 0.1 });
 
             const magneticBtn = document.getElementById("magic-allocate-btn");
             const container = document.getElementById("magnetic-button-container");
@@ -321,18 +353,20 @@
             }
 
             const ctx = document.getElementById('live-occupancy-chart-canvas').getContext('2d');
+            if (!ctx) return;
+            
             liveChartJSInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: ['🌳 Oak Center (Seats 1-30)', '🤫 Silent Pods (Seats 31+)'],
                     datasets: [{
-                        label: 'Active System Nodes',
+                        label: 'Active Nodes',
                         data: chartDataValues,
-                        backgroundColor: ['rgba(58, 120, 196, 0.75)', 'rgba(216, 74, 117, 0.75)'],
+                        backgroundColor: ['rgba(58, 120, 196, 0.8)', 'rgba(216, 74, 117, 0.8)'],
                         borderColor: ['#3A78C4', '#D84A75'],
-                        borderWidth: 1.5,
-                        borderRadius: 8,
-                        barThickness: 16
+                        borderWidth: 2,
+                        borderRadius: 10,
+                        barThickness: 18
                     }]
                 },
                 options: {
@@ -345,13 +379,13 @@
                     scales: {
                         x: {
                             grid: { display: false },
-                            ticks: { font: { family: 'Plus Jakarta Sans', size: 9, weight: 'bold' } },
+                            ticks: { font: { family: 'Plus Jakarta Sans', size: 10, weight: 'bold' }, color: '#64748b' },
                             min: 0,
                             max: 30
                         },
                         y: {
                             grid: { display: false },
-                            ticks: { font: { family: 'Plus Jakarta Sans', size: 9, weight: 'bold' }, color: '#334155' }
+                            ticks: { font: { family: 'Plus Jakarta Sans', size: 10, weight: 'bold' }, color: '#1e293b' }
                         }
                     }
                 }
@@ -368,51 +402,55 @@
             } catch(e) { console.error(e); }
         }
 
-        document.getElementById('hud-total-busy');
         function calculateHUDAnalytics(seats) {
             const busy = seats.filter(s => s.is_occupied).length;
             const open = seats.length - busy;
-            document.getElementById('hud-total-busy').innerHTML = `<i class="fa-solid fa-user-lock mr-1.5"></i> ${busy} Busy Units`;
-            document.getElementById('hud-total-open').innerHTML = `<i class="fa-solid fa-circle-check mr-1.5"></i> ${open} Clean Nodes`;
+            
+            const busyLabel = document.getElementById('hud-total-busy');
+            const openLabel = document.getElementById('hud-total-open');
+            
+            if (busyLabel) busyLabel.innerHTML = `<i class="fa-solid fa-user-lock mr-2"></i> ${busy} Busy Units`;
+            if (openLabel) openLabel.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> ${open} Clean Nodes`;
         }
 
         function formatRelativeSessionTime(timestampString) {
-            if (!timestampString) return "Available";
+            if (!timestampString) return "Available Node";
             const diff = new Date() - new Date(timestampString);
             const totalMinutes = Math.floor(diff / 1000 / 60);
-            if (totalMinutes < 1) return "Just checked in";
-            if (totalMinutes < 60) return `Busy ${totalMinutes}m`;
-            return `Busy ${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`;
+            if (totalMinutes < 1) return "Just initialized";
+            if (totalMinutes < 60) return `Held for ${totalMinutes}m`;
+            return `Held for ${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`;
         }
 
         function renderModularZoneGrid(seats) {
             const mainContainer = document.getElementById('library-bays-container');
+            if (!mainContainer) return;
             mainContainer.innerHTML = '';
 
             const seatsPerTable = 10;
             const totalTables = Math.ceil(seats.length / seatsPerTable);
 
             const relativeChairCoordinates = [
-                { top: '8%',  left: '-40px' }, { top: '26%', left: '-40px' }, { top: '44%', left: '-40px' }, { top: '62%', left: '-40px' }, { top: '80%', left: '-40px' },
-                { top: '8%',  right: '-40px' }, { top: '26%', right: '-40px' }, { top: '44%', right: '-40px' }, { top: '62%', right: '-40px' }, { top: '80%', right: '-40px' }
+                { top: '8%',  left: '-44px' }, { top: '26%', left: '-44px' }, { top: '44%', left: '-44px' }, { top: '62%', left: '-44px' }, { top: '80%', left: '-44px' },
+                { top: '8%',  right: '-44px' }, { top: '26%', right: '-44px' }, { top: '44%', right: '-44px' }, { top: '62%', right: '-44px' }, { top: '80%', right: '-44px' }
             ];
 
             for (let t = 0; t < totalTables; t++) {
                 let tableZone = t >= 3 ? 'quiet' : 'main';
-                let zoneLabelText = t >= 3 ? 'Silent Area' : 'Main Center';
+                let zoneLabelText = t >= 3 ? 'Silent Zone' : 'Oak Collective';
                 
                 if (globalCurrentZoneFilter !== 'all' && globalCurrentZoneFilter !== tableZone) continue;
 
                 const tableWrapper = document.createElement('div');
-                tableWrapper.className = "scandi-oak-bench w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4";
+                tableWrapper.className = "scandi-oak-bench w-56 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-6 shadow-md";
                 
                 tableWrapper.innerHTML = `
-                    <div class="absolute inset-y-0 w-[1px] bg-[#DBCEB4]/50 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                    <div class="absolute inset-x-0 h-[1px] bg-[#DBCEB4]/50 top-1/2 -translate-y-1/2 pointer-events-none"></div>
+                    <div class="absolute inset-y-0 w-[1px] bg-[#DBCEB4]/60 left-1/2 -translate-x-1/2 pointer-events-none"></div>
+                    <div class="absolute inset-x-0 h-[1px] bg-[#DBCEB4]/60 top-1/2 -translate-y-1/2 pointer-events-none"></div>
                     
-                    <div class="text-[9px] font-700 text-[#7C654D] uppercase tracking-wider bg-white/95 px-3 py-2 rounded-xl border border-[#D9CDBC]/60 z-10 shadow-md display-font select-none flex flex-col items-center gap-0.5">
+                    <div class="text-[10px] font-800 text-[#7C654D] uppercase tracking-wider bg-white/95 px-4 py-2.5 rounded-2xl border border-[#D9CDBC]/80 z-10 shadow-lg display-font select-none flex flex-col items-center gap-1">
                         <span>Section ${String.fromCharCode(65 + t)}</span>
-                        <span class="text-[6px] text-slate-400 font-sans font-normal tracking-normal lowercase">${zoneLabelText}</span>
+                        <span class="text-[7px] text-slate-400 font-sans font-medium tracking-normal lowercase">${zoneLabelText}</span>
                     </div>
                 `;
 
@@ -423,7 +461,7 @@
                     const position = relativeChairCoordinates[idx];
 
                     const chairDiv = document.createElement('div');
-                    chairDiv.className = "absolute w-10 h-10 flex items-center justify-center transition-all duration-300 z-20 group/chair";
+                    chairDiv.className = "absolute w-11 h-11 flex items-center justify-center transition-all duration-300 z-20 group/chair";
                     chairDiv.id = `chair-node-anchor-${seat.seat_number}`;
                     
                     if (position.left) chairDiv.style.left = position.left;
@@ -433,17 +471,17 @@
                     const sessionTrackingBadge = formatRelativeSessionTime(seat.occupied_since);
 
                     chairDiv.innerHTML = `
-                        <div class="absolute bottom-full mb-2 hidden group-hover/chair:flex flex-col items-center z-30 pointer-events-none whitespace-nowrap">
-                            <span class="bg-slate-900 text-white text-[9px] font-bold px-2 py-1 rounded-md shadow-lg tracking-wide">${sessionTrackingBadge}</span>
+                        <div class="absolute bottom-full mb-2.5 hidden group-hover/chair:flex flex-col items-center z-30 pointer-events-none whitespace-nowrap">
+                            <span class="bg-slate-900 text-white text-[9px] font-bold px-2.5 py-1.5 rounded-md shadow-xl tracking-wide font-mono">${sessionTrackingBadge}</span>
                             <div class="w-1.5 h-1.5 bg-slate-900 rotate-45 -mt-1"></div>
                         </div>
 
-                        <div class="w-9 h-9 rounded-xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm transform hover:scale-110 cursor-pointer ${
+                        <div class="w-10 h-10 rounded-xl border-2 flex flex-col items-center justify-center transition-all duration-300 shadow-sm transform hover:scale-110 cursor-pointer ${
                             occupied 
-                            ? 'bg-[#FFD2E2] border-[#FFAEC9] text-[#D84A75] shadow-pink-100/60' 
+                            ? 'bg-[#FFD2E2] border-[#FFAEC9] text-[#D84A75] shadow-pink-100/40' 
                             : 'bg-[#CDEEFF] border-[#B3E0FF] text-[#3A78C4] hover:bg-[#B3E0FF] hover:border-[#3A78C4] shadow-sky-50'
                         }">
-                            <span class="text-[7px] font-bold font-mono tracking-tighter">${seat.seat_number}</span>
+                            <span class="text-[8px] font-bold font-mono tracking-tighter">${seat.seat_number}</span>
                         </div>
                     `;
                     tableWrapper.appendChild(chairDiv);
@@ -452,7 +490,7 @@
                 mainContainer.appendChild(tableWrapper);
             }
             
-            gsap.from("#library-bays-container > div", { opacity: 0, y: 15, duration: 0.4, ease: "power2.out", stagger: 0.05 });
+            gsap.from("#library-bays-container > div", { opacity: 0, y: 20, duration: 0.5, ease: "power2.out", stagger: 0.06 });
         }
 
         async function fetchLiveBooksCatalog(searchQuery = '') {
@@ -464,18 +502,19 @@
                 const response = await fetch(url);
                 const books = await response.json();
                 const container = document.getElementById('student-books-container');
+                if (!container) return;
                 container.innerHTML = '';
 
                 if (books.length === 0) {
-                    container.className = "flex flex-col items-center justify-center py-16 col-span-full text-center border border-dashed border-[#E6DFD3] rounded-2xl bg-white/60";
+                    container.className = "flex flex-col items-center justify-center py-20 col-span-full text-center border border-dashed border-[#E6DFD3] rounded-3xl bg-white/50";
                     container.innerHTML = `
-                        <div class="text-[#E6DFD3] text-4xl mb-3"><i class="fa-solid fa-folder-open"></i></div>
-                        <p class="text-xs font-mono font-bold text-slate-500">No matching assets found in registers</p>
+                        <div class="text-[#E6DFD3] text-5xl mb-4"><i class="fa-solid fa-folder-open"></i></div>
+                        <p class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">No matching records found in table indices</p>
                     `;
                     return;
                 }
 
-                container.className = "grid grid-cols-1 md:grid-cols-2 gap-5";
+                container.className = "grid grid-cols-1 md:grid-cols-2 gap-6";
 
                 books.forEach(book => {
                     const available = book.is_available;
@@ -484,37 +523,40 @@
                     let themeGradient = "from-white to-[#FAF8F5]";
                     let tagDesignBadge = "bg-[#ECEFF1] border border-slate-200 text-slate-600";
                     
-                    if (titleLower.includes('algorithm') || titleLower.includes('python')) {
-                        themeGradient = "from-white via-white to-purple-50/40 group-hover:to-purple-100/30";
+                    if (titleLower.includes('algorithm') || titleLower.includes('python') || titleLower.includes('computer')) {
+                        themeGradient = "from-white via-white to-purple-50/50 group-hover:to-purple-100/30";
                         tagDesignBadge = "bg-purple-50 border border-purple-100 text-purple-600";
-                    } else if (titleLower.includes('physics')) {
-                        themeGradient = "from-white via-white to-sky-50/40 group-hover:to-sky-100/30";
+                    } else if (titleLower.includes('physics') || titleLower.includes('mechanics') || titleLower.includes('optics')) {
+                        themeGradient = "from-white via-white to-sky-50/50 group-hover:to-sky-100/30";
                         tagDesignBadge = "bg-sky-50 border border-sky-100 text-[#3A78C4]";
+                    } else if (titleLower.includes('math') || titleLower.includes('calculus') || titleLower.includes('algebra')) {
+                        themeGradient = "from-white via-white to-amber-50/40 group-hover:to-amber-100/30";
+                        tagDesignBadge = "bg-amber-50 border border-amber-100 text-amber-700";
                     }
 
                     const card = document.createElement('div');
-                    card.className = `pt-7 px-5 pb-5 rounded-2xl flex flex-col justify-between group relative overflow-hidden bg-gradient-to-b ${themeGradient} premium-glass-card`;
+                    card.className = `pt-8 px-6 pb-6 rounded-2xl flex flex-col justify-between group relative overflow-hidden bg-gradient-to-b ${themeGradient} premium-glass-card`;
                     
                     card.innerHTML = `
-                        <div class="absolute top-0 right-4 w-7 h-8 flex items-center justify-center text-[8px] font-900 tracking-wider font-mono text-white rounded-b-md shadow-sm transition-all duration-300 group-hover:h-10 ${
-                            available ? 'bg-[#98D8C8]' : 'bg-[#FF9AA2]'
+                        <div class="absolute top-0 right-5 w-8 h-9 flex items-center justify-center text-[9px] font-900 tracking-wider font-mono text-white rounded-b-md shadow-sm transition-all duration-300 group-hover:h-11 ${
+                            available ? 'bg-[#7EC9B7]' : 'bg-[#FFA4A6]'
                         }">
                             <span>${available ? 'IN' : 'OUT'}</span>
                         </div>
 
                         <div>
-                            <span class="text-[8px] uppercase tracking-widest font-900 px-2 py-0.5 rounded border font-mono ${tagDesignBadge}">
-                                ${titleLower.includes('physics') || titleLower.includes('algorithm') ? 'Boutique Collection' : 'Standard Catalog'}
+                            <span class="text-[9px] uppercase tracking-widest font-900 px-2.5 py-1 rounded-md border font-mono ${tagDesignBadge}">
+                                ${titleLower.includes('physics') || titleLower.includes('algorithm') || titleLower.includes('calculus') ? 'Boutique Track' : 'General Ledger'}
                             </span>
-                            <h3 class="font-800 text-slate-900 text-xs mt-3 mb-1 group-hover:text-[#4A90E2] transition-colors duration-200 display-font leading-snug pr-5 tracking-tight">${book.title}</h3>
+                            <h3 class="font-800 text-slate-900 text-sm mt-4 mb-1 group-hover:text-[#4A90E2] transition-colors duration-200 display-font leading-snug pr-6 tracking-tight">${book.title}</h3>
                             <p class="text-xs text-slate-400 font-medium">By ${book.author}</p>
                         </div>
                         
-                        <div class="flex items-center justify-between pt-3 border-t border-[#FAF8F5] mt-5">
-                            <span class="text-[9px] bg-white border border-[#E6DFD3] font-mono font-bold rounded-lg px-2.5 py-1 text-slate-500 flex items-center gap-1 shadow-sm transition-colors group-hover:border-slate-300">
-                                <i class="fa-solid fa-hashtag text-[8px] text-slate-400"></i> ${book.shelf_location}
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100 mt-6">
+                            <span class="text-[10px] bg-white border border-[#E6DFD3] font-mono font-bold rounded-xl px-3 py-1.5 text-slate-500 flex items-center gap-1.5 shadow-sm transition-colors group-hover:border-slate-300 max-w-[180px] truncate">
+                                <i class="fa-solid fa-hashtag text-[9px] text-slate-400"></i> ${book.shelf_location}
                             </span>
-                            <span class="text-[10px] font-800 ${available ? 'text-emerald-500' : 'text-slate-400'} font-mono">
+                            <span class="text-[10px] font-800 ${available ? 'text-emerald-500' : 'text-slate-400'} font-mono tracking-wider">
                                 ${available ? 'AVAILABLE' : 'CHECKED OUT'}
                             </span>
                         </div>
@@ -522,18 +564,20 @@
                     container.appendChild(card);
                 });
 
-                gsap.from("#student-books-container > div", { opacity: 0, y: 20, duration: 0.5, stagger: 0.06 });
+                gsap.from("#student-books-container > div", { opacity: 0, y: 25, duration: 0.6, stagger: 0.07, ease: "power3.out" });
             } catch (error) { console.error(error); }
         }
 
         function filterRadarZone(zone) {
             globalCurrentZoneFilter = zone;
             ['all', 'main', 'quiet'].forEach(b => {
-                const btn = document.getElementById(`zone-btn-${b}`);
-                if (b === zone) {
-                    btn.className = "px-4 py-2 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap bg-slate-900 text-white shadow-sm";
-                } else {
-                    btn.className = "px-4 py-2 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap text-slate-500 hover:text-slate-800 border border-transparent";
+                const btn = document.getElementById('zone-btn-' + b);
+                if (btn) {
+                    if (b === zone) {
+                        btn.className = "px-5 py-2.5 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap bg-slate-900 text-white shadow-sm";
+                    } else {
+                        btn.className = "px-5 py-2.5 rounded-lg text-xs font-800 transition-all duration-300 whitespace-nowrap text-slate-500 hover:text-slate-800 border border-transparent";
+                    }
                 }
             });
             renderModularZoneGrid(systemSeatsArray);
@@ -551,12 +595,14 @@
             }
 
             setTimeout(() => {
-                const anchor = document.getElementById(`chair-node-anchor-${match.seat_number}`);
+                const anchor = document.getElementById('chair-node-anchor-' + match.seat_number);
                 if (anchor) {
                     anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     const targetBox = anchor.firstElementChild;
-                    targetBox.classList.add('radar-pulse-active');
-                    setTimeout(() => { targetBox.classList.remove('radar-pulse-active'); }, 5000);
+                    if (targetBox) {
+                        targetBox.classList.add('radar-pulse-active');
+                        setTimeout(() => { targetBox.classList.remove('radar-pulse-active'); }, 5000);
+                    }
                 }
             }, 250);
         }
@@ -564,7 +610,8 @@
         let searchTimeout;
         function executeLiveSearch() {
             clearTimeout(searchTimeout);
-            const query = document.getElementById('catalog-search').value.trim();
+            const searchInput = document.getElementById('catalog-search');
+            const query = searchInput ? searchInput.value.trim() : '';
             searchTimeout = setTimeout(() => { fetchLiveBooksCatalog(query); }, 250);
         }
 
@@ -574,16 +621,18 @@
             const seatsBtn = document.getElementById('toggle-seats-btn');
             const booksBtn = document.getElementById('toggle-books-btn');
 
+            if (!seatsPanel || !booksPanel || !seatsBtn || !booksBtn) return;
+
             if (tab === 'seats') {
                 seatsPanel.classList.remove('hidden'); seatsPanel.classList.add('block');
                 booksPanel.classList.remove('block'); booksPanel.classList.add('hidden');
-                seatsBtn.className = "px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4] shadow-sm";
-                booksBtn.className = "px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 text-slate-500 hover:text-slate-800";
+                seatsBtn.className = "px-6 py-3 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4] shadow-sm";
+                booksBtn.className = "px-6 py-3 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 text-slate-500 hover:text-slate-800";
             } else {
                 seatsPanel.classList.remove('block'); seatsPanel.classList.add('hidden');
-                booksPanel.classList.remove('hidden'); booksPanel.classList.add('block');
-                booksBtn.className = "px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4] shadow-sm";
-                seatsBtn.className = "px-5 py-2.5 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 text-slate-500 hover:text-slate-800";
+                booksPanel.className = "lg:col-span-7 space-y-6 block";
+                booksBtn.className = "px-6 py-3 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 bg-[#CDEEFF] border border-[#B3E0FF] text-[#3A78C4] shadow-sm";
+                seatsBtn.className = "px-6 py-3 rounded-xl text-xs font-800 transition-all duration-300 flex items-center gap-2 text-slate-500 hover:text-slate-800";
             }
         }
 
