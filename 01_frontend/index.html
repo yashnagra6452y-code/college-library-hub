@@ -100,7 +100,7 @@
         }
         @keyframes radarGlowRing {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.5); }
-            50% { transform: scale(1.15); box-shadow: 0 0 0 12px rgba(217, 119, 6, 0); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(217, 119, 6, 0); }
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -222,8 +222,8 @@
                     <button id="zone-btn-quiet" onclick="filterRadarZone('quiet')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap text-slate-600 hover:text-slate-900">🤫 Silent Pods</button>
                 </div>
 
-                <div class="border border-[#EFEAE2] rounded-2xl p-4 bg-slate-50/50 max-h-[520px] overflow-y-auto space-y-10 flex flex-col items-center shadow-inner overflow-x-hidden">
-                    <div id="library-bays-container" class="w-full space-y-12 py-2 flex flex-col items-center"></div>
+                <div class="border border-[#EFEAE2] rounded-2xl p-4 bg-slate-50/50 max-h-[520px] overflow-y-auto space-y-6 shadow-inner overflow-x-hidden">
+                    <div id="library-bays-container" class="w-full space-y-6 py-1 flex flex-col items-center"></div>
                 </div>
             </div>
         </div>
@@ -380,7 +380,7 @@
             return `Taken for ${Math.floor(totalMinutes / 60)}h`;
         }
 
-        /* 🌟 REDESIGNED ARCHITECTURAL DESK GRID (CLEAN, SLIM & ELEGANT) */
+        /* 🌟 BULLETPROOF 2-COLUMN GRID DESK BLUEPRINT SYSTEM */
         function renderModularZoneGrid(seats) {
             const mainContainer = document.getElementById('library-bays-container');
             if (!mainContainer) return;
@@ -389,63 +389,55 @@
             const seatsPerTable = 10;
             const totalTables = Math.ceil(seats.length / seatsPerTable);
 
-            // Sleek alignment attached directly along the table periphery
-            const relativeChairCoordinates = [
-                { top: '8%',  left: '6px' },  { top: '27%', left: '6px' },  { top: '46%', left: '6px' },  { top: '65%', left: '6px' },  { top: '84%', left: '6px' },
-                { top: '8%',  right: '6px' }, { top: '27%', right: '6px' }, { top: '46%', right: '6px' }, { top: '65%', right: '6px' }, { top: '84%', right: '6px' }
-            ];
-
             for (let t = 0; t < totalTables; t++) {
                 let tableZone = t >= 3 ? 'quiet' : 'main';
                 let zoneLabelText = t >= 3 ? 'Silent Area' : 'Main Center';
                 
                 if (globalCurrentZoneFilter !== 'all' && globalCurrentZoneFilter !== tableZone) continue;
 
+                // MAIN TABLE CARD CONTAINER
                 const tableWrapper = document.createElement('div');
-                tableWrapper.className = "scandi-oak-bench w-full max-w-[280px] sm:max-w-[320px] h-[360px] rounded-2xl relative flex items-center justify-center shrink-0 my-2 mx-auto";
+                tableWrapper.className = "scandi-oak-bench w-full max-w-sm sm:max-w-md rounded-2xl p-4 sm:p-5 my-2 mx-auto shadow-sm";
                 
-                tableWrapper.innerHTML = `
-                    <div class="absolute inset-y-6 w-[1px] bg-[#E5DDCB] left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                    
-                    <div class="bg-white/95 backdrop-blur-sm border border-[#E2D7C3] px-4 py-2 rounded-xl z-10 shadow-sm flex flex-col items-center select-none">
-                        <span class="text-xs font-bold text-amber-900 tracking-wider font-mono">TABLE ${String.fromCharCode(65 + t)}</span>
-                        <span class="text-[10px] text-slate-400 font-medium lowercase tracking-tight">${zoneLabelText}</span>
+                // HEADER BADGE INSIDE TABLE
+                const tableHeader = `
+                    <div class="flex items-center justify-between pb-3 mb-4 border-b border-[#E2D7C3]/60">
+                        <span class="text-xs font-bold text-amber-900 tracking-wider font-mono uppercase">TABLE ${String.fromCharCode(65 + t)}</span>
+                        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest bg-white/80 px-2.5 py-1 rounded-md border border-[#E2D7C3]">${zoneLabelText}</span>
                     </div>
                 `;
 
                 const tableSeatsSlice = seats.slice(t * seatsPerTable, (t + 1) * seatsPerTable);
 
-                tableSeatsSlice.forEach((seat, idx) => {
+                // CLEAN 2-COLUMN GRID (5 Left, 5 Right)
+                let seatsGridHTML = `<div class="grid grid-cols-2 gap-3 sm:gap-4">`;
+
+                tableSeatsSlice.forEach((seat) => {
                     const occupied = seat.is_occupied;
-                    const position = relativeChairCoordinates[idx];
-
-                    const chairDiv = document.createElement('div');
-                    chairDiv.className = "absolute w-9 h-9 flex items-center justify-center transition-all duration-300 z-20 group/chair";
-                    chairDiv.id = `chair-node-anchor-${seat.seat_number}`;
-                    
-                    if (position.left) chairDiv.style.left = position.left;
-                    if (position.right) chairDiv.style.right = position.right;
-                    chairDiv.style.top = position.top;
-
                     const sessionTrackingBadge = formatRelativeSessionTime(seat.occupied_since);
 
-                    chairDiv.innerHTML = `
-                        <div class="absolute bottom-full mb-2 hidden group-hover/chair:flex flex-col items-center z-30 pointer-events-none whitespace-nowrap">
-                            <span class="bg-slate-900 text-white text-[11px] font-medium px-2.5 py-1 rounded-md shadow-md">${sessionTrackingBadge}</span>
-                            <div class="w-1.5 h-1.5 bg-slate-900 rotate-45 -mt-0.5"></div>
-                        </div>
-
-                        <div class="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer shadow-sm ${
+                    seatsGridHTML += `
+                        <div id="chair-node-anchor-${seat.seat_number}" class="relative flex items-center justify-between p-2.5 sm:p-3 rounded-xl border transition-all duration-200 cursor-pointer ${
                             occupied 
-                            ? 'bg-rose-50 border border-rose-300/80 text-rose-600 font-bold shadow-rose-100' 
-                            : 'bg-emerald-50 border border-emerald-300/80 text-emerald-700 font-bold hover:bg-emerald-100/80 shadow-emerald-100'
+                            ? 'bg-rose-50/90 border-rose-200 text-rose-700 shadow-sm' 
+                            : 'bg-emerald-50/90 border-emerald-200 text-emerald-800 hover:bg-emerald-100 shadow-sm'
                         }">
-                            <span class="text-[11px] font-bold font-mono tracking-tighter">${seat.seat_number}</span>
+                            <div class="flex items-center gap-2 sm:gap-2.5">
+                                <span class="w-2.5 h-2.5 rounded-full ${occupied ? 'bg-rose-500' : 'bg-emerald-500'}"></span>
+                                <span class="text-xs sm:text-sm font-bold font-mono tracking-tight">${seat.seat_number}</span>
+                            </div>
+                            <span class="text-[9px] sm:text-[10px] font-mono font-semibold px-2 py-0.5 rounded ${
+                                occupied ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'
+                            }">
+                                ${occupied ? 'TAKEN' : 'FREE'}
+                            </span>
                         </div>
                     `;
-                    tableWrapper.appendChild(chairDiv);
                 });
 
+                seatsGridHTML += `</div>`;
+
+                tableWrapper.innerHTML = tableHeader + seatsGridHTML;
                 mainContainer.appendChild(tableWrapper);
             }
         }
@@ -534,11 +526,8 @@
                 const anchor = document.getElementById('chair-node-anchor-' + match.seat_number);
                 if (anchor) {
                     anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    const targetBox = anchor.firstElementChild;
-                    if (targetBox) {
-                        targetBox.classList.add('radar-pulse-active');
-                        setTimeout(() => { targetBox.classList.remove('radar-pulse-active'); }, 5000);
-                    }
+                    anchor.classList.add('radar-pulse-active');
+                    setTimeout(() => { anchor.classList.remove('radar-pulse-active'); }, 5000);
                 }
             }, 250);
         }
