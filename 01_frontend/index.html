@@ -22,6 +22,7 @@
             background-color: #FDFBF7;
             overflow-x: hidden;
             position: relative;
+            font-size: 16px;
         }
 
         .display-font {
@@ -43,21 +44,21 @@
 
         /* 🧊 ULTRA-SOFT LIQUID GLASSMORPHISM */
         .premium-glass-shell {
-            background: rgba(255, 255, 255, 0.65);
+            background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.9);
             box-shadow: 
-                0 20px 40px -15px rgba(139, 92, 26, 0.06),
-                0 1px 3px rgba(0, 0, 0, 0.01);
+                0 20px 40px -15px rgba(139, 92, 26, 0.08),
+                0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
         /* 🗂️ COZY TACTILE BOUNCE CARDS */
         .premium-glass-card {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(239, 234, 226, 0.9);
             box-shadow: 0 10px 25px -10px rgba(120, 110, 90, 0.08);
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -66,7 +67,7 @@
             .premium-glass-card:hover {
                 transform: translateY(-6px) scale(1.015);
                 background: #FFFFFF;
-                border-color: rgba(217, 119, 6, 0.25);
+                border-color: rgba(217, 119, 6, 0.3);
                 box-shadow: 0 24px 36px -8px rgba(180, 150, 100, 0.2);
             }
         }
@@ -107,7 +108,7 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="min-h-screen text-slate-600 antialiased selection:bg-amber-100 selection:text-amber-900 opacity-0" id="master-body-viewport">
+<body class="min-h-screen text-slate-700 antialiased selection:bg-amber-100 selection:text-amber-900 opacity-0" id="master-body-viewport">
 
     <!-- 🌌 AMBIENT OVERLAY -->
     <div class="aurora-bg-mesh"></div>
@@ -118,22 +119,22 @@
     <div class="hidden lg:block absolute top-[22%] right-[5%] text-pink-400/20 text-5xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-feather-pointed"></i></div>
 
     <!-- CLEAN COZY NAV BAR -->
-    <nav class="bg-[#FDFBF7]/60 backdrop-blur-md border-b border-[#EFEAE2] sticky top-0 z-50 px-4 sm:px-10 py-4">
+    <nav class="bg-[#FDFBF7]/80 backdrop-blur-md border-b border-[#EFEAE2] sticky top-0 z-50 px-4 sm:px-10 py-4 shadow-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center relative z-10">
             <div class="flex items-center gap-3 group cursor-pointer">
-                <div class="bg-amber-50 border border-amber-200/60 w-10 h-10 rounded-2xl flex items-center justify-center text-amber-700 shadow-sm">
-                    <i class="fa-solid fa-seedling text-sm transition-transform duration-500 group-hover:rotate-12"></i>
+                <div class="bg-amber-50 border border-amber-200/80 w-11 h-11 rounded-2xl flex items-center justify-center text-amber-700 shadow-sm">
+                    <i class="fa-solid fa-seedling text-base transition-transform duration-500 group-hover:rotate-12"></i>
                 </div>
                 <div>
-                    <h1 class="text-xs sm:text-sm font-700 tracking-tight text-slate-800 display-font leading-tight">
+                    <h1 class="text-base sm:text-lg font-bold tracking-tight text-slate-900 display-font leading-tight">
                         ASBASJS Memorial College, Bela
                     </h1>
-                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Smart Student Space Portal</p>
+                    <p class="text-[11px] sm:text-xs text-amber-800/70 font-bold uppercase tracking-widest mt-0.5">Smart Student Space Portal</p>
                 </div>
             </div>
-            <div class="bg-white border border-[#EFEAE2] px-3 py-1.5 rounded-xl flex items-center gap-2 shadow-sm">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-                <span class="text-[8px] font-700 text-slate-400 uppercase tracking-widest font-mono">Connected</span>
+            <div class="bg-white border border-[#EFEAE2] px-3.5 py-1.5 rounded-xl flex items-center gap-2 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">Connected</span>
             </div>
         </div>
     </nav>
@@ -143,23 +144,23 @@
         <div id="gsap-hero-panel" class="premium-glass-shell rounded-[2rem] p-6 sm:p-8 flex flex-col md:flex-row justify-between items-center gap-6 border border-white">
             
             <div class="flex flex-col sm:flex-row items-center gap-5 w-full md:w-auto text-center sm:text-left relative z-10">
-                <div class="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center border border-amber-100 shrink-0 shadow-inner">
-                    <i class="fa-solid fa-couch text-lg text-amber-700"></i>
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-amber-50 rounded-2xl flex items-center justify-center border border-amber-200/60 shrink-0 shadow-inner">
+                    <i class="fa-solid fa-couch text-2xl text-amber-700"></i>
                 </div>
                 <div>
-                    <h2 class="text-lg sm:text-xl font-800 text-slate-800 display-font tracking-tight leading-tight">Welcome to Sanctuary Desk</h2>
-                    <p class="text-xs text-slate-400 mt-1 font-medium">Take a deep breath. Find your zone, grab your books, and study completely stress-free.</p>
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 display-font tracking-tight leading-tight">Welcome to Sanctuary Desk</h2>
+                    <p class="text-sm sm:text-base text-slate-600 mt-1 font-medium">Take a deep breath. Find your zone, grab your books, and study completely stress-free.</p>
                     
-                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-3 text-[10px] font-mono font-bold">
-                        <span id="hud-total-busy" class="bg-rose-50 border border-rose-100 text-rose-600 px-3 py-1 rounded-xl shadow-sm">0 Seats Taken</span>
-                        <span id="hud-total-open" class="bg-emerald-50 border border-emerald-100 text-emerald-600 px-3 py-1 rounded-xl shadow-sm">0 Seats Available</span>
+                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 mt-3.5 text-xs font-mono font-bold">
+                        <span id="hud-total-busy" class="bg-rose-50 border border-rose-200 text-rose-700 px-3.5 py-1.5 rounded-xl shadow-sm"><i class="fa-solid fa-couch mr-1.5"></i> 0 Seats Taken</span>
+                        <span id="hud-total-open" class="bg-emerald-50 border border-emerald-200 text-emerald-700 px-3.5 py-1.5 rounded-xl shadow-sm"><i class="fa-solid fa-feather mr-1.5"></i> 0 Seats Available</span>
                     </div>
                 </div>
             </div>
             
             <div class="w-full md:w-auto shrink-0 flex justify-center items-center relative z-10" id="magnetic-button-container">
-                <button id="magic-allocate-btn" onclick="executeMagicSeatMatch()" class="w-full md:w-auto bg-slate-800 hover:bg-slate-900 text-amber-100 font-700 text-xs tracking-wider uppercase px-5 py-3.5 rounded-xl shadow-md flex items-center justify-center gap-2 font-mono">
-                    <i class="fa-solid fa-compass text-[10px]"></i> Quick Match a Desk
+                <button id="magic-allocate-btn" onclick="executeMagicSeatMatch()" class="w-full md:w-auto bg-slate-900 hover:bg-slate-800 text-amber-100 font-bold text-xs sm:text-sm tracking-wider uppercase px-6 py-4 rounded-xl shadow-md flex items-center justify-center gap-2.5 font-mono transition-colors">
+                    <i class="fa-solid fa-compass text-xs"></i> Quick Match a Desk
                 </button>
             </div>
         </div>
@@ -167,38 +168,38 @@
 
     <!-- 📊 LOAD RATIOS -->
     <section class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10 gsap-hero-panel grid grid-cols-1 md:grid-cols-12 gap-6">
-        <div class="premium-glass-shell rounded-3xl p-5 md:col-span-8 border border-white">
-            <div class="mb-3 flex items-center gap-2 text-slate-400">
-                <i class="fa-solid fa-chart-bar text-xs"></i>
-                <h3 class="text-xs font-700 text-slate-500 uppercase tracking-wider font-mono">Current Space Load</h3>
+        <div class="premium-glass-shell rounded-3xl p-6 md:col-span-8 border border-white">
+            <div class="mb-3 flex items-center gap-2 text-slate-700">
+                <i class="fa-solid fa-chart-bar text-sm text-amber-600"></i>
+                <h3 class="text-xs sm:text-sm font-bold text-slate-700 uppercase tracking-wider font-mono">Current Space Load</h3>
             </div>
-            <div class="w-full h-24 relative flex items-center justify-center">
+            <div class="w-full h-28 relative flex items-center justify-center">
                 <canvas id="live-occupancy-chart-canvas"></canvas>
             </div>
         </div>
 
-        <div class="premium-glass-shell rounded-3xl p-5 md:col-span-4 border border-white flex flex-col justify-between">
+        <div class="premium-glass-shell rounded-3xl p-6 md:col-span-4 border border-white flex flex-col justify-between">
             <div>
-                <span class="text-[9px] uppercase tracking-widest font-700 text-amber-700 font-mono">System Intel</span>
-                <p class="text-[11px] text-slate-400 mt-1 font-medium leading-relaxed">
+                <span class="text-xs uppercase tracking-widest font-bold text-amber-700 font-mono">System Intel</span>
+                <p class="text-xs sm:text-sm text-slate-600 mt-1.5 font-medium leading-relaxed">
                     Designed to optimize student workflows and cut down library desk hunt chaos smoothly.
                 </p>
             </div>
             <div class="mt-4">
-                <a href="https://belacollege.org/" target="_blank" class="w-full bg-white hover:bg-amber-50/40 border border-[#EFEAE2] text-center text-[10px] font-mono font-bold py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 text-slate-500">
-                    Visit Main Campus Site <i class="fa-solid fa-arrow-up-right-from-square text-[8px] opacity-60"></i>
+                <a href="https://belacollege.org/" target="_blank" class="w-full bg-white hover:bg-amber-50/60 border border-[#EFEAE2] text-center text-xs font-mono font-bold py-3 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 text-slate-700">
+                    Visit Main Campus Site <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-70"></i>
                 </a>
             </div>
         </div>
     </section>
 
     <!-- MOBILE NAVIGATION BUTTONS -->
-    <div class="flex justify-center p-4 lg:hidden sticky top-[69px] z-40 backdrop-blur-md">
-        <div class="bg-white/90 border border-[#EFEAE2] p-1 rounded-2xl flex gap-1 shadow-sm">
-            <button id="toggle-seats-btn" onclick="switchMobileTab('seats')" class="px-5 py-2.5 rounded-xl text-xs font-700 transition-all bg-slate-800 text-amber-50">
+    <div class="flex justify-center p-4 lg:hidden sticky top-[73px] z-40 backdrop-blur-md">
+        <div class="bg-white/95 border border-[#EFEAE2] p-1.5 rounded-2xl flex gap-1.5 shadow-md">
+            <button id="toggle-seats-btn" onclick="switchMobileTab('seats')" class="px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-slate-900 text-amber-50 shadow-sm">
                 Space Map
             </button>
-            <button id="toggle-books-btn" onclick="switchMobileTab('books')" class="px-5 py-2.5 rounded-xl text-xs font-700 transition-all text-slate-400 hover:text-slate-700">
+            <button id="toggle-books-btn" onclick="switchMobileTab('books')" class="px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:text-slate-900">
                 Catalog Desk
             </button>
         </div>
@@ -209,20 +210,20 @@
         
         <!-- SEAT CONTROL SYSTEM -->
         <div id="seats-panel" class="lg:col-span-5 space-y-6 block transition-all duration-500 gsap-panel-left">
-            <div class="premium-glass-shell p-5 rounded-3xl">
+            <div class="premium-glass-shell p-6 rounded-3xl">
                 <div class="mb-4">
-                    <h2 class="text-sm font-700 text-slate-800 uppercase tracking-wider font-mono flex items-center gap-2">
+                    <h2 class="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wider font-mono flex items-center gap-2">
                         <i class="fa-solid fa-map-location-dot text-amber-600"></i> Desks Blueprint
                     </h2>
                 </div>
 
-                <div class="bg-white/60 border border-[#EFEAE2] p-1 rounded-xl flex gap-1 mb-5 overflow-x-auto no-scrollbar">
-                    <button id="zone-btn-all" onclick="filterRadarZone('all')" class="px-4 py-2 rounded-lg text-xs font-700 transition-all whitespace-nowrap bg-slate-800 text-white">All Tables</button>
-                    <button id="zone-btn-main" onclick="filterRadarZone('main')" class="px-4 py-2 rounded-lg text-xs font-700 transition-all whitespace-nowrap text-slate-400 hover:text-slate-700">🌳 Oak Center</button>
-                    <button id="zone-btn-quiet" onclick="filterRadarZone('quiet')" class="px-4 py-2 rounded-lg text-xs font-700 transition-all whitespace-nowrap text-slate-400 hover:text-slate-700">🤫 Silent Pods</button>
+                <div class="bg-white/80 border border-[#EFEAE2] p-1.5 rounded-xl flex gap-1.5 mb-5 overflow-x-auto no-scrollbar">
+                    <button id="zone-btn-all" onclick="filterRadarZone('all')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap bg-slate-900 text-white shadow-sm">All Tables</button>
+                    <button id="zone-btn-main" onclick="filterRadarZone('main')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap text-slate-600 hover:text-slate-900">🌳 Oak Center</button>
+                    <button id="zone-btn-quiet" onclick="filterRadarZone('quiet')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap text-slate-600 hover:text-slate-900">🤫 Silent Pods</button>
                 </div>
 
-                <div class="border border-[#EFEAE2] rounded-2xl p-4 bg-white/20 max-h-[480px] overflow-y-auto space-y-12 flex flex-col items-center shadow-inner">
+                <div class="border border-[#EFEAE2] rounded-2xl p-4 bg-white/40 max-h-[520px] overflow-y-auto space-y-12 flex flex-col items-center shadow-inner">
                     <div id="library-bays-container" class="w-full space-y-16 py-2 flex flex-col items-center"></div>
                 </div>
             </div>
@@ -230,17 +231,17 @@
 
         <!-- ASSET BOOK CATALOG CONTROL -->
         <div id="books-panel" class="lg:col-span-7 space-y-6 hidden lg:block transition-all duration-500 gsap-panel-right">
-            <div class="premium-glass-shell p-5 rounded-3xl">
+            <div class="premium-glass-shell p-6 rounded-3xl">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
                     <div>
-                        <h2 class="text-sm font-700 text-slate-800 uppercase tracking-wider font-mono flex items-center gap-2">
+                        <h2 class="text-xs sm:text-sm font-bold text-slate-800 uppercase tracking-wider font-mono flex items-center gap-2">
                             <i class="fa-solid fa-book text-amber-600"></i> Available Catalog Bank
                         </h2>
                     </div>
 
-                    <div class="relative w-full sm:w-64 rounded-xl">
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Search title, author, rows..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-[#EFEAE2] rounded-xl text-xs text-slate-700 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 transition-all font-medium shadow-sm">
+                    <div class="relative w-full sm:w-72 rounded-xl">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Search title, author, rows..." class="w-full pl-11 pr-4 py-2.5 bg-white border border-[#EFEAE2] rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 transition-all font-medium shadow-sm">
                     </div>
                 </div>
 
@@ -251,7 +252,7 @@
         </div>
     </main>
 
-    <footer class="max-w-7xl mx-auto p-6 text-center text-[10px] font-mono font-bold text-slate-400 tracking-wider relative z-10 border-t border-[#EFEAE2] mt-12">
+    <footer class="max-w-7xl mx-auto p-6 text-center text-xs font-mono font-bold text-slate-500 tracking-wider relative z-10 border-t border-[#EFEAE2] mt-12">
         SANCTUARY ARCHITECTURE PORTAL | CORE SYSTEM DESIGNED BY YASHPNEET SINGH
     </footer>
 
@@ -298,7 +299,6 @@
         }
 
         function triggerLiveMetricsRecompilation(seats) {
-            // CRITICAL FIX: Add full contextual verification protection barriers for mobile engines
             const canvasElement = document.getElementById('live-occupancy-chart-canvas');
             if (!canvasElement) return;
 
@@ -325,11 +325,11 @@
                     datasets: [{
                         label: 'Active Desks',
                         data: chartDataValues,
-                        backgroundColor: ['rgba(217, 119, 6, 0.6)', 'rgba(244, 63, 94, 0.6)'],
+                        backgroundColor: ['rgba(217, 119, 6, 0.7)', 'rgba(244, 63, 94, 0.7)'],
                         borderColor: ['#d97706', '#f43f5e'],
                         borderWidth: 1,
                         borderRadius: 6,
-                        barThickness: 14
+                        barThickness: 16
                     }]
                 },
                 options: {
@@ -340,12 +340,12 @@
                     scales: {
                         x: {
                             grid: { display: false },
-                            ticks: { font: { family: 'Plus Jakarta Sans', size: 9, weight: 'bold' }, color: '#94a3b8' },
+                            ticks: { font: { family: 'Plus Jakarta Sans', size: 11, weight: 'bold' }, color: '#64748b' },
                             min: 0, max: 30
                         },
                         y: {
                             grid: { display: false },
-                            ticks: { font: { family: 'Plus Jakarta Sans', size: 9, weight: 'bold' }, color: '#475569' }
+                            ticks: { font: { family: 'Plus Jakarta Sans', size: 11, weight: 'bold' }, color: '#334155' }
                         }
                     }
                 }
@@ -391,8 +391,8 @@
             const totalTables = Math.ceil(seats.length / seatsPerTable);
 
             const relativeChairCoordinates = [
-                { top: '8%',  left: '-36px' }, { top: '26%', left: '-36px' }, { top: '44%', left: '-36px' }, { top: '62%', left: '-36px' }, { top: '80%', left: '-36px' },
-                { top: '8%',  right: '-36px' }, { top: '26%', right: '-36px' }, { top: '44%', right: '-36px' }, { top: '62%', right: '-36px' }, { top: '80%', right: '-36px' }
+                { top: '8%',  left: '-38px' }, { top: '26%', left: '-38px' }, { top: '44%', left: '-38px' }, { top: '62%', left: '-38px' }, { top: '80%', left: '-38px' },
+                { top: '8%',  right: '-38px' }, { top: '26%', right: '-38px' }, { top: '44%', right: '-38px' }, { top: '62%', right: '-38px' }, { top: '80%', right: '-38px' }
             ];
 
             for (let t = 0; t < totalTables; t++) {
@@ -402,15 +402,15 @@
                 if (globalCurrentZoneFilter !== 'all' && globalCurrentZoneFilter !== tableZone) continue;
 
                 const tableWrapper = document.createElement('div');
-                tableWrapper.className = "scandi-oak-bench w-48 sm:w-52 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4";
+                tableWrapper.className = "scandi-oak-bench w-48 sm:w-56 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-4";
                 
                 tableWrapper.innerHTML = `
                     <div class="absolute inset-y-0 w-[1px] bg-[#DBCEB4]/40 left-1/2 -translate-x-1/2 pointer-events-none"></div>
                     <div class="absolute inset-x-0 h-[1px] bg-[#DBCEB4]/40 top-1/2 -translate-y-1/2 pointer-events-none"></div>
                     
-                    <div class="text-[9px] font-700 text-[#7C654D] uppercase tracking-wider bg-white/95 px-3 py-2 rounded-xl border border-[#D9CDBC]/50 z-10 shadow-sm display-font select-none flex flex-col items-center">
+                    <div class="text-xs font-bold text-[#634f3a] uppercase tracking-wider bg-white/95 px-3.5 py-2 rounded-xl border border-[#D9CDBC]/60 z-10 shadow-sm display-font select-none flex flex-col items-center">
                         <span>Table ${String.fromCharCode(65 + t)}</span>
-                        <span class="text-[6px] text-slate-400 font-sans tracking-normal lowercase mt-0.5">${zoneLabelText}</span>
+                        <span class="text-[9px] text-slate-500 font-sans tracking-normal lowercase mt-0.5 font-medium">${zoneLabelText}</span>
                     </div>
                 `;
 
@@ -421,7 +421,7 @@
                     const position = relativeChairCoordinates[idx];
 
                     const chairDiv = document.createElement('div');
-                    chairDiv.className = "absolute w-9 h-9 flex items-center justify-center transition-all duration-300 z-20 group/chair";
+                    chairDiv.className = "absolute w-10 h-10 flex items-center justify-center transition-all duration-300 z-20 group/chair";
                     chairDiv.id = `chair-node-anchor-${seat.seat_number}`;
                     
                     if (position.left) chairDiv.style.left = position.left;
@@ -432,16 +432,16 @@
 
                     chairDiv.innerHTML = `
                         <div class="absolute bottom-full mb-2 hidden group-hover/chair:flex flex-col items-center z-30 pointer-events-none whitespace-nowrap">
-                            <span class="bg-slate-800 text-white text-[9px] px-2 py-1 rounded-md shadow-md tracking-wide">${sessionTrackingBadge}</span>
-                            <div class="w-1 h-1 bg-slate-800 rotate-45 -mt-0.5"></div>
+                            <span class="bg-slate-900 text-white text-xs font-medium px-2.5 py-1 rounded-md shadow-md tracking-wide">${sessionTrackingBadge}</span>
+                            <div class="w-1.5 h-1.5 bg-slate-900 rotate-45 -mt-0.5"></div>
                         </div>
 
-                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl border flex flex-col items-center justify-center transition-all duration-300 shadow-sm transform hover:scale-110 cursor-pointer ${
+                        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border flex flex-col items-center justify-center transition-all duration-300 shadow-sm transform hover:scale-110 cursor-pointer ${
                             occupied 
-                            ? 'bg-rose-50 border-rose-200 text-rose-500' 
-                            : 'bg-emerald-50 border-emerald-200 text-emerald-600 hover:bg-emerald-100'
+                            ? 'bg-rose-50 border-rose-300 text-rose-600 font-bold' 
+                            : 'bg-emerald-50 border-emerald-300 text-emerald-700 font-bold hover:bg-emerald-100'
                         }">
-                            <span class="text-[8px] font-bold font-mono tracking-tighter">${seat.seat_number}</span>
+                            <span class="text-[10px] sm:text-xs font-bold font-mono tracking-tighter">${seat.seat_number}</span>
                         </div>
                     `;
                     tableWrapper.appendChild(chairDiv);
@@ -464,8 +464,8 @@
                 container.innerHTML = '';
 
                 if (books.length === 0) {
-                    container.className = "flex flex-col items-center justify-center py-16 col-span-full text-center border border-dashed border-slate-200 rounded-2xl bg-white/50";
-                    container.innerHTML = `<p class="text-xs font-mono text-slate-400">No matching library books found</p>`;
+                    container.className = "flex flex-col items-center justify-center py-16 col-span-full text-center border border-dashed border-slate-300 rounded-2xl bg-white/50";
+                    container.innerHTML = `<p class="text-sm font-mono text-slate-500 font-medium">No matching library books found</p>`;
                     return;
                 }
 
@@ -477,25 +477,25 @@
                     card.className = `pt-6 px-5 pb-5 rounded-2xl flex flex-col justify-between group bg-white premium-glass-card`;
                     
                     card.innerHTML = `
-                        <div class="absolute top-0 right-4 w-7 h-7 flex items-center justify-center text-[8px] font-bold font-mono text-white rounded-b-md shadow-sm ${
-                            available ? 'bg-emerald-400' : 'bg-rose-400'
+                        <div class="absolute top-0 right-4 w-8 h-8 flex items-center justify-center text-[9px] font-bold font-mono text-white rounded-b-md shadow-sm ${
+                            available ? 'bg-emerald-500' : 'bg-rose-500'
                         }">
                             <span>${available ? 'IN' : 'OUT'}</span>
                         </div>
 
                         <div>
-                            <span class="text-[8px] bg-slate-50 border border-slate-200 text-slate-500 uppercase font-700 px-2 py-0.5 rounded font-mono">
+                            <span class="text-[9px] sm:text-[10px] bg-slate-100 border border-slate-200 text-slate-600 uppercase font-bold px-2 py-0.5 rounded font-mono">
                                 Collection Index
                             </span>
-                            <h3 class="font-700 text-slate-800 text-xs mt-2.5 mb-0.5 tracking-tight leading-snug group-hover:text-amber-700 transition-colors">${book.title}</h3>
-                            <p class="text-[11px] text-slate-400">By ${book.author}</p>
+                            <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 mb-1 tracking-tight leading-snug group-hover:text-amber-700 transition-colors">${book.title}</h3>
+                            <p class="text-xs sm:text-sm text-slate-600 font-medium">By ${book.author}</p>
                         </div>
                         
                         <div class="flex items-center justify-between pt-3 border-t border-slate-100 mt-5">
-                            <span class="text-[9px] text-slate-400 font-mono truncate max-w-[160px]">
-                                <i class="fa-solid fa-hashtag text-[8px] opacity-60"></i> ${book.shelf_location}
+                            <span class="text-xs text-slate-500 font-mono font-medium truncate max-w-[160px]">
+                                <i class="fa-solid fa-hashtag text-[10px] opacity-70"></i> ${book.shelf_location}
                             </span>
-                            <span class="text-[9px] font-bold tracking-wider ${available ? 'text-emerald-600' : 'text-slate-400'} font-mono">
+                            <span class="text-xs font-bold tracking-wider ${available ? 'text-emerald-700' : 'text-slate-500'} font-mono">
                                 ${available ? 'AVAILABLE' : 'HELD'}
                             </span>
                         </div>
@@ -511,9 +511,9 @@
                 const btn = document.getElementById(`zone-btn-${b}`);
                 if (btn) {
                     if (b === zone) {
-                        btn.className = "px-4 py-2 rounded-lg text-xs font-700 transition-all whitespace-nowrap bg-slate-800 text-white shadow-sm";
+                        btn.className = "px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap bg-slate-900 text-white shadow-sm";
                     } else {
-                        btn.className = "px-4 py-2 rounded-lg text-xs font-700 transition-all whitespace-nowrap text-slate-400 hover:text-slate-700";
+                        btn.className = "px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap text-slate-600 hover:text-slate-900";
                     }
                 }
             });
@@ -563,13 +563,13 @@
             if (tab === 'seats') {
                 seatsPanel.classList.remove('hidden'); seatsPanel.classList.add('block');
                 booksPanel.classList.remove('block'); booksPanel.classList.add('hidden');
-                seatsBtn.className = "px-5 py-2.5 rounded-xl text-xs font-700 transition-all bg-slate-800 text-amber-50";
-                booksBtn.className = "px-5 py-2.5 rounded-xl text-xs font-700 transition-all text-slate-400 hover:text-slate-700";
+                seatsBtn.className = "px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-slate-900 text-amber-50 shadow-sm";
+                booksBtn.className = "px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:text-slate-900";
             } else {
                 seatsPanel.classList.remove('block'); seatsPanel.classList.add('hidden');
                 booksPanel.classList.remove('hidden'); booksPanel.classList.add('block');
-                booksBtn.className = "px-5 py-2.5 rounded-xl text-xs font-700 transition-all bg-slate-800 text-amber-50";
-                seatsBtn.className = "px-5 py-2.5 rounded-xl text-xs font-700 transition-all text-slate-400 hover:text-slate-700";
+                booksBtn.className = "px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-slate-900 text-amber-50 shadow-sm";
+                seatsBtn.className = "px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all text-slate-600 hover:text-slate-900";
             }
         }
 
