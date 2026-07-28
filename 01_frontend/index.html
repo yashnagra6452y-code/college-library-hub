@@ -19,7 +19,7 @@
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #FDFBF7;
+            background-color: #FAF8F5;
             overflow-x: hidden;
             position: relative;
             font-size: 16px;
@@ -29,60 +29,59 @@
             font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* ☁️ ULTRA-CHILL AMBIENT ORB BACKGROUND */
+        /* AMBIENT BACKGROUND MESH */
         .aurora-bg-mesh {
             position: fixed;
             inset: 0;
             z-index: 1;
             pointer-events: none;
             background: 
-                radial-gradient(circle at 10% 20%, rgba(254, 243, 199, 0.6) 0%, transparent 40%),
-                radial-gradient(circle at 90% 10%, rgba(224, 242, 254, 0.5) 0%, transparent 40%),
-                radial-gradient(circle at 50% 90%, rgba(251, 207, 232, 0.3) 0%, transparent 50%),
-                #FDFBF7;
+                radial-gradient(circle at 10% 20%, rgba(254, 243, 199, 0.5) 0%, transparent 40%),
+                radial-gradient(circle at 90% 10%, rgba(224, 242, 254, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 50% 90%, rgba(251, 207, 232, 0.25) 0%, transparent 50%),
+                #FAF8F5;
         }
 
-        /* 🧊 ULTRA-SOFT LIQUID GLASSMORPHISM */
+        /* PREMIUM LIQUID GLASSMORPHISM */
         .premium-glass-shell {
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.95);
             box-shadow: 
-                0 20px 40px -15px rgba(139, 92, 26, 0.08),
+                0 20px 40px -15px rgba(139, 92, 26, 0.05),
                 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
-        /* 🗂️ COZY TACTILE BOUNCE CARDS */
+        /* TACTILE CARDS */
         .premium-glass-card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(239, 234, 226, 0.9);
-            box-shadow: 0 10px 25px -10px rgba(120, 110, 90, 0.08);
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 25px -10px rgba(120, 110, 90, 0.06);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         @media (min-width: 1024px) {
             .premium-glass-card:hover {
-                transform: translateY(-6px) scale(1.015);
+                transform: translateY(-4px);
                 background: #FFFFFF;
                 border-color: rgba(217, 119, 6, 0.3);
-                box-shadow: 0 24px 36px -8px rgba(180, 150, 100, 0.2);
+                box-shadow: 0 20px 30px -8px rgba(180, 150, 100, 0.15);
             }
         }
 
-        /* 🌳 PREMIUM WARM OAK WOOD BENCHES */
+        /* ARCHITECTURAL OAK BENCH DESIGN */
         .scandi-oak-bench {
-            background: linear-gradient(135deg, #FFFDF9 0%, #F5EDE0 100%);
-            border: 1.5px solid #E6DBC9;
+            background: linear-gradient(180deg, #FFFFFF 0%, #F8F4EE 100%);
+            border: 1px solid #EAE3D5;
             box-shadow: 
-                inset 0 2px 4px rgba(255, 255, 255, 0.9),
-                0 12px 28px -10px rgba(139, 92, 26, 0.15);
-            transition: all 0.4s ease;
+                0 10px 25px -5px rgba(139, 92, 26, 0.05),
+                0 2px 4px rgba(0, 0, 0, 0.01);
         }
 
-        /* 🧚‍♀️ AMBIENT DRIFT MOTION */
+        /* AMBIENT DRIFT MOTION */
         .drift-node-y { animation: floatY 10s infinite ease-in-out; }
         .drift-node-x { animation: floatX 12s infinite ease-in-out; }
 
@@ -95,13 +94,13 @@
             50% { transform: translateX(12px) translateY(-8px) rotate(-3deg); opacity: 0.7; }
         }
 
-        /* ⚡ SLOW-GLOW RADAR WAVE */
+        /* RADAR PULSE EFFECT */
         .radar-pulse-active {
-            animation: radarGlowRing 3s infinite ease-in-out;
+            animation: radarGlowRing 2.5s infinite ease-in-out;
         }
         @keyframes radarGlowRing {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.4), 0 4px 10px rgba(217, 119, 6, 0.1); }
-            50% { transform: scale(1.12); box-shadow: 0 0 0 14px rgba(217, 119, 6, 0), 0 20px 35px rgba(217, 119, 6, 0.25); }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.5); }
+            50% { transform: scale(1.15); box-shadow: 0 0 0 12px rgba(217, 119, 6, 0); }
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -110,41 +109,41 @@
 </head>
 <body class="min-h-screen text-slate-700 antialiased selection:bg-amber-100 selection:text-amber-900 opacity-0" id="master-body-viewport">
 
-    <!-- 🌌 AMBIENT OVERLAY -->
+    <!-- AMBIENT OVERLAY -->
     <div class="aurora-bg-mesh"></div>
 
-    <!-- CHILL FLOATING DECORATIONS -->
-    <div class="hidden lg:block absolute top-[12%] left-[4%] text-amber-600/20 text-5xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-mug-hot"></i></div>
-    <div class="hidden lg:block absolute top-[62%] left-[45%] text-sky-400/20 text-6xl pointer-events-none select-none drift-node-x z-0"><i class="fa-solid fa-book-open"></i></div>
-    <div class="hidden lg:block absolute top-[22%] right-[5%] text-pink-400/20 text-5xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-feather-pointed"></i></div>
+    <!-- FLOATING DECORATIONS -->
+    <div class="hidden lg:block absolute top-[12%] left-[4%] text-amber-600/15 text-5xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-mug-hot"></i></div>
+    <div class="hidden lg:block absolute top-[62%] left-[45%] text-sky-400/15 text-6xl pointer-events-none select-none drift-node-x z-0"><i class="fa-solid fa-book-open"></i></div>
+    <div class="hidden lg:block absolute top-[22%] right-[5%] text-pink-400/15 text-5xl pointer-events-none select-none drift-node-y z-0"><i class="fa-solid fa-feather-pointed"></i></div>
 
     <!-- CLEAN COZY NAV BAR -->
-    <nav class="bg-[#FDFBF7]/80 backdrop-blur-md border-b border-[#EFEAE2] sticky top-0 z-50 px-4 sm:px-10 py-4 shadow-sm">
+    <nav class="bg-[#FAF8F5]/85 backdrop-blur-md border-b border-[#EFEAE2] sticky top-0 z-50 px-4 sm:px-10 py-3.5 shadow-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center relative z-10">
-            <div class="flex items-center gap-3 group cursor-pointer">
-                <div class="bg-amber-50 border border-amber-200/80 w-11 h-11 rounded-2xl flex items-center justify-center text-amber-700 shadow-sm">
+            <div class="flex items-center gap-3.5 group cursor-pointer">
+                <div class="bg-amber-500/10 border border-amber-500/20 w-10 h-10 rounded-xl flex items-center justify-center text-amber-700 shadow-sm">
                     <i class="fa-solid fa-seedling text-base transition-transform duration-500 group-hover:rotate-12"></i>
                 </div>
                 <div>
                     <h1 class="text-base sm:text-lg font-bold tracking-tight text-slate-900 display-font leading-tight">
                         ASBASJS Memorial College, Bela
                     </h1>
-                    <p class="text-[11px] sm:text-xs text-amber-800/70 font-bold uppercase tracking-widest mt-0.5">Smart Student Space Portal</p>
+                    <p class="text-[10px] sm:text-[11px] text-amber-800/80 font-bold uppercase tracking-wider mt-0.5">Smart Student Space Portal</p>
                 </div>
             </div>
-            <div class="bg-white border border-[#EFEAE2] px-3.5 py-1.5 rounded-xl flex items-center gap-2 shadow-sm">
+            <div class="bg-white/90 border border-[#EFEAE2] px-3.5 py-1.5 rounded-xl flex items-center gap-2 shadow-sm">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span class="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">Connected</span>
             </div>
         </div>
     </nav>
 
-    <!-- 🌟 SANCTUARY GREETING HERO -->
+    <!-- SANCTUARY GREETING HERO -->
     <header class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10">
-        <div id="gsap-hero-panel" class="premium-glass-shell rounded-[2rem] p-6 sm:p-8 flex flex-col md:flex-row justify-between items-center gap-6 border border-white">
+        <div id="gsap-hero-panel" class="premium-glass-shell rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row justify-between items-center gap-6 border border-white">
             
             <div class="flex flex-col sm:flex-row items-center gap-5 w-full md:w-auto text-center sm:text-left relative z-10">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-amber-50 rounded-2xl flex items-center justify-center border border-amber-200/60 shrink-0 shadow-inner">
+                <div class="w-16 h-16 sm:w-18 sm:h-18 bg-amber-50 rounded-2xl flex items-center justify-center border border-amber-200/60 shrink-0 shadow-inner">
                     <i class="fa-solid fa-couch text-2xl text-amber-700"></i>
                 </div>
                 <div>
@@ -159,14 +158,14 @@
             </div>
             
             <div class="w-full md:w-auto shrink-0 flex justify-center items-center relative z-10" id="magnetic-button-container">
-                <button id="magic-allocate-btn" onclick="executeMagicSeatMatch()" class="w-full md:w-auto bg-slate-900 hover:bg-slate-800 text-amber-100 font-bold text-xs sm:text-sm tracking-wider uppercase px-6 py-4 rounded-xl shadow-md flex items-center justify-center gap-2.5 font-mono transition-colors">
-                    <i class="fa-solid fa-compass text-xs"></i> Quick Match a Desk
+                <button id="magic-allocate-btn" onclick="executeMagicSeatMatch()" class="w-full md:w-auto bg-slate-900 hover:bg-slate-800 text-amber-50 font-bold text-xs sm:text-sm tracking-wider uppercase px-6 py-3.5 rounded-xl shadow-md flex items-center justify-center gap-2.5 font-mono transition-all hover:shadow-lg">
+                    <i class="fa-solid fa-compass text-xs text-amber-400"></i> Quick Match a Desk
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- 📊 LOAD RATIOS -->
+    <!-- LOAD RATIOS -->
     <section class="max-w-7xl mx-auto p-4 sm:p-6 pb-0 relative z-10 gsap-hero-panel grid grid-cols-1 md:grid-cols-12 gap-6">
         <div class="premium-glass-shell rounded-3xl p-6 md:col-span-8 border border-white">
             <div class="mb-3 flex items-center gap-2 text-slate-700">
@@ -186,7 +185,7 @@
                 </p>
             </div>
             <div class="mt-4">
-                <a href="https://belacollege.org/" target="_blank" class="w-full bg-white hover:bg-amber-50/60 border border-[#EFEAE2] text-center text-xs font-mono font-bold py-3 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 text-slate-700">
+                <a href="https://belacollege.org/" target="_blank" class="w-full bg-white hover:bg-amber-50/60 border border-[#EFEAE2] text-center text-xs font-mono font-bold py-2.5 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 text-slate-700">
                     Visit Main Campus Site <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-70"></i>
                 </a>
             </div>
@@ -194,7 +193,7 @@
     </section>
 
     <!-- MOBILE NAVIGATION BUTTONS -->
-    <div class="flex justify-center p-4 lg:hidden sticky top-[73px] z-40 backdrop-blur-md">
+    <div class="flex justify-center p-4 lg:hidden sticky top-[71px] z-40 backdrop-blur-md">
         <div class="bg-white/95 border border-[#EFEAE2] p-1.5 rounded-2xl flex gap-1.5 shadow-md">
             <button id="toggle-seats-btn" onclick="switchMobileTab('seats')" class="px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-slate-900 text-amber-50 shadow-sm">
                 Space Map
@@ -223,8 +222,8 @@
                     <button id="zone-btn-quiet" onclick="filterRadarZone('quiet')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all whitespace-nowrap text-slate-600 hover:text-slate-900">🤫 Silent Pods</button>
                 </div>
 
-                <div class="border border-[#EFEAE2] rounded-2xl p-4 sm:p-6 bg-white/40 max-h-[520px] overflow-y-auto space-y-12 flex flex-col items-center shadow-inner overflow-x-hidden">
-                    <div id="library-bays-container" class="w-full space-y-16 py-2 flex flex-col items-center"></div>
+                <div class="border border-[#EFEAE2] rounded-2xl p-4 bg-slate-50/50 max-h-[520px] overflow-y-auto space-y-10 flex flex-col items-center shadow-inner overflow-x-hidden">
+                    <div id="library-bays-container" class="w-full space-y-12 py-2 flex flex-col items-center"></div>
                 </div>
             </div>
         </div>
@@ -241,7 +240,7 @@
 
                     <div class="relative w-full sm:w-72 rounded-xl">
                         <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Search title, author, rows..." class="w-full pl-11 pr-4 py-2.5 bg-white border border-[#EFEAE2] rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 transition-all font-medium shadow-sm">
+                        <input id="catalog-search" type="text" oninput="executeLiveSearch()" placeholder="Search title, author, rows..." class="w-full pl-11 pr-4 py-2 bg-white border border-[#EFEAE2] rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 transition-all font-medium shadow-sm">
                     </div>
                 </div>
 
@@ -252,7 +251,7 @@
         </div>
     </main>
 
-    <footer class="max-w-7xl mx-auto p-6 text-center text-xs font-mono font-bold text-slate-500 tracking-wider relative z-10 border-t border-[#EFEAE2] mt-12">
+    <footer class="max-w-7xl mx-auto p-6 text-center text-xs font-mono font-bold text-slate-400 tracking-wider relative z-10 border-t border-[#EFEAE2] mt-12">
         SANCTUARY ARCHITECTURE PORTAL | CORE SYSTEM DESIGNED BY YASHPNEET SINGH
     </footer>
 
@@ -324,7 +323,7 @@
                     datasets: [{
                         label: 'Active Desks',
                         data: chartDataValues,
-                        backgroundColor: ['rgba(217, 119, 6, 0.7)', 'rgba(244, 63, 94, 0.7)'],
+                        backgroundColor: ['rgba(217, 119, 6, 0.75)', 'rgba(244, 63, 94, 0.75)'],
                         borderColor: ['#d97706', '#f43f5e'],
                         borderWidth: 1,
                         borderRadius: 6,
@@ -381,6 +380,7 @@
             return `Taken for ${Math.floor(totalMinutes / 60)}h`;
         }
 
+        /* 🌟 REDESIGNED ARCHITECTURAL DESK GRID (CLEAN, SLIM & ELEGANT) */
         function renderModularZoneGrid(seats) {
             const mainContainer = document.getElementById('library-bays-container');
             if (!mainContainer) return;
@@ -389,10 +389,10 @@
             const seatsPerTable = 10;
             const totalTables = Math.ceil(seats.length / seatsPerTable);
 
-            // INSIDE BOUNDS POSITIONING (Inward percentages ensure zero clipping or scrollbar overlap)
+            // Sleek alignment attached directly along the table periphery
             const relativeChairCoordinates = [
-                { top: '6%',  left: '4%' }, { top: '25%', left: '4%' }, { top: '44%', left: '4%' }, { top: '63%', left: '4%' }, { top: '82%', left: '4%' },
-                { top: '6%',  right: '4%' }, { top: '25%', right: '4%' }, { top: '44%', right: '4%' }, { top: '63%', right: '4%' }, { top: '82%', right: '4%' }
+                { top: '8%',  left: '6px' },  { top: '27%', left: '6px' },  { top: '46%', left: '6px' },  { top: '65%', left: '6px' },  { top: '84%', left: '6px' },
+                { top: '8%',  right: '6px' }, { top: '27%', right: '6px' }, { top: '46%', right: '6px' }, { top: '65%', right: '6px' }, { top: '84%', right: '6px' }
             ];
 
             for (let t = 0; t < totalTables; t++) {
@@ -402,15 +402,14 @@
                 if (globalCurrentZoneFilter !== 'all' && globalCurrentZoneFilter !== tableZone) continue;
 
                 const tableWrapper = document.createElement('div');
-                tableWrapper.className = "scandi-oak-bench w-64 sm:w-72 h-80 rounded-3xl relative flex items-center justify-center shrink-0 mb-6 my-2 mx-auto shadow-md";
+                tableWrapper.className = "scandi-oak-bench w-full max-w-[280px] sm:max-w-[320px] h-[360px] rounded-2xl relative flex items-center justify-center shrink-0 my-2 mx-auto";
                 
                 tableWrapper.innerHTML = `
-                    <div class="absolute inset-y-0 w-[1px] bg-[#DBCEB4]/40 left-1/2 -translate-x-1/2 pointer-events-none"></div>
-                    <div class="absolute inset-x-0 h-[1px] bg-[#DBCEB4]/40 top-1/2 -translate-y-1/2 pointer-events-none"></div>
+                    <div class="absolute inset-y-6 w-[1px] bg-[#E5DDCB] left-1/2 -translate-x-1/2 pointer-events-none"></div>
                     
-                    <div class="text-xs font-bold text-[#634f3a] uppercase tracking-wider bg-white/95 px-4 py-2 rounded-xl border border-[#D9CDBC]/60 z-10 shadow-sm display-font select-none flex flex-col items-center">
-                        <span>Table ${String.fromCharCode(65 + t)}</span>
-                        <span class="text-[9px] text-slate-500 font-sans tracking-normal lowercase mt-0.5 font-medium">${zoneLabelText}</span>
+                    <div class="bg-white/95 backdrop-blur-sm border border-[#E2D7C3] px-4 py-2 rounded-xl z-10 shadow-sm flex flex-col items-center select-none">
+                        <span class="text-xs font-bold text-amber-900 tracking-wider font-mono">TABLE ${String.fromCharCode(65 + t)}</span>
+                        <span class="text-[10px] text-slate-400 font-medium lowercase tracking-tight">${zoneLabelText}</span>
                     </div>
                 `;
 
@@ -421,7 +420,7 @@
                     const position = relativeChairCoordinates[idx];
 
                     const chairDiv = document.createElement('div');
-                    chairDiv.className = "absolute w-10 h-10 flex items-center justify-center transition-all duration-300 z-20 group/chair";
+                    chairDiv.className = "absolute w-9 h-9 flex items-center justify-center transition-all duration-300 z-20 group/chair";
                     chairDiv.id = `chair-node-anchor-${seat.seat_number}`;
                     
                     if (position.left) chairDiv.style.left = position.left;
@@ -432,16 +431,16 @@
 
                     chairDiv.innerHTML = `
                         <div class="absolute bottom-full mb-2 hidden group-hover/chair:flex flex-col items-center z-30 pointer-events-none whitespace-nowrap">
-                            <span class="bg-slate-900 text-white text-xs font-medium px-2.5 py-1 rounded-md shadow-md tracking-wide">${sessionTrackingBadge}</span>
+                            <span class="bg-slate-900 text-white text-[11px] font-medium px-2.5 py-1 rounded-md shadow-md">${sessionTrackingBadge}</span>
                             <div class="w-1.5 h-1.5 bg-slate-900 rotate-45 -mt-0.5"></div>
                         </div>
 
-                        <div class="w-10 h-10 rounded-xl border flex flex-col items-center justify-center transition-all duration-300 shadow-sm transform hover:scale-110 cursor-pointer ${
+                        <div class="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 cursor-pointer shadow-sm ${
                             occupied 
-                            ? 'bg-rose-50 border-rose-300 text-rose-600 font-bold' 
-                            : 'bg-emerald-50 border-emerald-300 text-emerald-700 font-bold hover:bg-emerald-100'
+                            ? 'bg-rose-50 border border-rose-300/80 text-rose-600 font-bold shadow-rose-100' 
+                            : 'bg-emerald-50 border border-emerald-300/80 text-emerald-700 font-bold hover:bg-emerald-100/80 shadow-emerald-100'
                         }">
-                            <span class="text-[10px] sm:text-xs font-bold font-mono tracking-tighter">${seat.seat_number}</span>
+                            <span class="text-[11px] font-bold font-mono tracking-tighter">${seat.seat_number}</span>
                         </div>
                     `;
                     tableWrapper.appendChild(chairDiv);
@@ -477,25 +476,25 @@
                     card.className = `pt-6 px-5 pb-5 rounded-2xl flex flex-col justify-between group bg-white premium-glass-card`;
                     
                     card.innerHTML = `
-                        <div class="absolute top-0 right-4 w-8 h-8 flex items-center justify-center text-[9px] font-bold font-mono text-white rounded-b-md shadow-sm ${
+                        <div class="absolute top-0 right-4 w-8 h-7 flex items-center justify-center text-[9px] font-bold font-mono text-white rounded-b-md shadow-sm ${
                             available ? 'bg-emerald-500' : 'bg-rose-500'
                         }">
                             <span>${available ? 'IN' : 'OUT'}</span>
                         </div>
 
                         <div>
-                            <span class="text-[9px] sm:text-[10px] bg-slate-100 border border-slate-200 text-slate-600 uppercase font-bold px-2 py-0.5 rounded font-mono">
+                            <span class="text-[9px] sm:text-[10px] bg-slate-100 border border-slate-200/80 text-slate-600 uppercase font-bold px-2 py-0.5 rounded font-mono">
                                 Collection Index
                             </span>
                             <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-2.5 mb-1 tracking-tight leading-snug group-hover:text-amber-700 transition-colors">${book.title}</h3>
-                            <p class="text-xs sm:text-sm text-slate-600 font-medium">By ${book.author}</p>
+                            <p class="text-xs sm:text-sm text-slate-500 font-medium">By ${book.author}</p>
                         </div>
                         
                         <div class="flex items-center justify-between pt-3 border-t border-slate-100 mt-5">
-                            <span class="text-xs text-slate-500 font-mono font-medium truncate max-w-[160px]">
+                            <span class="text-xs text-slate-400 font-mono font-medium truncate max-w-[160px]">
                                 <i class="fa-solid fa-hashtag text-[10px] opacity-70"></i> ${book.shelf_location}
                             </span>
-                            <span class="text-xs font-bold tracking-wider ${available ? 'text-emerald-700' : 'text-slate-500'} font-mono">
+                            <span class="text-xs font-bold tracking-wider ${available ? 'text-emerald-600' : 'text-slate-400'} font-mono">
                                 ${available ? 'AVAILABLE' : 'HELD'}
                             </span>
                         </div>
