@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASBASJS Terminal | Master Management Node</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Socket.io Client -->
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <!-- GSAP Premium Animation Engine Core -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
@@ -66,12 +70,7 @@
             box-shadow: 0 12px 28px -8px rgba(220, 210, 190, 0.12);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .premium-glass-card:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 1);
-            box-shadow: 0 16px 30px -8px rgba(180, 195, 215, 0.3);
-        }
-
+        
         .admin-node-cell {
             border: 1px solid rgba(226, 215, 195, 0.8);
             background: #FFFFFF;
@@ -132,11 +131,14 @@
             <!-- WORKSTATION OVERRIDES PANEL -->
             <section class="lg:col-span-5 space-y-6">
                 <div class="premium-glass-shell p-5 sm:p-6 rounded-3xl relative overflow-hidden">
-                    <div class="mb-5">
-                        <h2 class="text-sm sm:text-base font-bold text-slate-900 display-font flex items-center gap-2">
-                            <i class="fa-solid fa-chair text-amber-600"></i> Live Workstation Overrides
-                        </h2>
-                        <p class="text-xs sm:text-sm text-slate-500 mt-1 font-medium">Broadcast absolute system overrides straight to student layout mesh</p>
+                    <div class="mb-5 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-sm sm:text-base font-bold text-slate-900 display-font flex items-center gap-2">
+                                <i class="fa-solid fa-chair text-amber-600"></i> Live Workstation Overrides
+                            </h2>
+                            <p class="text-xs sm:text-sm text-slate-500 mt-0.5 font-medium">Broadcast absolute system overrides straight to student layout</p>
+                        </div>
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" title="Real-Time Sync Active"></span>
                     </div>
 
                     <div class="border border-[#E6DFD3] rounded-2xl p-4 bg-slate-50/50 max-h-[580px] overflow-y-auto no-scrollbar shadow-inner">
@@ -174,6 +176,7 @@
         const BACKEND_URL = 'https://college-library-hub.onrender.com';
         const socket = io(BACKEND_URL);
         let administrativeSessionToken = localStorage.getItem('admin_token') || null;
+        let systemAdminSeats = [];
 
         document.addEventListener("DOMContentLoaded", () => {
             gsap.to("#admin-viewport", { opacity: 1, duration: 0.5 });
@@ -237,44 +240,63 @@
             return `Active ${Math.floor(totalMins / 60)}h ${totalMins % 60}m`;
         }
 
-        /* 🌟 REDESIGNED HIGH-CONTRAST WORKSTATION OVERRIDE CARDS */
+        /* 🌟 REAL-TIME WORKSTATION GRID ENGINE */
         async function fetchAdminGridData() {
             try {
                 const response = await fetch(`${BACKEND_URL}/api/seats`);
-                const seats = await response.json();
-                const container = document.getElementById('admin-seats-control-container');
-                container.innerHTML = '';
-
-                seats.forEach(seat => {
-                    const cell = document.createElement('div');
-                    cell.className = "admin-node-cell p-4 rounded-2xl flex flex-col justify-between items-center text-center shadow-sm relative overflow-hidden group";
-                    
-                    const timeTrackingTag = seat.is_occupied ? formatRelativeSessionTime(seat.occupied_since) : 'Vacant Node';
-
-                    cell.innerHTML = `
-                        <div class="w-full">
-                            <div class="flex items-center justify-between gap-1 mb-2">
-                                <span class="w-2.5 h-2.5 rounded-full ${seat.is_occupied ? 'bg-rose-500' : 'bg-emerald-500'}"></span>
-                                <span class="text-xs sm:text-sm font-bold font-mono text-slate-900 tracking-tight">NODE ${seat.seat_number}</span>
-                            </div>
-                            <div class="text-xs font-bold tracking-tight font-mono truncate max-w-full ${seat.is_occupied ? 'text-rose-600' : 'text-emerald-600'}">
-                                ${timeTrackingTag}
-                            </div>
-                        </div>
-                        <button onclick="requestNodeOverride(${seat.seat_number})" class="mt-3.5 w-full text-xs font-bold tracking-wider uppercase font-mono py-2.5 rounded-xl border transition-all duration-200 shadow-sm ${
-                            seat.is_occupied 
-                            ? 'bg-rose-50 border-rose-300 text-rose-700 hover:bg-rose-600 hover:text-white hover:border-rose-600' 
-                            : 'bg-emerald-50 border-emerald-300 text-emerald-800 hover:bg-emerald-600 hover:text-white hover:border-emerald-600'
-                        }">
-                            ${seat.is_occupied ? 'Force Free' : 'Force Occupy'}
-                        </button>
-                    `;
-                    container.appendChild(cell);
-                });
+                systemAdminSeats = await response.json();
+                renderAdminSeatNodes(systemAdminSeats);
             } catch(e) { console.error(e); }
         }
 
-        async function requestNodeOverride(seat_number) {
+        function renderAdminSeatNodes(seats) {
+            const container = document.getElementById('admin-seats-control-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            seats.forEach(seat => {
+                const seatKey = seat.seat_number || seat.desk_number || seat.id;
+                const isOccupied = seat.is_occupied || seat.is_taken || false;
+                const timeTrackingTag = isOccupied ? formatRelativeSessionTime(seat.occupied_since) : 'Vacant Node';
+
+                const cell = document.createElement('div');
+                cell.id = `admin-seat-card-${seatKey}`;
+                cell.className = "admin-node-cell p-4 rounded-2xl flex flex-col justify-between items-center text-center shadow-sm relative overflow-hidden group";
+
+                cell.innerHTML = `
+                    <div class="w-full">
+                        <div class="flex items-center justify-between gap-1 mb-2">
+                            <span class="w-2.5 h-2.5 rounded-full ${isOccupied ? 'bg-rose-500 animate-pulse' : 'bg-emerald-500'}"></span>
+                            <span class="text-xs sm:text-sm font-bold font-mono text-slate-900 tracking-tight">${seatKey}</span>
+                        </div>
+                        <div class="text-xs font-bold tracking-tight font-mono truncate max-w-full ${isOccupied ? 'text-rose-600' : 'text-emerald-600'}">
+                            ${timeTrackingTag}
+                        </div>
+                    </div>
+                    <button onclick="requestNodeOverride('${seatKey}', ${isOccupied})" class="mt-3.5 w-full text-xs font-bold tracking-wider uppercase font-mono py-2.5 rounded-xl border transition-all duration-200 shadow-sm ${
+                        isOccupied 
+                        ? 'bg-rose-50 border-rose-300 text-rose-700 hover:bg-rose-600 hover:text-white hover:border-rose-600' 
+                        : 'bg-emerald-50 border-emerald-300 text-emerald-800 hover:bg-emerald-600 hover:text-white hover:border-emerald-600'
+                    }">
+                        ${isOccupied ? 'Force Free' : 'Force Occupy'}
+                    </button>
+                `;
+                container.appendChild(cell);
+            });
+        }
+
+        /* 🚀 OPTIMISTIC REAL-TIME TOGGLE WITHOUT REFRESH */
+        async function requestNodeOverride(seat_number, currentStatus) {
+            // 1. Instantly update UI locally (Optimistic Render)
+            const targetIndex = systemAdminSeats.findIndex(s => (s.seat_number || s.desk_number || s.id) == seat_number);
+            if (targetIndex !== -1) {
+                systemAdminSeats[targetIndex].is_occupied = !currentStatus;
+                systemAdminSeats[targetIndex].is_taken = !currentStatus;
+                systemAdminSeats[targetIndex].occupied_since = !currentStatus ? new Date().toISOString() : null;
+                renderAdminSeatNodes(systemAdminSeats);
+            }
+
+            // 2. Dispatch network override request to server
             try {
                 const response = await fetch(`${BACKEND_URL}/api/seats/toggle`, {
                     method: 'POST',
@@ -282,18 +304,29 @@
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${administrativeSessionToken}`
                     },
-                    body: JSON.stringify({ seat_number })
+                    body: JSON.stringify({ seat_number: seat_number, seat_id: seat_number })
                 });
-                if(response.status === 401 || response.status === 403) terminateSessionLogout();
-            } catch(e) { console.error(e); }
+
+                if (response.status === 401 || response.status === 403) {
+                    terminateSessionLogout();
+                    return;
+                }
+
+                // Double check backend consistency
+                fetchAdminGridData();
+            } catch(e) { 
+                console.error(e);
+                fetchAdminGridData(); // Revert on failure
+            }
         }
 
-        /* 🌟 REDESIGNED LOGISTICS BOOK CARDS & FORM INPUTS */
+        /* 📚 CATALOG LOGISTICS CONTROL */
         async function fetchAdminLogisticsBooks() {
             try {
                 const response = await fetch(`${BACKEND_URL}/api/books`);
                 const books = await response.json();
                 const container = document.getElementById('admin-books-logistics-container');
+                if (!container) return;
                 container.innerHTML = '';
 
                 books.forEach(book => {
@@ -347,6 +380,7 @@
                     body: JSON.stringify({ book_id, student_id, student_name })
                 });
                 if(response.status === 401 || response.status === 403) terminateSessionLogout();
+                fetchAdminLogisticsBooks();
             } catch(e) { console.error(e); }
         }
 
@@ -361,10 +395,24 @@
                     body: JSON.stringify({ book_id })
                 });
                 if(response.status === 401 || response.status === 403) terminateSessionLogout();
+                fetchAdminLogisticsBooks();
             } catch(e) { console.error(e); }
         }
 
-        socket.on('seatUpdated', () => { fetchAdminGridData(); });
+        /* 📡 REAL-TIME WEBSOCKET LISTENERS */
+        socket.on('seatUpdated', (updatedSeat) => { 
+            if (updatedSeat) {
+                const seatKey = updatedSeat.seat_number || updatedSeat.desk_number || updatedSeat.id;
+                const idx = systemAdminSeats.findIndex(s => (s.seat_number || s.desk_number || s.id) == seatKey);
+                if (idx !== -1) {
+                    systemAdminSeats[idx] = updatedSeat;
+                    renderAdminSeatNodes(systemAdminSeats);
+                    return;
+                }
+            }
+            fetchAdminGridData(); 
+        });
+
         socket.on('bookUpdated', () => { fetchAdminLogisticsBooks(); });
     </script>
 </body>
